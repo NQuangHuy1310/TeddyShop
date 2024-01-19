@@ -87,7 +87,6 @@
   border-radius: 8px;
   display: none;
   background-color: var(--background-primary);
-  overflow-x: auto;
   // display: flex;
   // opacity: 0;
   // transition: 0.2s opacity linear;
@@ -97,7 +96,7 @@
   position: absolute;
   height: 60px;
   width: 100%;
-  top: -40px;
+  top: -42px;
   left: 0;
   right: 0;
 }
