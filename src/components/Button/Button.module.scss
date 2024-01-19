@@ -1,0 +1,43 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid var(--black-color);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+// button type
+.outline {
+  background-color: transparent;
+  color: var(--black-color);
+
+  &:hover {
+    background-color: var(--black-color);
+    color: var(--white-color);
+    transition: 0.2s linear;
+  }
+}
+.background {
+  background-color: var(--black-color);
+  color: var(--white-color);
+
+  &:hover {
+    background-color: transparent;
+    color: var(--black-color);
+    transition: 0.2s linear;
+  }
+}
+
+.large {
+  padding: 12px 24px;
+  max-height: 20px;
+  max-width: 80px;
+}
+
+.small {
+  padding: 8px 20px;
+  max-width: 130px;
+  max-height: 48px;
+}
