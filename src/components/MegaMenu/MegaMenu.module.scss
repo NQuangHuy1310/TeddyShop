@@ -1,0 +1,26 @@
+.mega-menu-list {
+  flex: 1 0 0;
+}
+.mega-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  list-style: none;
+}
+.mega-heading {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+.mega-link {
+  display: flex;
+  gap: 0 6px;
+  font-weight: 600;
+  line-height: calc(24 / 16);
+}
+.mega-desc {
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: calc(21 / 14);
+  cursor: text;
+}

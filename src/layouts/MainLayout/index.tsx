@@ -2,6 +2,8 @@ import React from 'react'
 import classNames from 'classnames/bind'
 
 import styles from './MainLayout.module.scss'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 interface mainLayoutProps {
   children: React.ReactNode
@@ -14,9 +16,9 @@ const MainLayout = (props: mainLayoutProps) => {
 
   return (
     <div className={cx('wrapper')}>
-      <header>Đây là header</header>
+      <Header />
       <main className={cx('content')}>{children}</main>
-      <footer>Đây là footer</footer>
+      <Footer />
     </div>
   )
 }
