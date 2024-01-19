@@ -1,0 +1,143 @@
+.footer {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 80px 64px;
+  background-color: #fff;
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 80px;
+}
+
+.footer-content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 64px;
+  align-self: stretch;
+}
+
+.footer-info {
+  display: flex;
+  max-width: 864px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.footer-logo {
+  font-size: 2.4rem;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--tex-primary);
+}
+
+.footer-address,
+.footer-contact {
+  font-size: 1.4rem;
+  font-weight: 400;
+
+  strong {
+    display: block;
+    font-weight: 600;
+    line-height: calc(21 / 14);
+  }
+
+  p {
+    display: inline-block;
+  }
+}
+
+.footer-social {
+  display: flex;
+  gap: 0 20px;
+
+  .footer-icon {
+    font-size: 2.5rem;
+    cursor: pointer;
+  }
+}
+
+.footer-list {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  flex: 1 0 0;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  flex: 1 0 0;
+  width: 180px;
+}
+
+.footer-link {
+  font-weight: 600;
+  line-height: calc(24 / 16);
+  width: 100%;
+}
+
+.footer-credits {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 32px;
+  border-top: 1px solid var(--black-color);
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+
+  a {
+    font-size: 1.4rem;
+    font-weight: 400;
+    text-decoration: underline;
+    line-height: calc(21 / 14);
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 64px;
+  }
+
+  .footer-credits {
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .footer-list {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 20px;
+  }
+
+  .footer-credits {
+    align-items: center;
+    justify-content: center;
+
+    span {
+      text-align: center;
+    }
+  }
+
+  .footer-links {
+    flex-direction: column;
+    text-align: center;
+  }
+}
