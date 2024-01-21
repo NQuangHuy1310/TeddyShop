@@ -1,0 +1,261 @@
+// keyboards section
+.keyboards-section {
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 80px;
+
+  .keyboards-section-heading {
+    flex: 1 0 0;
+  }
+
+  .keyboards-section-desc {
+    flex: 1 0 0;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: calc(27 / 18);
+  }
+}
+
+@media screen and (max-width: 48rem) {
+  .keyboards-section {
+    padding-top: 10px !important;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 20px;
+  }
+}
+
+// products
+.products {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+.product-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.product-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-gap: 26px;
+  grid-auto-flow: row;
+}
+@media screen and (max-width: 63.938rem) {
+  .product-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .product-top {
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+}
+
+@media screen and (max-width: 48rem) {
+  .product-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .product-top {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .product-sub-heading {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 364px) {
+  .product-list {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
+
+//new keyboards
+.new-keyboards {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+}
+
+.new-keboard-content {
+  flex: 1 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.new-keyboard-heading {
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: calc(48 / 40);
+}
+
+.new-keyboard-desc {
+  font-size: 1.8rem;
+  font-weight: 400;
+  line-height: calc(27 / 18);
+}
+
+.new-keyboard-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.new-keyboard-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.new-keyboard-img {
+  flex: 1 0 0;
+  max-width: 640px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+}
+
+@media screen and (max-width: 63.938rem) {
+  .new-keyboard-heading {
+    font-size: 3.2rem;
+    line-height: calc(43 / 32);
+  }
+  .new-keyboards {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 60px;
+  }
+}
+@media screen and (max-width: 48rem) {
+  .new-keyboard-heading {
+    font-size: 2.6rem;
+    line-height: calc(29 / 26);
+  }
+}
+
+//product fqa
+.product-fqa {
+  display: flex;
+  gap: 80px;
+}
+.faq-title {
+  flex: 1 0 0;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.faq-list {
+  flex: 1 0 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 48px;
+
+  .faq-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--neutral);
+  }
+
+  .question {
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: calc(27 / 18);
+  }
+}
+
+@media screen and (max-width: 63.938rem) {
+  .product-fqa {
+    flex-direction: column;
+    gap: 60px;
+  }
+}
+@media screen and (max-width: 48rem) {
+  .product-fqa {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .question {
+    font-size: 1.6rem;
+  }
+}
+
+//early access
+.early-content {
+  padding: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid var(--black-color);
+  border-radius: 8px;
+
+  .desc {
+    margin-top: 8px;
+    margin-bottom: 28px;
+    text-align: center;
+  }
+}
+.action {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+
+  input {
+    padding: 12px;
+    max-width: 300px;
+    flex: 1 0 0;
+    border: none;
+    outline: none;
+    border: 1px solid var(--neutral);
+    border-radius: 4px;
+  }
+}
+
+@media screen and (max-width: 63.938rem) {
+  .early-content {
+    padding: 42px;
+  }
+}
+@media screen and (max-width: 48rem) {
+  .action {
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 23.313rem) {
+  .early-content {
+    padding: 32px;
+  }
+  .action {
+    flex-direction: column;
+
+    input {
+      width: 100%;
+    }
+  }
+}

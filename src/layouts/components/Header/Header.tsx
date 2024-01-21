@@ -8,6 +8,7 @@ import Button from '~/components/Button'
 import MegaMenu from '~/components/MegaMenu'
 import BlogHeader from '../BlogHeader'
 import { useState } from 'react'
+import config from '~/config'
 
 const cx = classNames.bind(styles)
 
@@ -97,12 +98,12 @@ const Header = () => {
           </Link>
           <ul className={cx('header-menu', menuMobile ? 'active' : '')}>
             <li className={cx('menu-item')}>
-              <Link to="" className={cx('menu-link')}>
+              <Link to={config.routes.products} className={cx('menu-link')}>
                 Mua ngay
               </Link>
             </li>
             <li className={cx('menu-item')}>
-              <Link to="" className={cx('menu-link')}>
+              <Link to={config.routes.about} className={cx('menu-link')}>
                 Về chúng tôi
               </Link>
             </li>
@@ -112,7 +113,7 @@ const Header = () => {
               </Link>
             </li>
             <li className={cx('menu-item', 'menu-item-has-children')}>
-              <Link to="" className={cx('menu-link')}>
+              <div className={cx('menu-link')}>
                 Các sản phẩm
                 <MdExpandMore />
                 <div className={cx('mega-menu')}>
@@ -124,7 +125,7 @@ const Header = () => {
                     <BlogHeader data={blogHeaderData} />
                   </div>
                 </div>
-              </Link>
+              </div>
             </li>
           </ul>
 
