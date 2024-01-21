@@ -72,6 +72,15 @@
   max-width: 180px;
 }
 
+@media screen and (max-width: 1280px) {
+  .product-add {
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
 @media screen and (max-width: 1023.98px) {
   .product-name {
     font-size: 1.8rem;
@@ -83,6 +92,13 @@
     font-size: 1.4rem;
     line-height: calc(27 / 16);
     margin-bottom: 10px;
+  }
+
+  .product-add {
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+    gap: 8px;
   }
 }
 
@@ -106,12 +122,5 @@
   .product-price {
     font-size: 1.6rem;
     line-height: calc(27 / 16);
-  }
-
-  .product-add {
-    flex-direction: column;
-    width: 100%;
-    align-items: flex-start;
-    gap: 8px;
   }
 }
