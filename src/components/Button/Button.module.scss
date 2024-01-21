@@ -3,14 +3,25 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  border: 1px solid var(--black-color);
   border-radius: 4px;
   cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+
+  .icon {
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 // button type
 .outline {
   background-color: transparent;
+  border: 1px solid var(--black-color);
   color: var(--black-color);
 
   &:hover {
@@ -20,24 +31,52 @@
   }
 }
 .background {
-  background-color: var(--black-color);
+  background-color: var(--background-color);
   color: var(--white-color);
 
   &:hover {
     background-color: transparent;
     color: var(--black-color);
     transition: 0.2s linear;
+    border: 1px solid var(--background-color);
   }
 }
 
 .large {
   padding: 12px 24px;
-  max-height: 20px;
-  max-width: 80px;
+  min-height: 48px;
+  min-width: 130px;
 }
 
 .small {
   padding: 8px 20px;
-  max-width: 130px;
+  min-width: 90px;
   max-height: 48px;
+}
+
+.rightIcon {
+  transition: 0.2s linear;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    transform: translateX(5px);
+    color: #7f8c8d;
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  .small {
+    padding: 8px 16px;
+    min-width: 90px;
+    max-height: 48px;
+    font-size: 1.2rem;
+  }
+
+  .large {
+    padding: 12px 16px;
+    min-height: 48px;
+    min-width: 130px;
+    font-size: 1.4rem;
+  }
 }
