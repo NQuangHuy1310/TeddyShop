@@ -7,6 +7,7 @@ import styles from './ProductDetail.module.scss'
 import images from '~/assets'
 import Button from '~/components/Button'
 import Heading from '~/components/Heading'
+import Form from '~/components/Form'
 
 const cx = classNames.bind(styles)
 
@@ -254,24 +255,7 @@ const ProductDetail = () => {
 
       <section className={cx('product-order')}>
         <div className={cx('order-container')}>
-          <form className={cx('order-form')}>
-            <Heading
-              heading="Để lại thông tin liên lạc"
-              desc="Điền vào những thông tin của bạn để đặt hàng và nhận những phần quà giá trị của chúng tôi."
-            />
-            <div className={cx('order-input')}>
-              <input type="text" placeholder="Họ và tên" />
-              <input type="number" placeholder="Số điện thoại" />
-              <input type="address" placeholder="Địa chỉ" />
-              <input type="email" placeholder="Email" />
-              <textarea placeholder="Ghi chú" />
-            </div>
-            <div className={cx('order-action')}>
-              <Button background large>
-                Đăng ký
-              </Button>
-            </div>
-          </form>
+          <Form />
           <div className={cx('order-gift')}>
             <img src={images.gifts} alt="Gifts" />
           </div>
