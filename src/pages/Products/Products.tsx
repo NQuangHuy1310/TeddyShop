@@ -13,50 +13,16 @@ const productData = [
     desc: 'Hot-swappable Mechanical Gaming Keyboard',
     price: 200,
     image:
-      'https://bizweb.dktcdn.net/thumb/large/100/438/322/products/bottom-bg-white-y0a1a2a5a-caps-d.jpg?v=1695965181743'
+      'https://bizweb.dktcdn.net/thumb/large/100/438/322/products/bottom-bg-white-y0a1a2a5a-caps-d.jpg?v=1695965181743',
+    link: '/product'
   },
   {
     name: 'Razer BlackWidow V4 75%',
     desc: 'Hot-swappable Mechanical Gaming Keyboard',
     price: 200,
     image:
-      'https://bizweb.dktcdn.net/thumb/large/100/438/322/products/bottom-bg-white-y0a1a2a5a-caps-d.jpg?v=1695965181743'
-  },
-  {
-    name: 'Razer BlackWidow V4 75%',
-    desc: 'Hot-swappable Mechanical Gaming Keyboard',
-    price: 200,
-    image:
-      'https://bizweb.dktcdn.net/thumb/large/100/438/322/products/bottom-bg-white-y0a1a2a5a-caps-d.jpg?v=1695965181743'
-  },
-
-  {
-    name: 'Razer BlackWidow V4 75%',
-    desc: 'Hot-swappable Mechanical Gaming Keyboard',
-    price: 200,
-    image:
-      'https://bizweb.dktcdn.net/thumb/large/100/438/322/products/bottom-bg-white-y0a1a2a5a-caps-d.jpg?v=1695965181743'
-  },
-  {
-    name: 'Razer BlackWidow V4 75%',
-    desc: 'Hot-swappable Mechanical Gaming Keyboard',
-    price: 200,
-    image:
-      'https://bizweb.dktcdn.net/thumb/large/100/438/322/products/bottom-bg-white-y0a1a2a5a-caps-d.jpg?v=1695965181743'
-  },
-  {
-    name: 'Razer BlackWidow V4 75%',
-    desc: 'Hot-swappable Mechanical Gaming Keyboard',
-    price: 200,
-    image:
-      'https://bizweb.dktcdn.net/thumb/large/100/438/322/products/bottom-bg-white-y0a1a2a5a-caps-d.jpg?v=1695965181743'
-  },
-  {
-    name: 'Razer BlackWidow V4 75%',
-    desc: 'Hot-swappable Mechanical Gaming Keyboard',
-    price: 200,
-    image:
-      'https://bizweb.dktcdn.net/thumb/large/100/438/322/products/bottom-bg-white-y0a1a2a5a-caps-d.jpg?v=1695965181743'
+      'https://bizweb.dktcdn.net/thumb/large/100/438/322/products/bottom-bg-white-y0a1a2a5a-caps-d.jpg?v=1695965181743',
+    link: '/product'
   }
 ]
 

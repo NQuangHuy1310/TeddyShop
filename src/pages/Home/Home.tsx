@@ -14,42 +14,15 @@ const productData = [
     desc: 'Hot-swappable Mechanical Gaming Keyboard',
     price: 200,
     image:
-      'https://bizweb.dktcdn.net/thumb/large/100/438/322/products/bottom-bg-white-y0a1a2a5a-caps-d.jpg?v=1695965181743'
+      'https://bizweb.dktcdn.net/thumb/large/100/438/322/products/bottom-bg-white-y0a1a2a5a-caps-d.jpg?v=1695965181743',
+    link: ''
   },
   {
     name: 'Razer BlackWidow V4 75%',
     desc: 'Hot-swappable Mechanical Gaming Keyboard',
     price: 200,
-    image:
-      'https://bizweb.dktcdn.net/thumb/large/100/438/322/products/bottom-bg-white-y0a1a2a5a-caps-d.jpg?v=1695965181743'
-  },
-  {
-    name: 'Razer BlackWidow V4 75%',
-    desc: 'Hot-swappable Mechanical Gaming Keyboard',
-    price: 200,
-    image:
-      'https://bizweb.dktcdn.net/thumb/large/100/438/322/products/bottom-bg-white-y0a1a2a5a-caps-d.jpg?v=1695965181743'
-  },
-  {
-    name: 'Razer BlackWidow V4 75%',
-    desc: 'Hot-swappable Mechanical Gaming Keyboard',
-    price: 200,
-    image:
-      'https://bizweb.dktcdn.net/thumb/large/100/438/322/products/bottom-bg-white-y0a1a2a5a-caps-d.jpg?v=1695965181743'
-  },
-  {
-    name: 'Razer BlackWidow V4 75%',
-    desc: 'Hot-swappable Mechanical Gaming Keyboard',
-    price: 200,
-    image:
-      'https://assets3.razerzone.com/zIgYlO_LsoGIbfbJw-NF283m8vg=/300x300/https%3A%2F%2Fhybrismediaprod.blob.core.windows.net%2Fsys-master-phoenix-images-container%2Fh36%2Fh5a%2F9640099184670%2Fblackwidow-v4-2-500x500.png'
-  },
-  {
-    name: 'Razer BlackWidow V4 75%',
-    desc: 'Hot-swappable Mechanical Gaming Keyboard',
-    price: 200,
-    image:
-      'https://assets3.razerzone.com/zIgYlO_LsoGIbfbJw-NF283m8vg=/300x300/https%3A%2F%2Fhybrismediaprod.blob.core.windows.net%2Fsys-master-phoenix-images-container%2Fh36%2Fh5a%2F9640099184670%2Fblackwidow-v4-2-500x500.png'
+    image: '',
+    link: ''
   }
 ]
 
@@ -144,7 +117,7 @@ const Home = () => {
               <div className={cx('feature-icon')}>
                 <img src={images.icon} alt="Icon" />
               </div>
-              <h2 className={cx('feature-heading', 'heading')}>Khám phá các tính năng hàng đầu của chúng tôi</h2>
+              <h2 className={cx('feature-heading')}>Khám phá các tính năng hàng đầu của chúng tôi</h2>
               <p className={cx('feature-desc')}>
                 Khám phá những lợi của các tùy chọn bàn phím tùy chỉnh, công tắc cơ học và thiết kế tiện dụng của chúng
                 tôi
