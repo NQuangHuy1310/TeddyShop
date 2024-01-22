@@ -3,7 +3,7 @@ const routes = {
   about: '/about',
   blog: '/blog',
   blogPost: '/blogPost',
-  productDetail: '/productDetail',
+  productDetail: '/product',
   products: '/products'
 }
 

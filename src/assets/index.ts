@@ -7,6 +7,8 @@ import bestKeyboard1 from './best-keyboard-1.jpg'
 import bestKeyboard2 from './best-keyboard-2.jpg'
 import typingExperience from './type-experience.jpeg'
 import services from './services.jpeg'
+import productDefault from './productDefault.png'
+import gifts from './gifts.jpeg'
 
 const images = {
   placeholderImageBlog,
@@ -17,7 +19,9 @@ const images = {
   bestKeyboard1,
   bestKeyboard2,
   typingExperience,
-  services
+  services,
+  productDefault,
+  gifts
 }
 
 export default images

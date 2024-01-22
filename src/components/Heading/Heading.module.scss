@@ -1,0 +1,36 @@
+.heading {
+  font-size: 4.8rem;
+  font-weight: 700;
+  line-height: calc(57 / 48);
+  margin-bottom: 24px;
+}
+
+.desc {
+  font-size: 1.8rem;
+  font-weight: 400;
+  line-height: calc(27 / 18);
+}
+
+@media screen and (max-width: 1023.98px) {
+  .heading {
+    font-size: 4rem !important;
+    line-height: calc(43 / 36) !important;
+    text-align: center !important;
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  .heading {
+    font-size: 3.2rem !important;
+    line-height: calc(33 / 28) !important;
+    text-align: center !important;
+  }
+}
+
+@media screen and (max-width: 374.98px) {
+  .heading {
+    font-size: 2.6rem !important;
+    line-height: calc(29 / 24) !important;
+    text-align: center !important;
+  }
+}

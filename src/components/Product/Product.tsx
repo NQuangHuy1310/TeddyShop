@@ -2,6 +2,8 @@ import classNames from 'classnames/bind'
 
 import styles from './Product.module.scss'
 import Button from '~/components/Button'
+import { Link } from 'react-router-dom'
+import images from '~/assets'
 
 const cx = classNames.bind(styles)
 
@@ -10,15 +12,16 @@ interface productProps {
   desc: string
   price: number
   image: string
+  link: string
 }
 
 const Product = (props: productProps) => {
-  const { name, desc, price, image } = props
+  const { name, desc, price, image, link } = props
 
   return (
-    <div className={cx('product')}>
+    <Link to={link} className={cx('product')}>
       <div className={cx('product-img')}>
-        <img src={image} />
+        <img src={image || images.productDefault} />
       </div>
       <div className={cx('product-content')}>
         <h5 className={cx('product-name')}>{name}</h5>
@@ -30,7 +33,7 @@ const Product = (props: productProps) => {
           </Button>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 
