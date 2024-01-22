@@ -25,7 +25,8 @@
   color: var(--black-color);
 
   &:hover {
-    background-color: var(--black-color);
+    background-color: var(--background-color);
+    border: 1px solid var(--background-color);
     color: var(--white-color);
     transition: 0.2s linear;
   }

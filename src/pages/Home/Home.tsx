@@ -5,6 +5,7 @@ import styles from './Home.module.scss'
 import images from '~/assets'
 import Button from '~/components/Button'
 import Product from '~/components/Product'
+import config from '~/config'
 
 const cx = classNames.bind(styles)
 
@@ -41,7 +42,7 @@ const Home = () => {
               của bạn
             </p>
             <div className={cx('banner-btn')}>
-              <Button to="" outline large>
+              <Button to={config.routes.products} outline large>
                 Mua ngay
               </Button>
               <Button to="" background large>
@@ -97,7 +98,7 @@ const Home = () => {
             </div>
           </div>
           <div className={cx('keyboard-find-action')}>
-            <Button to="" outline small>
+            <Button to={config.routes.products} outline small>
               Mua ngay
             </Button>
             <Button to="" small rightIcon={<RiArrowRightSLine />}>
@@ -248,7 +249,7 @@ const Home = () => {
             Khám phá nhiều lựa chọn bàn phím chất lượng của chúng tôi cho nhu cầu gõ của bạn.
           </p>
           <div className={cx('typing-experience-action')}>
-            <Button to="" small background>
+            <Button to={config.routes.products} small background>
               Mua ngay
             </Button>
             <Button to="" small outline>
