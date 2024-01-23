@@ -6,6 +6,7 @@ import images from '~/assets'
 import Button from '~/components/Button'
 import Product from '~/components/Product'
 import config from '~/config'
+import routes from '~/config/routes'
 
 const cx = classNames.bind(styles)
 
@@ -128,7 +129,7 @@ const Home = () => {
               <Button outline small to="">
                 Tìm hiểu thêm
               </Button>
-              <Button to="" small rightIcon={<RiArrowRightSLine />}>
+              <Button to={routes.login} small rightIcon={<RiArrowRightSLine />}>
                 Đăng nhập
               </Button>
             </div>
@@ -145,7 +146,7 @@ const Home = () => {
               <Button outline small to="">
                 Tìm hiểu thêm
               </Button>
-              <Button to="" small rightIcon={<RiArrowRightSLine />}>
+              <Button to={routes.login} small rightIcon={<RiArrowRightSLine />}>
                 Đăng nhập
               </Button>
             </div>
@@ -164,7 +165,7 @@ const Home = () => {
               <Button outline small to="">
                 Tìm hiểu thêm
               </Button>
-              <Button to="" small rightIcon={<RiArrowRightSLine />}>
+              <Button to={routes.login} small rightIcon={<RiArrowRightSLine />}>
                 Đăng nhập
               </Button>
             </div>
@@ -187,7 +188,7 @@ const Home = () => {
               <Button to="" small outline>
                 Tìm hiểu thêm
               </Button>
-              <Button to="" small rightIcon={<RiArrowRightSLine />}>
+              <Button to={routes.login} small rightIcon={<RiArrowRightSLine />}>
                 Đăng nhập
               </Button>
             </div>
@@ -217,7 +218,7 @@ const Home = () => {
               <Button to="" small outline>
                 Tìm hiểu thêm
               </Button>
-              <Button to="" small rightIcon={<RiArrowRightSLine />}>
+              <Button to={routes.login} small rightIcon={<RiArrowRightSLine />}>
                 Đăng nhập
               </Button>
             </div>
