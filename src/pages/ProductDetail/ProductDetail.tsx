@@ -92,7 +92,19 @@ const ProductDetail = () => {
               <Button outline small className={cx('product-btn')} onClick={decreaseProductCount}>
                 -
               </Button>
-              <input type="number" className={cx('product-input')} value={productCount} />
+              <input
+                type="number"
+                className={cx('product-input')}
+                value={productCount}
+                onChange={(event) => {
+                  const newValue = parseInt(event.target.value)
+                  if (isNaN(newValue) || newValue === 0) {
+                    setProductCount(1)
+                  } else {
+                    setProductCount(newValue)
+                  }
+                }}
+              />
               <Button outline small className={cx('product-btn')} onClick={increaseProductCount}>
                 +
               </Button>
