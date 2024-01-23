@@ -7,6 +7,7 @@ import Button from '~/components/Button'
 import UserItem from '~/components/UserItem'
 import images from '~/assets'
 import { DATA } from '~/constants'
+import config from '~/config'
 
 const cx = className.bind(styles)
 
@@ -15,14 +16,14 @@ const About = () => {
     <div className={cx('about-wrapper')}>
       <section className={cx('smooth-typing')}>
         <Heading
-          heading="Nâng cao trải nghiệm khi sử dụng bàn phím với chúng tôi"
+          heading="Nâng cao trải nghiệm khi sử dụng bàn phím của chúng tôi"
           desc="Chúng tôi cố gắng cung cấp bàn phím hàng đầu để nâng cao trải nghiệm gõ của bạn lên một tầm cao mới."
         />
         <div className={cx('smooth-typing-action')}>
           <Button background small to="">
             Tìm hiểu ngay
           </Button>
-          <Button outline small to="">
+          <Button outline small to={config.routes.login}>
             Đăng nhập
           </Button>
         </div>
@@ -52,7 +53,7 @@ const About = () => {
 
         <div className={cx('join-us')}>
           <h4>Tham gia với chúng tôi!</h4>
-          <p>Chúng tôi đang tìm kiếm những cá nhân tài năng để gia nhập đội ngũ của chúng tôi.</p>
+          <p>TeddyShop đang tìm kiếm những cá nhân tài năng để gia nhập đội ngũ của chúng tôi.</p>
           <Button outline small to="">
             Đăng ký ngay
           </Button>
@@ -69,7 +70,7 @@ const About = () => {
             <Button outline small to="">
               Xem thêm
             </Button>
-            <Button small rightIcon={<MdDoubleArrow />}>
+            <Button small rightIcon={<MdDoubleArrow />} to={config.routes.login}>
               Đăng nhập
             </Button>
           </div>
@@ -96,7 +97,7 @@ const About = () => {
             <Button outline small to="">
               Khám phá ngay
             </Button>
-            <Button small rightIcon={<MdDoubleArrow />}>
+            <Button small rightIcon={<MdDoubleArrow />} to={config.routes.login}>
               Đăng nhập
             </Button>
           </div>

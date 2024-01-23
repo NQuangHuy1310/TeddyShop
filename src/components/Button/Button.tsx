@@ -17,6 +17,7 @@ interface buttonProps {
   disabled?: boolean
   children?: string | React.ReactNode
   className?: string
+  category?: boolean
   small?: boolean
   large?: boolean
 }
@@ -30,6 +31,7 @@ const Button: React.FC<buttonProps> = ({
   primary = false,
   small = false,
   large = false,
+  category = false,
   children,
   className,
   leftIcon,
@@ -68,7 +70,8 @@ const Button: React.FC<buttonProps> = ({
     onClick,
     disabled,
     small,
-    large
+    large,
+    category
   })
 
   return (
