@@ -10,6 +10,7 @@ interface buttonProps {
   href?: string
   outline?: boolean
   background?: boolean
+  primary?: boolean
   leftIcon?: React.ReactNode
   rightIcon?: React.ReactNode
   onClick?: () => void
@@ -26,6 +27,7 @@ const Button: React.FC<buttonProps> = ({
   outline = false,
   disabled = false,
   background = false,
+  primary = false,
   small = false,
   large = false,
   children,
@@ -60,6 +62,7 @@ const Button: React.FC<buttonProps> = ({
     href,
     outline,
     background,
+    primary,
     leftIcon,
     rightIcon,
     onClick,
