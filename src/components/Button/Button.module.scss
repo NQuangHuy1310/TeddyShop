@@ -17,6 +17,11 @@
     justify-content: center;
     align-items: center;
   }
+
+  &:hover {
+    border: 1px solid var(--black-color);
+    transition: 0.2s linear;
+  }
 }
 
 // button type
@@ -64,6 +69,11 @@
   padding: 8px 20px;
   min-width: 90px;
   max-height: 48px;
+}
+
+.category {
+  padding: 8px 16px;
+  border-radius: 4px;
 }
 
 .rightIcon {
