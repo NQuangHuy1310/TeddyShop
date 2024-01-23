@@ -9,6 +9,7 @@ import Home from '~/pages/Home'
 import Login from '~/pages/Login'
 import ProductDetail from '~/pages/ProductDetail'
 import Products from '~/pages/Products'
+import Register from '~/pages/Register'
 
 const publicRoutes: route[] = [
   { path: config.routes.home, element: Home, layout: MainLayout },
@@ -17,7 +18,8 @@ const publicRoutes: route[] = [
   { path: config.routes.blogPost, element: BlogPost, layout: MainLayout },
   { path: config.routes.productDetail, element: ProductDetail, layout: MainLayout },
   { path: config.routes.products, element: Products, layout: MainLayout },
-  { path: config.routes.login, element: Login, layout: HeaderOnly }
+  { path: config.routes.login, element: Login, layout: HeaderOnly },
+  { path: config.routes.register, element: Register, layout: HeaderOnly }
 ]
 
 // const privateRoutes = []
