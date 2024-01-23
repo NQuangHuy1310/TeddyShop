@@ -11,20 +11,22 @@ interface userItemProps {
   name: string
   role: string
   desc: string
+  image: string
   social: {
     facebook: string
     linkedin: string
     instagram: string
   }
+  isSupport?: boolean
 }
 
 const UserItem = (props: userItemProps) => {
-  const { name, role, desc, social } = props
+  const { name, role, desc, social, isSupport, image } = props
 
   return (
-    <div className={cx('user-item')}>
-      <div className={cx('user-avatar')}>
-        <img src={images.productDefault} alt="" />
+    <div className={cx(isSupport ? 'user-support' : 'user-item')}>
+      <div className={cx(isSupport ? 'support-avatar' : 'user-avatar')}>
+        <img src={image || images.productDefault} alt="" />
       </div>
       <div className={cx('user-info')}>
         <div className="">

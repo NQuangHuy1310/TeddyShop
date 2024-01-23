@@ -5,6 +5,7 @@ import { route } from '~/models'
 import About from '~/pages/About'
 import Blog from '~/pages/Blog'
 import BlogPost from '~/pages/BlogPost'
+import Contact from '~/pages/Contact'
 import Home from '~/pages/Home'
 import Login from '~/pages/Login'
 import ProductDetail from '~/pages/ProductDetail'
@@ -19,7 +20,8 @@ const publicRoutes: route[] = [
   { path: config.routes.productDetail, element: ProductDetail, layout: MainLayout },
   { path: config.routes.products, element: Products, layout: MainLayout },
   { path: config.routes.login, element: Login, layout: HeaderOnly },
-  { path: config.routes.register, element: Register, layout: HeaderOnly }
+  { path: config.routes.register, element: Register, layout: HeaderOnly },
+  { path: config.routes.contact, element: Contact, layout: MainLayout }
 ]
 
 // const privateRoutes = []

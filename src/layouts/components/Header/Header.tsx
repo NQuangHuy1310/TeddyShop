@@ -109,7 +109,7 @@ const Header = () => {
               </Link>
             </li>
             <li className={cx('menu-item')}>
-              <Link to="" className={cx('menu-link')}>
+              <Link to={config.routes.contact} className={cx('menu-link')}>
                 Liên hệ
               </Link>
             </li>
