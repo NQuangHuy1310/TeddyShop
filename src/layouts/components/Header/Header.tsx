@@ -9,6 +9,7 @@ import MegaMenu from '~/components/MegaMenu'
 import BlogHeader from '../BlogHeader'
 import { useState } from 'react'
 import config from '~/config'
+import routes from '~/config/routes'
 
 const cx = classNames.bind(styles)
 
@@ -130,10 +131,10 @@ const Header = () => {
           </ul>
 
           <div className={cx('header-action')}>
-            <Button outline small to="">
+            <Button outline small to={routes.register}>
               Đăng ký
             </Button>
-            <Button background small to="">
+            <Button background small to={routes.login}>
               Đăng nhập
             </Button>
           </div>
