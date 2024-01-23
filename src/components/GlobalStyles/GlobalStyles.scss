@@ -13,6 +13,8 @@
   --neutral: #666;
 
   --text-hover: #535c68;
+  --btn-background-hover: #10ac84;
+  --btn-outline-hover: #22a6b3;
 
   --header-height: 72px;
 }
@@ -35,6 +37,7 @@ body {
   text-rendering: optimizeSpeed;
   scroll-behavior: smooth;
   overflow: scroll;
+  line-height: calc(27 / 16);
 }
 
 h1,

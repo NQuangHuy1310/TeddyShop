@@ -8,48 +8,9 @@ import images from '~/assets'
 import Button from '~/components/Button'
 import Heading from '~/components/Heading'
 import Form from '~/components/Form'
+import { DATA } from '~/constants'
 
 const cx = classNames.bind(styles)
-
-const performanceData = [
-  {
-    title: 'Thiết kế gọn nhẹ',
-    desc: 'Bàn phím được thiết kế để mang lại sự thoải mái tối đa và giảm căng thẳng cho cổ tay và ngón tay của bạn.'
-  },
-  {
-    title: 'Tính năng có thể tùy chỉnh',
-    desc: 'Cá nhân hóa trải nghiệm gõ của bạn với ánh sáng phím có thể tùy chỉnh và macro có thể lập trình.'
-  },
-  {
-    title: 'Bền bỉ và đáng tin cậy',
-    desc: 'Được thiết kế để tồn tại lâu dài với vật liệu chất lượng cao và hiệu suất đáng tin cậy.'
-  }
-]
-
-const dataFAQ = [
-  {
-    question: 'Có thể tùy chỉnh ánh sáng phím không?',
-    answer: 'Có, bạn có thể tùy chỉnh ánh sáng phím theo ý thích của mình.'
-  },
-  {
-    question: 'Các thông số kỹ thuật là gì?',
-    answer:
-      'Sản phẩm của chúng tôi có kết cấu bền bỉ, thiết kế tiện dụng và các tùy chọn ánh sáng RGB có thể tùy chỉnh.'
-  },
-  {
-    question: 'Bàn phím có thể dùng cho máy tính Mac không?',
-    answer: 'Có, bạn có thể dùng bàn phím của chúng tôi cho máy tính Mac.'
-  },
-  {
-    question: 'Làm thế nào để làm sạch bàn phím?',
-    answer:
-      'Để làm sạch bàn phím, bạn chỉ cần sử dụng vải mềm và dung dịch tẩy rửa nhẹ. Tránh sử dụng các hóa chất mạnh.'
-  },
-  {
-    question: 'Làm thế nào để đặt hàng?',
-    answer: 'Để đặt hàng, bạn chỉ cần chọn sản phẩm mong muốn, thêm sản phẩm vào giỏ hàng và tiến hành thanh toán.'
-  }
-]
 
 const ProductDetail = () => {
   const [productCount, setProductCount] = useState<number>(1)
@@ -180,7 +141,7 @@ const ProductDetail = () => {
           </div>
           <div className="">
             <div className={cx('performance-list')}>
-              {performanceData.map((item, index) => {
+              {DATA.PERFORMANCE_DATA.map((item, index) => {
                 return (
                   <div className={cx('performance-item')} key={index}>
                     <div className={cx('performance-icon')}>
@@ -211,7 +172,7 @@ const ProductDetail = () => {
             desc="Tìm câu trả lời cho các câu hỏi phổ biến về sản phẩm của chúng tôi dưới đây."
           />
           <div className={cx('faq-list')}>
-            {dataFAQ.map((item, index) => {
+            {DATA.FAQS_PRODUCTS.map((item, index) => {
               return (
                 <div className={cx('faq-item')} key={index}>
                   <div className={cx('faq-question')}>
