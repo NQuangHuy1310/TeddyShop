@@ -25,8 +25,8 @@
   color: var(--black-color);
 
   &:hover {
-    background-color: var(--background-color);
-    border: 1px solid var(--background-color);
+    background-color: var(--btn-outline-hover);
+    border: 1px solid var(--btn-outline-hover);
     color: var(--white-color);
     transition: 0.2s linear;
   }
@@ -36,8 +36,8 @@
   color: var(--white-color);
 
   &:hover {
-    background-color: transparent;
-    color: var(--black-color);
+    background-color: var(--btn-background-hover);
+    color: var(--white-color);
     transition: 0.2s linear;
     border: 1px solid var(--background-color);
   }

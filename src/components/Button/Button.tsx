@@ -14,7 +14,7 @@ interface buttonProps {
   rightIcon?: React.ReactNode
   onClick?: () => void
   disabled?: boolean
-  children?: string
+  children?: string | React.ReactNode
   className?: string
   small?: boolean
   large?: boolean

@@ -4,6 +4,7 @@ import styles from './Products.module.scss'
 import Button from '~/components/Button'
 import Product from '~/components/Product'
 import images from '~/assets'
+import { DATA } from '~/constants'
 
 const cx = classNames.bind(styles)
 
@@ -23,34 +24,6 @@ const productData = [
     image:
       'https://bizweb.dktcdn.net/thumb/large/100/438/322/products/bottom-bg-white-y0a1a2a5a-caps-d.jpg?v=1695965181743',
     link: '/product'
-  }
-]
-
-const questionsAndAnserws = [
-  {
-    question: 'Thông số kỹ thuật là gì ?',
-    answer:
-      'Sản phẩm của chúng tôi có nhiều thông số kỹ thuật để đáp ứng các nhu cầu khác nhau. Vui lòng kiểm tra mô tả sản phẩm để biết thêm thông tin chi tiết.'
-  },
-  {
-    question: 'Làm thế nào tôi có thể đặt hàng ?',
-    answer:
-      'Để đặt hàng, bạn chỉ cần thêm sản phẩm mong muốn vào giỏ hàng và tiến hành thanh toán. Thực hiện theo các hướng dẫn để hoàn tất việc mua hàng của bạn.'
-  },
-  {
-    question: 'Chính sách hoàn trả của bạn là gì ?',
-    answer:
-      'Chúng tôi cung cấp chính sách hoàn trả trong 30 ngày đối với các sản phẩm chưa sử dụng và không bị hư hại. Vui lòng tham khảo trang Trả lại & Hoàn tiền của chúng tôi để biết thêm thông tin.'
-  },
-  {
-    question: 'Bảo hiểm trong bao lâu ?',
-    answer:
-      'Sản phẩm của chúng tôi được bảo hành 1 năm đối với các lỗi sản xuất. Vui lòng liên hệ với nhóm hỗ trợ của chúng tôi để yêu cầu bảo hành.'
-  },
-  {
-    question: 'Bạn thường có thường xuyên đặt hàng nước ngoài không ?',
-    answer:
-      'Có, chúng tôi cung cấp dịch vụ vận chuyển quốc tế đến một số quốc gia được chọn. Phí vận chuyển và thời gian giao hàng có thể thay đổi. Vui lòng kiểm tra trang Vận chuyển & Giao hàng của chúng tôi để biết thêm chi tiết.'
   }
 ]
 
@@ -120,8 +93,8 @@ const Products = () => {
           </Button>
         </div>
         <ul className={cx('faq-list')}>
-          {questionsAndAnserws &&
-            questionsAndAnserws.map((item, index) => {
+          {DATA.FAQS &&
+            DATA.FAQS.map((item, index) => {
               return (
                 <li className={cx('faq-item')} key={index}>
                   <p className={cx('question')}>{item.question}</p>

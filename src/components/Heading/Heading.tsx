@@ -6,13 +6,16 @@ const cx = classNames.bind(styles)
 interface headingProps {
   heading: string
   desc: string
+  className?: string
 }
 
 const Heading = (props: headingProps) => {
   const { heading, desc } = props
 
+  const className = cx(props.className)
+
   return (
-    <div>
+    <div className={className}>
       <h2 className={cx('heading')}>{heading}</h2>
       <p className={cx('desc')}>{desc}</p>
     </div>
