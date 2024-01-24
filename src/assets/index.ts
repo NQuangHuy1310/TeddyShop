@@ -12,6 +12,7 @@ import gifts from './gifts.jpeg'
 import email from './envelope.png'
 import phone from './phone.png'
 import map from './map.png'
+import eventImage from './event.jpeg'
 
 const images = {
   placeholderImageBlog,
@@ -27,7 +28,8 @@ const images = {
   gifts,
   email,
   map,
-  phone
+  phone,
+  eventImage
 }
 
 export default images

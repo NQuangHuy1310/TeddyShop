@@ -11,6 +11,7 @@ import Login from '~/pages/Login'
 import ProductDetail from '~/pages/ProductDetail'
 import Products from '~/pages/Products'
 import Register from '~/pages/Register'
+import Events from '~/pages/Events'
 
 const publicRoutes: route[] = [
   { path: config.routes.home, element: Home, layout: MainLayout },
@@ -21,7 +22,8 @@ const publicRoutes: route[] = [
   { path: config.routes.products, element: Products, layout: MainLayout },
   { path: config.routes.login, element: Login, layout: HeaderOnly },
   { path: config.routes.register, element: Register, layout: HeaderOnly },
-  { path: config.routes.contact, element: Contact, layout: MainLayout }
+  { path: config.routes.contact, element: Contact, layout: MainLayout },
+  { path: config.routes.events, element: Events, layout: MainLayout }
 ]
 
 // const privateRoutes = []

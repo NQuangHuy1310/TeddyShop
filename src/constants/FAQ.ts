@@ -50,3 +50,39 @@ export const FAQS_PRODUCTS = [
     answer: 'Để đặt hàng, bạn chỉ cần chọn sản phẩm mong muốn, thêm sản phẩm vào giỏ hàng và tiến hành thanh toán.'
   }
 ]
+
+export const EVENT_FAQS = [
+  {
+    question: 'Làm thế nào để đăng ký tham gia sự kiện?',
+    answer: 'Để đăng ký tham gia sự kiện, bạn chỉ cần truy cập trang sự kiện và đăng ký thông tin cá nhân của mình.'
+  },
+  {
+    question: 'Làm thế nào để tham gia sự kiện?',
+    answer: 'Để tham gia sự kiện, bạn chỉ cần đăng nhập vào tài khoản của mình và thực hiện theo các bước hướng dẫn.'
+  },
+  {
+    question: 'Sự kiện có phí tham dự không?',
+    answer:
+      'Phụ thuộc vào loại sự kiện, một số sự kiện có yêu cầu phí tham dự trong khi các sự kiện khác có thể miễn phí.'
+  },
+  {
+    question: 'Tôi có thể đăng ký tham gia nhiều sự kiện cùng lúc không?',
+    answer:
+      'Có, bạn có thể đăng ký tham gia nhiều sự kiện cùng lúc tùy thuộc vào thời gian và điều kiện của từng sự kiện.'
+  },
+  {
+    question: 'Tôi cần chuẩn bị gì trước khi tham gia sự kiện?',
+    answer:
+      'Trước khi tham gia sự kiện, bạn nên kiểm tra các yêu cầu và hướng dẫn cụ thể của sự kiện đó, và chuẩn bị những gì cần thiết như thiết bị, phần mềm, hoặc tài liệu liên quan.'
+  },
+  {
+    question: 'Làm thế nào để hủy đăng ký tham gia sự kiện?',
+    answer:
+      'Bạn có thể hủy đăng ký tham gia sự kiện bằng cách truy cập lại trang sự kiện hoặc liên hệ với tổ chức sự kiện để được hỗ trợ.'
+  },
+  {
+    question: 'Tôi có thể đổi lịch tham gia sự kiện sau khi đã đăng ký không?',
+    answer:
+      'Khả năng đổi lịch tham gia sự kiện sau khi đã đăng ký phụ thuộc vào chính sách của từng sự kiện. Bạn nên liên hệ với tổ chức sự kiện để biết thêm thông tin chi tiết.'
+  }
+]
