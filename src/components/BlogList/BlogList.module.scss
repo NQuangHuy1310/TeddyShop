@@ -1,0 +1,32 @@
+.blog-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 62px;
+  column-gap: 32px;
+}
+
+.blog-categories {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+@media screen and (max-width: 63.938rem) {
+  .blog-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  .blog-categories {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+}
+
+@media screen and (max-width: 48rem) {
+  .blog-list {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 32px;
+  }
+}

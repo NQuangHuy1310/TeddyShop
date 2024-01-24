@@ -3,10 +3,12 @@ import classNames from 'classnames/bind'
 import styles from './Blogs.module.scss'
 import Heading from '~/components/Heading'
 import Button from '~/components/Button'
-import BlogItem from '~/components/BlogItem'
 import images from '~/assets'
+import BlogList from '~/components/BlogList'
 
 const cx = classNames.bind(styles)
+
+const categories = ['Xem tất cả', 'Công nghệ', 'Kiến thức & Phần mềm', 'Sử dụng và bảo dưỡng', 'Tin tức và xu hướng']
 
 const Blogs = () => {
   return (
@@ -16,23 +18,7 @@ const Blogs = () => {
           heading="Khám phá các bài viết nổi bật của chúng tôi"
           desc="Các bài viết luôn được cập nhật một cách nhanh chóng và chính xác."
         />
-        <div className={cx('blog-categories')}>
-          <Button category outline>
-            Xem tất cả
-          </Button>
-          <Button category>Công nghệ</Button>
-          <Button category>Kiến thức & Phần mềm</Button>
-          <Button category>Sử dụng và bảo dưỡng</Button>
-          <Button category>Tin tức và xu hướng</Button>
-        </div>
-        <div className={cx('blog-list')}>
-          <BlogItem />
-          <BlogItem />
-          <BlogItem />
-          <BlogItem />
-          <BlogItem />
-          <BlogItem />
-        </div>
+        <BlogList limit={6} isShowCategory categories={categories} />
       </section>
 
       <section className={cx('blog-feature')}>
@@ -40,14 +26,7 @@ const Blogs = () => {
           heading="Khám phá bài viết mới nhất của chúng tôi"
           desc="Cập nhật thông tin với các bài viết mới nhất của chúng tôi."
         />
-        <div className={cx('blog-list')}>
-          <BlogItem />
-          <BlogItem />
-          <BlogItem />
-        </div>
-        <Button outline small className={cx('blog-view-all')}>
-          Xem tất cả
-        </Button>
+        <BlogList limit={3} isShowMore />
       </section>
 
       <section className={cx('blog-newsletter')}>
