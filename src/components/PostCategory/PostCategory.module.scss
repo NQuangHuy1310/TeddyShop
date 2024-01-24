@@ -1,0 +1,17 @@
+.post-category {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  span {
+    height: 27px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  a {
+    font-size: 1.6rem;
+    font-weight: 400;
+  }
+}

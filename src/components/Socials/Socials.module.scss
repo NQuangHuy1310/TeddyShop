@@ -1,0 +1,14 @@
+.social-icons {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+
+  a {
+    padding: 5px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--neutral-lightest);
+    border-radius: 8px;
+  }
+}
