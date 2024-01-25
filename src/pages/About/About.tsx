@@ -20,7 +20,7 @@ const About = () => {
           desc="Chúng tôi cố gắng cung cấp bàn phím hàng đầu để nâng cao trải nghiệm gõ của bạn lên một tầm cao mới."
         />
         <div className={cx('smooth-typing-action')}>
-          <Button background small to="">
+          <Button background small to={config.routes.blog}>
             Tìm hiểu ngay
           </Button>
           <Button outline small to={config.routes.login}>

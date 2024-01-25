@@ -5,6 +5,7 @@ import Button from '~/components/Button'
 import Product from '~/components/Product'
 import images from '~/assets'
 import { DATA } from '~/constants'
+import config from '~/config'
 
 const cx = classNames.bind(styles)
 
@@ -41,9 +42,9 @@ const Products = () => {
         <div className={cx('product-top')}>
           <div className={cx('product-heading')}>
             <p className={cx('product-sub-heading')}>Bàn phím tốt nhất</p>
-            <h2 className={cx('product-heading', 'heading')}>Các sản phẩm</h2>
+            <h2 className={cx('product-heading', 'heading')}>Các sản phẩm nổi bật</h2>
             <p className={cx('product-sub-heading')}>
-              Duyệt qua nhiều lựa chọn bàn phím của chúng tôi cho mọi nhu cầu.
+              Tìm bàn phím hoàn hảo cho nhu cầu của bạn, từ bàn phím chơi game đến bàn phím làm việc hàng ngày.
             </p>
           </div>
           <Button className={cx('product-view-all')}>Xem tất cả</Button>
@@ -88,7 +89,7 @@ const Products = () => {
         <div className={cx('faq-title')}>
           <h2 className={cx('heading')}>Các câu hỏi thường gặp</h2>
           <p>Tìm câu trả lời cho các câu hỏi phổ biến về sản phâm của chúng tôi và đưa ra quyết định sáng suốt</p>
-          <Button small outline>
+          <Button small outline to={config.routes.contact}>
             Liên hệ
           </Button>
         </div>
