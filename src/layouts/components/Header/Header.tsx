@@ -113,6 +113,16 @@ const Header = () => {
                 Liên hệ
               </Link>
             </li>
+            <li className={cx('menu-item')}>
+              <Link to={config.routes.events} className={cx('menu-link')}>
+                Sự kiện
+              </Link>
+            </li>
+            <li className={cx('menu-item')}>
+              <Link to={config.routes.blog} className={cx('menu-link')}>
+                Bài viết
+              </Link>
+            </li>
             <li className={cx('menu-item', 'menu-item-has-children')}>
               <div className={cx('menu-link')}>
                 Các sản phẩm
