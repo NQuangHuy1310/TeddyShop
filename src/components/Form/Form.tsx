@@ -6,14 +6,19 @@ import Button from '../Button'
 
 const cx = classNames.bind(styles)
 
-type Props = {}
+interface formProps {
+  heading?: string
+  desc?: string
+}
 
-const Form = (props: Props) => {
+const Form = (props: formProps) => {
+  const { heading, desc } = props
+
   return (
     <form className={cx('form')}>
       <Heading
-        heading="Để lại thông tin liên lạc"
-        desc="Điền vào những thông tin của bạn để đặt hàng và nhận những phần quà giá trị của chúng tôi."
+        heading={heading || 'Để lại thông tin liên lạc'}
+        desc={desc || 'Điền vào những thông tin của bạn để đặt hàng và nhận những phần quà giá trị của chúng tôi.'}
       />
       <div className={cx('form-inputs')}>
         <input type="text" placeholder="Họ và tên" />

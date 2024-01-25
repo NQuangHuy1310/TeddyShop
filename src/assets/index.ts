@@ -13,6 +13,7 @@ import email from './envelope.png'
 import phone from './phone.png'
 import map from './map.png'
 import eventImage from './event.jpeg'
+import razer from './razer-esports.jpeg'
 
 const images = {
   placeholderImageBlog,
@@ -29,7 +30,8 @@ const images = {
   email,
   map,
   phone,
-  eventImage
+  eventImage,
+  razer
 }
 
 export default images
