@@ -9,7 +9,7 @@ const cx = classNames.bind(styles)
 
 interface blogListProps {
   limit: number
-  data?: {}[]
+  data?: unknown[]
   isShowCategory?: boolean
   isShowMore?: boolean
   categories?: string[]

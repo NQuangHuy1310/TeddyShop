@@ -108,10 +108,7 @@ const Events = () => {
       <section className={cx('event-heading')}>
         <Heading
           heading="Tham gia cộng đồng bàn phím"
-          desc="Chúng tôi luôn cập nhật thông tin mới nhất về các triển lãm bàn phím, 
-          triển lãm thương mại và các buổi gặp gỡ trong lĩnh vực này. 
-          Điều này giúp bạn không bỏ lỡ bất kỳ sự kiện quan trọng nào và 
-          cung cấp cho bạn những thông tin mới nhất về các sản phẩm và xu hướng hàng đầu trong ngành."
+          desc="Chúng tôi luôn cập nhật thông tin mới nhất về các triển lãm bàn phím, triển lãm thương mại và các buổi gặp gỡ trong lĩnh vực này. Điều này giúp bạn không bỏ lỡ bất kỳ sự kiện quan trọng nào và cung cấp cho bạn những thông tin mới nhất về các sản phẩm và xu hướng hàng đầu trong ngành."
         />
         <div className={cx('heading-action')}>
           <Button background small>

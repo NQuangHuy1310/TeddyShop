@@ -6,9 +6,7 @@ import styles from './Socials.module.scss'
 
 const cx = classNames.bind(styles)
 
-interface Props {}
-
-const Socials = (props: Props) => {
+const Socials = () => {
   return (
     <div className={cx('social-icons')}>
       <Link to="">
