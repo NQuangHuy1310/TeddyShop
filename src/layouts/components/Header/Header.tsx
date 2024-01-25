@@ -105,7 +105,7 @@ const Header = () => {
             </li>
             <li className={cx('menu-item')}>
               <Link to={config.routes.about} className={cx('menu-link')}>
-                Về chúng tôi
+                Giới thiệu
               </Link>
             </li>
             <li className={cx('menu-item')}>
