@@ -10,6 +10,9 @@ import BlogHeader from '../BlogHeader'
 import { useState } from 'react'
 import config from '~/config'
 import routes from '~/config/routes'
+import { useSelector, useDispatch } from 'react-redux'
+import images from '~/assets'
+import { logoutUser } from '~/feature/auth/authSlice'
 
 const cx = classNames.bind(styles)
 
@@ -85,9 +88,19 @@ const blogHeaderData = {
 
 const Header = () => {
   const [menuMobile, setMenuMobile] = useState(false)
+  const dispatch = useDispatch()
+
+  const userState = useSelector((state: any) => state.auth)
+
+  const { user } = userState
 
   const showOnMenu = () => {
     setMenuMobile(!menuMobile)
+  }
+
+  const handleLogoutUser = () => {
+    dispatch<any>(logoutUser())
+    location.reload()
   }
 
   return (
@@ -140,14 +153,48 @@ const Header = () => {
             </li>
           </ul>
 
-          <div className={cx('header-action')}>
-            <Button outline small to={routes.register}>
-              Đăng ký
-            </Button>
-            <Button background small to={routes.login}>
-              Đăng nhập
-            </Button>
-          </div>
+          {Object.keys(user).length > 0 ? (
+            <div className={cx('header-auth')}>
+              <div className={cx('header-auth-avatar')}>
+                <img
+                  src={Object.keys(user.userAvatar).length !== 0 ? user.userAvatar.url : images.noImage}
+                  alt="avatar"
+                />
+              </div>
+              <div className={cx('header-auth-name')}>{user.userName}</div>
+              <ul className={cx('auth-menu')}>
+                <li className={cx('auth-item')}>
+                  <Link to="" className={cx('auth-link')}>
+                    Tài khoản của tôi
+                  </Link>
+                </li>
+                <li className="auth-item">
+                  <Link to="" className={cx('auth-link')}>
+                    Giỏ hàng
+                  </Link>
+                </li>
+                <li className="auth-item">
+                  <Link to="" className={cx('auth-link')}>
+                    Đơn hàng
+                  </Link>
+                </li>
+                <li className="auth-item">
+                  <Link to="" className={cx('auth-link')} onClick={handleLogoutUser}>
+                    Đăng xuất
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <div className={cx('header-action')}>
+              <Button outline small to={routes.register}>
+                Đăng ký
+              </Button>
+              <Button background small to={routes.login}>
+                Đăng nhập
+              </Button>
+            </div>
+          )}
 
           <div className={cx('header-mobile')} onClick={showOnMenu}>
             <FaBars />
