@@ -1,0 +1,42 @@
+.tabs-container {
+  display: flex;
+  margin-top: 24px;
+  flex-direction: column;
+}
+
+.tabs-header {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+.tab-item {
+  font-size: 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0 6px 4px;
+
+  &:hover {
+    color: var(--primary);
+  }
+
+  &.active {
+    border-bottom: 2px solid var(--background-color);
+  }
+}
+
+.tabs-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.tab-content-item {
+  display: none;
+  font-size: 1.6rem;
+  line-height: 1.6;
+
+  &.active {
+    display: block;
+  }
+}

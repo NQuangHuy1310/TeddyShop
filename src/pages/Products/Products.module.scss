@@ -51,6 +51,13 @@
   grid-auto-flow: row;
 }
 
+.product-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 @media screen and (max-width: 63.938rem) {
   .product-list {
     grid-template-columns: repeat(2, 1fr);

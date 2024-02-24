@@ -1,5 +1,5 @@
 .product-detail {
-  padding: 80px 0;
+  padding: 20px 0 80px 0;
   display: flex;
   flex-direction: column;
   gap: 48px;
@@ -14,45 +14,40 @@
 }
 
 .product-img-main {
-  flex: 1 0 0;
-  max-width: 648px;
-  max-height: 624px;
+  width: 548px;
+  height: 524px;
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+    rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  overflow: hidden;
+  border-radius: 4px;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     overflow: hidden;
-    border-radius: 4px;
     cursor: pointer;
   }
 }
 
 .product-img-list {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: auto;
   gap: 16px;
-  flex: 1 0 0;
-}
-
-.product-img-row {
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
 }
 
 .product-img-item {
-  max-height: 304px;
-  max-width: 316px;
-  flex: 1 0 0;
+  max-height: 180px;
+  max-width: 180px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 4px;
+  overflow: hidden;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    overflow: hidden;
-    border-radius: 4px;
     cursor: pointer;
   }
 }
@@ -64,16 +59,18 @@
 }
 
 .product-info-left {
-  flex: 1 0 0;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 24px;
+  // flex: 1 0 0;
+  width: 832px;
+  flex-shrink: 0;
 }
 
 .product-name {
-  font-size: 4rem;
+  font-size: 3.4rem;
   font-weight: 700;
-  line-height: calc(48 / 40);
+  line-height: calc(48 / 34);
 }
 
 .product-text {
@@ -83,7 +80,7 @@
 }
 
 .product-info-right {
-  flex: 1 0 0;
+  flex: 1;
   max-width: 400px;
   display: flex;
   flex-direction: column;
@@ -120,8 +117,8 @@
 }
 
 .product-input {
-  width: 40px;
-  padding: 5px;
+  width: 50px;
+  padding: 8px;
   border: none;
   outline: none;
   border: 1px solid var(--neutral);
@@ -129,8 +126,8 @@
 }
 
 .product-btn {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 36px;
 }
 
 .product-action {

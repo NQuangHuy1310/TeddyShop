@@ -2,8 +2,13 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { publicRoutes } from '~/routes'
 import { route } from './models'
 import MainLayout from '~/layouts/MainLayout'
+import { useEffect } from 'react'
 
 function App() {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <Router>
       <div className="App">

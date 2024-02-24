@@ -43,7 +43,7 @@ const subCategoriesData = {
 }
 
 const subBrandData = {
-  name: 'Danh mục sản phẩm',
+  name: 'Hãng sản xuất',
   items: [
     {
       name: 'Logitech',
@@ -168,17 +168,17 @@ const Header = () => {
                     Tài khoản của tôi
                   </Link>
                 </li>
-                <li className="auth-item">
+                <li className={cx('auth-item')}>
                   <Link to="" className={cx('auth-link')}>
                     Giỏ hàng
                   </Link>
                 </li>
-                <li className="auth-item">
+                <li className={cx('auth-item')}>
                   <Link to="" className={cx('auth-link')}>
                     Đơn hàng
                   </Link>
                 </li>
-                <li className="auth-item">
+                <li className={cx('auth-item')}>
                   <Link to="" className={cx('auth-link')} onClick={handleLogoutUser}>
                     Đăng xuất
                   </Link>
