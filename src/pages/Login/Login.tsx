@@ -35,17 +35,16 @@ const Login = () => {
 
   const userState = useSelector((state: any) => state.auth)
   const { isLoading, isSuccess, isError, user, message } = userState
+
   useEffect(() => {
-    if (Object.keys(user).length > 0 && isSuccess) {
-      localStorage.setItem('access_token', user.token)
-      localStorage.setItem('user_data', JSON.stringify(user))
+    if (isSuccess && user) {
       toast.success('Đăng nhập thành công')
       navigate('/')
     }
     if (isError && message) {
       toast.error(message)
     }
-  }, [isLoading, isError, isSuccess, user, message, navigate])
+  }, [isLoading, isError, isSuccess, user, message, navigate, dispatch])
 
   return (
     <div className={cx('login-section')}>

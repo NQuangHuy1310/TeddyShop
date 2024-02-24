@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind'
 import { RiArrowRightSLine } from 'react-icons/ri'
+import { useDispatch, useSelector } from 'react-redux'
 
 import styles from './Home.module.scss'
 import images from '~/assets'
@@ -7,28 +8,23 @@ import Button from '~/components/Button'
 import Product from '~/components/Product'
 import config from '~/config'
 import routes from '~/config/routes'
+import { useEffect } from 'react'
+import { getProducts } from '~/feature/product/productSlice'
+import { ProductModel } from '~/models'
+import Loading from '~/components/Loading/Loading'
 
 const cx = classNames.bind(styles)
 
-const productData = [
-  {
-    name: 'Razer BlackWidow V4 75%',
-    desc: 'Hot-swappable Mechanical Gaming Keyboard',
-    price: 200,
-    image:
-      'https://bizweb.dktcdn.net/thumb/large/100/438/322/products/bottom-bg-white-y0a1a2a5a-caps-d.jpg?v=1695965181743',
-    link: ''
-  },
-  {
-    name: 'Razer BlackWidow V4 75%',
-    desc: 'Hot-swappable Mechanical Gaming Keyboard',
-    price: 200,
-    image: '',
-    link: ''
-  }
-]
-
 const Home = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch<any>(getProducts())
+  }, [dispatch])
+
+  const productState = useSelector((state: any) => state.product.products)
+  const productData = productState?.slice(0, 8)
+
   return (
     <div className={cx('home-wrapper')}>
       <section className={cx('home-banner')}>
@@ -36,7 +32,7 @@ const Home = () => {
           <img src={images.homeBanner} alt="Home Banner" />
         </div>
         <div className={cx('banner-content')}>
-          <h2 className={cx('banner-heading', 'heading')}>Khám phá bàn phím hoản hảo dành cho bạn</h2>
+          <h2 className={cx('banner-heading', 'heading')}>Khám phá bàn phím hoàn hảo dành cho bạn</h2>
           <div className={cx('banner-desc')}>
             <p>
               Khám phá nhiều lựa chọn bàn phím mới nhất và phổ biến của chúng tôi được thế kế để nâng cao trải nghiệm gõ
@@ -234,13 +230,15 @@ const Home = () => {
         <h2 className={cx('product-heading', 'heading')}>Sản phẩm nổi bật</h2>
         <p className="product-desc">Khám phá nhiều lựa chọn bàn phím phổ biến của chúng tôi.</p>
 
-        <div className={cx('products')}>
-          {productData &&
-            productData.length > 0 &&
-            productData.map((product, index) => {
-              return <Product key={index} {...product} />
-            })}
-        </div>
+        {productData && productData.length > 0 ? (
+          <div className={cx('products')}>
+            {productData.map((product: ProductModel, index: number) => (
+              <Product key={index} {...product} />
+            ))}
+          </div>
+        ) : (
+          <Loading tip="sản phẩm" />
+        )}
       </section>
 
       <section className={cx('typing-experience')}>

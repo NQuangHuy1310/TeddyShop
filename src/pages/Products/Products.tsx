@@ -1,4 +1,6 @@
 import classNames from 'classnames/bind'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
 
 import styles from './Products.module.scss'
 import Button from '~/components/Button'
@@ -6,29 +8,21 @@ import Product from '~/components/Product'
 import images from '~/assets'
 import { DATA } from '~/constants'
 import config from '~/config'
+import { getProducts } from '~/feature/product/productSlice'
+import { ProductModel } from '~/models'
+import Loading from '~/components/Loading/Loading'
 
 const cx = classNames.bind(styles)
 
-const productData = [
-  {
-    name: 'Razer BlackWidow V4 75%',
-    desc: 'Hot-swappable Mechanical Gaming Keyboard',
-    price: 200,
-    image:
-      'https://bizweb.dktcdn.net/thumb/large/100/438/322/products/bottom-bg-white-y0a1a2a5a-caps-d.jpg?v=1695965181743',
-    link: '/product'
-  },
-  {
-    name: 'Razer BlackWidow V4 75%',
-    desc: 'Hot-swappable Mechanical Gaming Keyboard',
-    price: 200,
-    image:
-      'https://bizweb.dktcdn.net/thumb/large/100/438/322/products/bottom-bg-white-y0a1a2a5a-caps-d.jpg?v=1695965181743',
-    link: '/product'
-  }
-]
-
 const Products = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch<any>(getProducts())
+  }, [dispatch])
+
+  const productState = useSelector((state: any) => state.product?.products)
+
   return (
     <div className={cx('products-wrapper')}>
       <section className={cx('keyboards-section')}>
@@ -49,12 +43,17 @@ const Products = () => {
           </div>
           <Button className={cx('product-view-all')}>Xem tất cả</Button>
         </div>
-        <div className={cx('product-list')}>
-          {productData &&
-            productData.length > 0 &&
-            productData.map((product, index) => {
-              return <Product key={index} {...product} />
-            })}
+        <div className={cx('product-content')}>
+          {productState ? (
+            <div className={cx('product-list')}>
+              {productState.length > 0 &&
+                productState.map((product: ProductModel, index: number) => {
+                  return <Product key={index} {...product} />
+                })}
+            </div>
+          ) : (
+            <Loading tip="sản phẩm" />
+          )}
         </div>
       </section>
 

@@ -1,3 +1,4 @@
-export const getAccessTokenFromLocalStorage: string | null = (localStorage.getItem('access_token') || '') as
-  | string
-  | null
+export const getAccessTokenFromLocalStorage = () => {
+  const accessToken = localStorage.getItem('access_token') || null
+  return accessToken
+}

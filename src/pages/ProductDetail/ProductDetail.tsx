@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind'
 import { FaRegStar } from 'react-icons/fa'
 import { MdKeyboardDoubleArrowRight } from 'react-icons/md'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import styles from './ProductDetail.module.scss'
 import images from '~/assets'
@@ -9,63 +9,62 @@ import Button from '~/components/Button'
 import Heading from '~/components/Heading'
 import Form from '~/components/Form'
 import { DATA } from '~/constants'
+import { useDispatch, useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
+import { getProduct } from '~/feature/product/productSlice'
+import { ProductModel } from '~/models'
+import { formatPrice } from '~/utils'
+import Tabs from '~/components/Tabs'
 
 const cx = classNames.bind(styles)
 
 const ProductDetail = () => {
+  const dispatch = useDispatch()
+  const location = useLocation()
+  const productId = location.pathname.split('/')[2]
+
   const [productCount, setProductCount] = useState<number>(1)
 
-  const increaseProductCount = () => {
-    setProductCount(productCount + 1)
-  }
+  // product detail data
+  useEffect(() => {
+    dispatch<any>(getProduct(productId))
+  }, [productId, dispatch])
 
-  const decreaseProductCount = () => {
-    if (productCount > 1) {
-      setProductCount(productCount - 1)
-    }
-  }
+  const product: ProductModel = useSelector((state: any) => state.product?.product)
+  const { price, name, images: productImages, description, warranty } = product
+
+  const [productImageMain, setProductImageMain] = useState<string | undefined>('')
+  const productPrice = formatPrice(price)
+
+  // handle product count
+  const increaseProductCount = () => {}
+
+  const decreaseProductCount = () => {}
 
   return (
     <div className={cx('product-detail-wrapper')}>
       <section className={cx('product-detail')}>
         <div className={cx('product-img')}>
           <div className={cx('product-img-main')}>
-            <img src={images.bestKeyboard1} alt="" />
+            <img src={productImageMain || (productImages && productImages[0]?.url)} alt="product" />
           </div>
           <div className={cx('product-img-list')}>
-            <div className={cx('product-img-row')}>
-              <div className={cx('product-img-item')}>
-                <img src={images.bestKeyboard1} alt="" />
-              </div>
-              <div className={cx('product-img-item')}>
-                <img src={images.bestKeyboard1} alt="" />
-              </div>
-            </div>
-            <div className={cx('product-img-row')}>
-              <div className={cx('product-img-item')}>
-                <img src={images.bestKeyboard1} alt="" />
-              </div>
-              <div className={cx('product-img-item')}>
-                <img src={images.bestKeyboard1} alt="" />
-              </div>
-            </div>
+            {productImages?.map((item, index) => {
+              return (
+                <div className={cx('product-img-item')} key={index} onClick={() => setProductImageMain(item?.url)}>
+                  <img src={item.url} alt="product" />
+                </div>
+              )
+            })}
           </div>
         </div>
         <div className={cx('product-info')}>
           <div className={cx('product-info-left')}>
-            <h3 className={cx('product-name')}>Mechanical Keyboard</h3>
-            <p className={cx('product-desc')}>
-              Trải nghiệm trải nghiệm gõ tuyệt vời nhất với Bàn phím cơ của chúng tôi. Được thiết kế cho độ chính xác và
-              thoải mái.
-            </p>
-            <div className={cx('product-text')}>
-              <p>Vật liệu chất lượng cao cho độ bền và hiệu suất.</p>
-              <p>Thiết kế công thái học để gõ thoải mái cả ngày.</p>
-              <p>Ánh sáng RGB có thể tùy chỉnh để có giao diện cá nhân hóa.</p>
-            </div>
+            <h3 className={cx('product-name')}>{name}</h3>
+            <Tabs desctiption={description} warranty={warranty} />
           </div>
           <div className={cx('product-info-right')}>
-            <h4 className={cx('product-price')}>$200</h4>
+            <h4 className={cx('product-price')}>{productPrice}</h4>
             <div className={cx('product-reviews')}>
               <div className={cx('starts')}>
                 <FaRegStar />
@@ -89,32 +88,20 @@ const ProductDetail = () => {
               </Button>
             </div>
             <div className={cx('product-quantity')}>
-              <Button outline small className={cx('product-btn')} onClick={decreaseProductCount}>
+              <Button outline className={cx('product-btn')} onClick={decreaseProductCount}>
                 -
               </Button>
-              <input
-                type="number"
-                className={cx('product-input')}
-                value={productCount}
-                onChange={(event) => {
-                  const newValue = parseInt(event.target.value)
-                  if (isNaN(newValue) || newValue === 0) {
-                    setProductCount(1)
-                  } else {
-                    setProductCount(newValue)
-                  }
-                }}
-              />
-              <Button outline small className={cx('product-btn')} onClick={increaseProductCount}>
+              <input type="number" className={cx('product-input')} value={productCount} />
+              <Button outline className={cx('product-btn')} onClick={increaseProductCount}>
                 +
               </Button>
             </div>
             <div className={cx('product-action')}>
               <Button background large className={cx('product-add')}>
-                Add to cart
+                Thêm vào giỏ hàng
               </Button>
               <Button outline large className={cx('product-buy')}>
-                Buy now
+                Mua ngay
               </Button>
             </div>
           </div>
