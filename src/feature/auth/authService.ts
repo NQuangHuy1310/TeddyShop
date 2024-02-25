@@ -1,21 +1,15 @@
 import axios from '~/apis/axiosConfig'
 
 const registerUser = async (userData: { email: string; fullName: string; password: string }) => {
-  const response = await axios.post('auth/register', userData)
-
-  return response.data
+  return await axios.post('auth/register', userData)
 }
 
 const loginUser = async (userData: { email: string; password: string }) => {
-  const response = await axios.post('auth/login', userData)
-
-  return response
+  return await axios.post('auth/login', userData)
 }
 
 const logoutUser = async () => {
-  const reponse = await axios.post('auth/logout', null, { withCredentials: true })
-
-  return reponse
+  return await axios.post('auth/logout', null, { withCredentials: true })
 }
 
 export const authService = {
