@@ -39,10 +39,10 @@ export const productSlice = createSlice({
       .addCase(getProducts.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(getProducts.fulfilled, (state, action) => {
+      .addCase(getProducts.fulfilled, (state, action: any) => {
         state.isLoading = false
         state.isSuccess = true
-        state.products = action.payload.products
+        state.products = action.payload.data.products
       })
       .addCase(getProducts.rejected, (state) => {
         state.isError = true
@@ -50,7 +50,7 @@ export const productSlice = createSlice({
       .addCase(getProduct.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(getProduct.fulfilled, (state, action) => {
+      .addCase(getProduct.fulfilled, (state, action: any) => {
         state.isLoading = false
         state.isSuccess = true
         state.product = action.payload

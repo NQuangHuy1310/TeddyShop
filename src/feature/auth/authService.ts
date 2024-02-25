@@ -13,7 +13,7 @@ const loginUser = async (userData: { email: string; password: string }) => {
 }
 
 const logoutUser = async () => {
-  const reponse = await axios.get('auth/logout')
+  const reponse = await axios.post('auth/logout', null, { withCredentials: true })
 
   return reponse
 }

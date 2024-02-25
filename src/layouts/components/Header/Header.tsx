@@ -100,7 +100,6 @@ const Header = () => {
 
   const handleLogoutUser = () => {
     dispatch<any>(logoutUser())
-    location.reload()
   }
 
   return (
