@@ -7,7 +7,7 @@ import Button from '~/components/Button'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
-import { registerUser } from '~/feature/auth/authSlice'
+import { registerUser, resetState } from '~/feature/auth/authSlice'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 
@@ -26,6 +26,10 @@ const cx = classNames.bind(styles)
 const Register = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    dispatch<any>(resetState())
+  }, [dispatch])
 
   const userState = useSelector((state: any) => state.auth)
   const { isError, isLoading, isSuccess, message } = userState

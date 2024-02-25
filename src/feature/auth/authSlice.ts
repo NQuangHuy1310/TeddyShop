@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk, createAction } from '@reduxjs/toolkit'
 import { authService } from './authService'
 import { User } from '~/models'
 const getUserFormLocalStorage = localStorage.getItem('user_data')
@@ -47,6 +47,8 @@ export const logoutUser = createAsyncThunk('auth/logout', async (thunkAPI) => {
   }
 })
 
+export const resetState = createAction('ReverAll')
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -68,13 +70,13 @@ export const authSlice = createSlice({
       .addCase(loginUser.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(loginUser.fulfilled, (state, action) => {
+      .addCase(loginUser.fulfilled, (state, action: any) => {
         state.isLoading = false
         state.isSuccess = true
         state.isError = false
-        state.user = action.payload.data
-        localStorage.setItem('user_data', JSON.stringify(action.payload.data))
-        localStorage.setItem('access_token', action.payload.data.token)
+        state.user = action.payload
+        localStorage.setItem('user_data', JSON.stringify(action.payload))
+        localStorage.setItem('access_token', action.payload.token)
       })
       .addCase(loginUser.rejected, (state, action: any) => {
         state.isError = true
@@ -84,16 +86,17 @@ export const authSlice = createSlice({
         state.isLoading = true
       })
       .addCase(logoutUser.fulfilled, (state) => {
-        state.isLoading = false
-        state.isSuccess = true
-        state.isError = false
         state.user = {} as User
         localStorage.removeItem('user_data')
         localStorage.removeItem('access_token')
-        // location.reload()
       })
       .addCase(logoutUser.rejected, (state) => {
         state.isError = true
+      })
+      .addCase(resetState, (state) => {
+        state.isError = false
+        state.isLoading = false
+        state.isSuccess = false
       })
   }
 })

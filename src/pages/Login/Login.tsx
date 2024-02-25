@@ -7,7 +7,7 @@ import Button from '~/components/Button'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
-import { loginUser } from '~/feature/auth/authSlice'
+import { loginUser, resetState } from '~/feature/auth/authSlice'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 
@@ -37,8 +37,9 @@ const Login = () => {
   const { isLoading, isSuccess, isError, user, message } = userState
 
   useEffect(() => {
-    if (isSuccess && user) {
+    if (isSuccess && Object.keys(user).length > 0) {
       toast.success('Đăng nhập thành công')
+      dispatch<any>(resetState())
       navigate('/')
     }
     if (isError && message) {
