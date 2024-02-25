@@ -1,11 +1,11 @@
 import axios from 'axios'
 import { getAccessTokenFromLocalStorage } from '~/utils'
 
-axios.defaults.withCredentials = true
+// axios.defaults.withCredentials = true
 
 const axiosConfig = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
-  withCredentials: true
+  withCredentials: true,
+  baseURL: import.meta.env.VITE_BASE_URL
 })
 
 axiosConfig.interceptors.request.use((config) => {

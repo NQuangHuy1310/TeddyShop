@@ -41,8 +41,6 @@ export const loginUser = createAsyncThunk('auth/login', async (user: { email: st
 
 export const logoutUser = createAsyncThunk('auth/logout', async (thunkAPI) => {
   try {
-    localStorage.removeItem('user_data')
-    localStorage.removeItem('access_token')
     return await authService.logoutUser()
   } catch (error) {
     return (thunkAPI as any).rejectWithValue(error)
@@ -75,6 +73,8 @@ export const authSlice = createSlice({
         state.isSuccess = true
         state.isError = false
         state.user = action.payload.data
+        localStorage.setItem('user_data', JSON.stringify(action.payload.data))
+        localStorage.setItem('access_token', action.payload.data.token)
       })
       .addCase(loginUser.rejected, (state, action: any) => {
         state.isError = true
@@ -88,6 +88,9 @@ export const authSlice = createSlice({
         state.isSuccess = true
         state.isError = false
         state.user = {} as User
+        localStorage.removeItem('user_data')
+        localStorage.removeItem('access_token')
+        // location.reload()
       })
       .addCase(logoutUser.rejected, (state) => {
         state.isError = true
