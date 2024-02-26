@@ -10,7 +10,8 @@ const routes = {
   register: '/register',
   contact: '/contact',
   events: '/events',
-  event: '/event'
+  event: '/event',
+  brandDetail: '/brand/:id'
 }
 
 export default routes

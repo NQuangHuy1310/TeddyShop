@@ -8,19 +8,33 @@
   gap: 16px;
   list-style: none;
 }
+
+.mega-item {
+  padding: 8px;
+  display: flex;
+  gap: 12px;
+}
+
 .mega-heading {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 600;
 }
+
 .mega-link {
   display: flex;
   gap: 0 6px;
   font-weight: 600;
   line-height: calc(24 / 16);
 }
+
+.mega-name {
+  font-weight: 700;
+  font-size: 1.6rem;
+}
+
 .mega-desc {
   font-size: 1.4rem;
-  font-weight: 400;
+  font-weight: 500;
   line-height: calc(21 / 14);
   cursor: text;
 }

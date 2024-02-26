@@ -5,18 +5,19 @@ import styles from './MegaMenu.module.scss'
 
 const cx = classNames.bind(styles)
 
-interface menuDataProps {
+interface brandProps {
   data: {
     name: string
     items: {
+      _id: string
       name: string
-      desc: string
       link: string
+      desc?: string
     }[]
   }
 }
 
-const MegaMenu = (props: menuDataProps) => {
+const MegaMenu = (props: brandProps) => {
   const { name, items } = props.data
 
   return (
@@ -27,8 +28,8 @@ const MegaMenu = (props: menuDataProps) => {
           items.length > 0 &&
           items.map((item, index) => {
             return (
-              <li className={cx('mega-item')} key={index}>
-                <Link to={item.link} className={cx('mega-link')}>
+              <Link to={item.link} className={cx('mega-item')} key={index}>
+                <div className={cx('mega-icon')}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path
                       fillRule="evenodd"
@@ -37,10 +38,12 @@ const MegaMenu = (props: menuDataProps) => {
                       fill="black"
                     />
                   </svg>
-                  {item.name}
-                </Link>
-                <span className={cx('mega-desc')}>{item.desc}</span>
-              </li>
+                </div>
+                <div className={cx('mega-content')}>
+                  <h5 className={cx('mega-name')}>{item.name}</h5>
+                  <span className={cx('mega-desc')}>{item.desc}</span>
+                </div>
+              </Link>
             )
           })}
       </ul>

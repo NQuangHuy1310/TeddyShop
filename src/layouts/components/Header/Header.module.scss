@@ -40,14 +40,14 @@
 }
 
 .mega-right {
-  padding: 32px 96px 32px 32px;
+  padding: 32px 32px 32px 64px;
   max-width: 560px;
   flex-shrink: 0;
   background-color: var(--neutral-lightest);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
+  gap: 4px;
 }
 
 .menu-link {
@@ -81,6 +81,7 @@
   max-width: 1440px;
   margin: 0 auto;
   width: 100%;
+  height: 399px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   display: flex;
   justify-content: space-between;
@@ -103,7 +104,7 @@
 }
 
 .mega-left {
-  padding: 32px 32px 32px 64px;
+  padding: 32px 32px 32px 44px;
   flex: 1 0 0;
   display: flex;
   align-items: flex-end;
