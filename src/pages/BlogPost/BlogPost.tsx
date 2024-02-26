@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 import styles from './BlogPost.module.scss'
 import BlogList from '~/components/BlogList'
@@ -7,24 +7,56 @@ import Heading from '~/components/Heading'
 import images from '~/assets'
 import Socials from '~/components/Socials'
 import PostCategory from '~/components/PostCategory'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { getBlogById, getBlogs, resetState } from '~/features/blog/blogSlice'
+import { blogModel } from '~/models'
+import moment from 'moment'
+import { FaRegEye, FaRegHeart } from 'react-icons/fa'
 
 const cx = classNames.bind(styles)
 
-const categories = ['Bàn phím cơ', 'Bàn phím chơi game', 'Bàn phím văn phòng', 'Bàn phím custom']
-
 const BlogPost = () => {
+  const dispatch = useDispatch()
+  const location = useLocation()
+
+  const blogId = location.pathname.split('/')[2]
+
+  useEffect(() => {
+    if (blogId !== undefined) {
+      dispatch<any>(getBlogById(blogId))
+      dispatch<any>(getBlogs())
+    } else {
+      dispatch<any>(resetState())
+    }
+  }, [blogId, dispatch])
+
+  const blogState = useSelector((state: any) => state.blog)
+  const { blog, blogs } = blogState
+  const blogDetail: blogModel = blog
+
+  const formattedDate = 'Ngày tạo ' + moment(blogDetail?.createdTime).format('DD-MM-YYYY')
+
   return (
     <div className={cx('blog-post-wrapper')}>
       <section className={cx('post-header')}>
         <div className={cx('header-title')}>
           <div className={cx('header-info')}>
-            <PostCategory category="Công nghệ" subCategory="Bàn phím cơ" />
-            <h2 className={cx('header-name')}>Giải phóng sức mạnh của bàn phím cơ</h2>
+            <PostCategory category={blogDetail?.blogCategory?.name} subCategory={blogDetail.tag} />
+            <h2 className={cx('header-name')}>{blogDetail.name}</h2>
             <div className={cx('header-created')}>
-              By <strong>Nguyễn Quang Huy</strong>
+              By <strong>{blogDetail?.createdBy?.fullName}</strong>
+            </div>
+            <div className={cx('header-view')}>
+              <div>
+                <FaRegEye /> <strong>{blogDetail?.views}</strong>
+              </div>
+              <div>
+                <FaRegHeart /> <strong>{blogDetail?.likes}</strong>
+              </div>
             </div>
             <div className={cx('header-time')}>
-              <p>Ngày 13 tháng 10 năm 2023</p>
+              <p>{formattedDate}</p>
               <span>·</span>
               <p>5 phút đọc</p>
             </div>
@@ -35,38 +67,29 @@ const BlogPost = () => {
           </div>
         </div>
         <div className={cx('post-image')}>
-          <img src={images.findKeyboard} alt="" />
+          <img src={blogDetail?.thumbnail?.url || images.placeholderImageBlog} alt="" />
         </div>
       </section>
 
       <section className={cx('post-content')}>
         <div className={cx('post-top')}>
           <div className={cx('post-title')}>
-            <PostCategory category="Công nghệ" subCategory="Bàn phím cơ" />
+            <PostCategory category={blogDetail?.blogCategory?.name} subCategory={blogDetail.tag} />
             <Socials />
           </div>
-          <div className={cx('post-text')}>Nội dung bài viết ở đây</div>
+          <div className={cx('post-text')} dangerouslySetInnerHTML={{ __html: blogDetail.content }}></div>
           <div className={cx('post-social')}>
             <p>Chia sẻ bài viết</p>
             <Socials />
           </div>
           <div className={cx('post-tags')}>
             <div className={cx('tag')}>
-              <Link to="">Bàn phím cơ</Link>
-            </div>
-            <div className={cx('tag')}>
-              <Link to="">Tin công nghệ</Link>
-            </div>
-            <div className={cx('tag')}>
-              <Link to="">Kiến thức</Link>
-            </div>
-            <div className={cx('tag')}>
-              <Link to="">Thông tin mới</Link>
+              <Link to="">{blogDetail.tag}</Link>
             </div>
           </div>
         </div>
 
-        <div className={cx('post-author')}>
+        {/* <div className={cx('post-author')}>
           <div className={cx('author-avatar')}>
             <img src={images.placeholderImageBlog} alt="" />
           </div>
@@ -77,15 +100,16 @@ const BlogPost = () => {
               nghệ và thích viết về nó.
             </div>
           </div>
-        </div>
+        </div> */}
       </section>
 
       <section className={cx('post-recommendation')}>
         <Heading
-          heading="Khám phá bàn phím tốt nhất"
-          desc="Khám phá tuyển tập bàn phím được xếp hạng hàng đầu của chúng tôi."
+          heading="Khám phá tuyển tập bài viết khác của chúng tôi"
+          desc="Tại đây, bạn sẽ tìm thấy một tuyển tập đa dạng và phong phú của các bài viết chất lượng cao.
+          Hãy dành thời gian để khám phá nội dung thú vị và hữu ích mà chúng tôi đã chuẩn bị cho bạn."
         />
-        <BlogList limit={6} isShowCategory categories={categories} />
+        <BlogList data={blogs} limit={3} />
       </section>
     </div>
   )

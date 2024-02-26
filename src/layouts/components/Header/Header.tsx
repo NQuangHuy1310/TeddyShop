@@ -7,12 +7,13 @@ import styles from './Header.module.scss'
 import Button from '~/components/Button'
 import MegaMenu from '~/components/MegaMenu'
 import BlogHeader from '../BlogHeader'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import config from '~/config'
 import routes from '~/config/routes'
 import { useSelector, useDispatch } from 'react-redux'
 import images from '~/assets'
-import { logoutUser, resetState } from '~/feature/auth/authSlice'
+import { logoutUser, resetState } from '~/features/auth/authSlice'
+import { getBlogs } from '~/features/blog/blogSlice'
 
 const cx = classNames.bind(styles)
 
@@ -68,29 +69,21 @@ const subBrandData = {
   ]
 }
 
-const blogHeaderData = {
-  name: 'Bài viết nổi bật',
-  blogs: [
-    {
-      name: 'The best',
-      desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-      link: '',
-      image: ''
-    },
-    {
-      name: 'The best',
-      desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-      link: '',
-      image: ''
-    }
-  ]
-}
-
 const Header = () => {
   const [menuMobile, setMenuMobile] = useState(false)
   const dispatch = useDispatch()
 
+  useEffect(() => {
+    dispatch<any>(getBlogs())
+  }, [dispatch])
+
   const userState = useSelector((state: any) => state.auth)
+  const blogState = useSelector((state: any) => state.blog?.blogs)?.slice(0, 2)
+
+  const blogData = {
+    name: 'Bài viết nổi bật',
+    blogs: blogState
+  }
 
   const { user } = userState
 
@@ -146,7 +139,7 @@ const Header = () => {
                     <MegaMenu data={subBrandData} />
                   </div>
                   <div className={cx('mega-right')}>
-                    <BlogHeader data={blogHeaderData} />
+                    <BlogHeader data={blogData} />
                   </div>
                 </div>
               </div>

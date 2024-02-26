@@ -9,7 +9,7 @@ import Product from '~/components/Product'
 import config from '~/config'
 import routes from '~/config/routes'
 import { useEffect } from 'react'
-import { getProducts } from '~/feature/product/productSlice'
+import { getProducts } from '~/features/product/productSlice'
 import { ProductModel } from '~/models'
 import Loading from '~/components/Loading/Loading'
 
