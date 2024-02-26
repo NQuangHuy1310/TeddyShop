@@ -21,9 +21,10 @@
 }
 
 .user-avatar {
-  max-width: 280px;
+  width: 280px;
   height: 280px;
   cursor: pointer;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
   img {
     width: 100%;
@@ -76,6 +77,14 @@
   align-items: flex-start;
   gap: 14px;
   cursor: pointer;
+  margin-top: auto;
+
+  .icon {
+    width: 20px;
+    height: 20px;
+    fill: var(--neutral);
+    transition: 0.2s linear;
+  }
 }
 
 @media screen and (max-width: 63.938rem) {

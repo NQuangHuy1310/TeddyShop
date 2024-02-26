@@ -1,15 +1,25 @@
 import classNames from 'classnames/bind'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import styles from './Contact.module.scss'
 import Heading from '~/components/Heading'
 import Button from '~/components/Button'
 import UserItem from '~/components/UserItem'
 import { DATA } from '~/constants'
+import { useDispatch, useSelector } from 'react-redux'
+import { getMembers } from '~/features/member/memberSlice'
+import { memberModal } from '~/models'
 
 const cx = classNames.bind(styles)
 
 const Contact = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch<any>(getMembers())
+  }, [dispatch])
+  const memberState = useSelector((state: any) => state.member?.members)
+
   const [mapIndex, setMapIndex] = useState(0)
 
   const handleChangeMap = (index: number) => {
@@ -87,7 +97,7 @@ const Contact = () => {
       <section className={cx('support-section')}>
         <Heading heading="Đội ngũ hỗ trợ" desc="Gặp gỡ các thành viên của nhóm hỗ trợ khách hàng chúng tôi." />
         <div className={cx('support-team')}>
-          {DATA.USER_SUPPORT_DATA.map((item, index) => {
+          {memberState.map((item: memberModal, index: number) => {
             return <UserItem key={index} {...item} isSupport />
           })}
         </div>
