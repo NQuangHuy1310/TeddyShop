@@ -4,18 +4,15 @@ import { RiArrowDropRightLine } from 'react-icons/ri'
 import styles from './BlogHeader.module.scss'
 import images from '~/assets'
 import { Link } from 'react-router-dom'
+import { blogModel } from '~/models'
+import routes from '~/config/routes'
 
 const cx = classNames.bind(styles)
 
 interface blogHeaderProps {
   data: {
     name: string
-    blogs: {
-      name: string
-      desc: string
-      link: string
-      image: string
-    }[]
+    blogs: blogModel[]
   }
 }
 
@@ -32,22 +29,22 @@ const BlogHeader = (props: blogHeaderProps) => {
             return (
               <div className={cx('blog-item')} key={index}>
                 <div className={cx('blog-img')}>
-                  <img src={blog.image || images.placeholderImageBlog} alt="" />
+                  <img src={blog.thumbnail?.url || images.placeholderImageBlog} alt="" />
                 </div>
                 <div className={cx('blog-content')}>
                   <h5 className={cx('blog-name')}>{blog.name}</h5>
-                  <p className={cx('blog-desc')}>{blog.desc}</p>
-                  <Link to={blog.link} className={cx('read-more')}>
-                    Read More
+                  {/* <p className={cx('blog-desc')}>{blog.desc}</p> */}
+                  <Link to={blog._id} className={cx('read-more')}>
+                    Đọc thêm
                   </Link>
                 </div>
               </div>
             )
           })}
       </div>
-      <p className={cx('blog-all')}>
+      <Link to={routes.blog} className={cx('blog-all')}>
         Xem tất cả bài viết <RiArrowDropRightLine />
-      </p>
+      </Link>
     </>
   )
 }

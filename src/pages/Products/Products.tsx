@@ -8,7 +8,7 @@ import Product from '~/components/Product'
 import images from '~/assets'
 import { DATA } from '~/constants'
 import config from '~/config'
-import { getProducts } from '~/feature/product/productSlice'
+import { getProducts } from '~/features/product/productSlice'
 import { ProductModel } from '~/models'
 import Loading from '~/components/Loading/Loading'
 

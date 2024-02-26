@@ -1,4 +1,7 @@
 // blog header
+.blog-post-wrapper {
+  margin-top: 20px !important;
+}
 .post-header {
   display: flex;
   align-items: flex-start;
@@ -33,6 +36,21 @@
 
   strong {
     font-weight: 600;
+  }
+}
+
+.header-view {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin: 8px 0;
+
+  div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.6rem;
+    cursor: pointer;
   }
 }
 
@@ -80,7 +98,7 @@
 .post-top {
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 28px;
   align-items: center;
   justify-content: center;
   padding-bottom: 48px;
@@ -97,6 +115,10 @@
 
 .post-text {
   min-height: 400px;
+
+  h2 {
+    text-align: center;
+  }
 }
 
 .post-social {

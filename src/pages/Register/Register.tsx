@@ -7,7 +7,7 @@ import Button from '~/components/Button'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
-import { registerUser, resetState } from '~/feature/auth/authSlice'
+import { registerUser, resetState } from '~/features/auth/authSlice'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 

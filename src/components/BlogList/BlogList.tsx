@@ -4,67 +4,64 @@ import styles from './BlogList.module.scss'
 import BlogItem from '../BlogItem'
 import Button from '../Button'
 import { useState } from 'react'
+import { blogCategory, blogModel } from '~/models'
+import Loading from '../Loading/Loading'
 
 const cx = classNames.bind(styles)
 
 interface blogListProps {
-  limit: number
-  data?: unknown[]
+  limit?: number
+  data?: blogModel[]
   isShowCategory?: boolean
   isShowMore?: boolean
-  categories?: string[]
+  categories?: blogCategory[]
+  // eslint-disable-next-line no-unused-vars
+  onBlogChange?: (blogId: string) => void
 }
 
 const BlogList = (props: blogListProps) => {
-  const { isShowCategory, isShowMore, categories } = props
+  const { isShowCategory, isShowMore, categories, data, limit } = props
+  const [blogId, setBlogId] = useState<string>('')
 
-  const [categoryIndex, setCategoryIndex] = useState<number>(0)
-  const [category, setCategory] = useState<string>('')
-
-  const handleChangeButton = (category: string, index: number) => {
-    setCategoryIndex(index)
-    setCategory(category)
+  const handleChangeCat = (catId: string) => {
+    setBlogId(catId)
+    if (props.onBlogChange) props.onBlogChange(catId)
   }
 
   return (
     <>
       {isShowCategory && (
         <div className={cx('blog-categories')}>
-          {categories ? (
-            categories?.map((category, index) => {
-              return (
-                <Button
-                  category
-                  outline={categoryIndex === index}
-                  key={index}
-                  onClick={() => handleChangeButton(category, index)}
-                >
-                  {category}
-                </Button>
-              )
-            })
-          ) : (
-            <>
-              <Button category outline>
-                Xem tất cả
+          <Button category outline={blogId ? false : true} onClick={() => handleChangeCat('')}>
+            Xem tất cả
+          </Button>
+          {categories &&
+            categories?.map((cat, index) => (
+              <Button category outline={cat._id === blogId} key={index} onClick={() => handleChangeCat(cat._id)}>
+                {cat.name}
               </Button>
-              <Button category>Công nghệ</Button>
-              <Button category>Kiến thức & Phần mềm</Button>
-              <Button category>Sử dụng và bảo dưỡng</Button>
-              <Button category>Tin tức và xu hướng</Button>
-            </>
-          )}
+            ))}
         </div>
       )}
 
-      <div className={cx('blog-list')}>
-        <BlogItem />
-        <BlogItem />
-        <BlogItem />
-        <BlogItem />
-        <BlogItem />
-        <BlogItem />
-      </div>
+      {data && data.length === 0 && (
+        <div className={cx('blog-no-data')}>
+          <p className={cx('blog-text')}>Đang cập nhật bài viết, bạn có thể quay lại sau!</p>
+          <Loading tip="bài viết" />
+        </div>
+      )}
+
+      {limit ? (
+        <div className={cx('blog-list')}>
+          {data &&
+            data.length > 0 &&
+            data?.map((blog, index) => index < limit && <BlogItem key={blog._id} {...blog} />)}
+        </div>
+      ) : (
+        <div className={cx('blog-list')}>
+          {data && data.length > 0 && data?.map((blog) => <BlogItem key={blog._id} {...blog} />)}
+        </div>
+      )}
 
       {isShowMore && (
         <Button outline small className={cx('blog-view-all')}>
