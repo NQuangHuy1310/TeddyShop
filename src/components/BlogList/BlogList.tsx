@@ -47,7 +47,7 @@ const BlogList = (props: blogListProps) => {
       {data && data.length === 0 && (
         <div className={cx('blog-no-data')}>
           <p className={cx('blog-text')}>Đang cập nhật bài viết, bạn có thể quay lại sau!</p>
-          <Loading tip="bài viết" />
+          <Loading tip="bài viết" title="Đang cập nhật" />
         </div>
       )}
 
