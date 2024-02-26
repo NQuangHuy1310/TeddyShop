@@ -1,0 +1,142 @@
+.brand-info {
+  display: flex;
+  gap: 32px;
+}
+
+.brand-leading {
+  position: relative;
+  width: 630px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.brand-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-position: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: blur(4px);
+}
+
+.brand-logo {
+  width: 72px;
+  height: 72px;
+  overflow: hidden;
+  border-radius: 50rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border: 2px solid var(--background-color);
+  flex-shrink: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.brand-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  display: flex;
+  align-items: flex-start;
+  padding: 12px;
+  gap: 16px;
+}
+
+.brand-name {
+  font-size: 2rem;
+  color: #fff;
+}
+
+.brand-desc {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.brand-action {
+  display: flex;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.brand-total {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #fff;
+}
+
+.btn {
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 24px;
+  border-radius: 6px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+}
+
+.brand-btn {
+  background-color: var(--btn-primary-color);
+
+  &:hover {
+    background-color: var(--btn-background-hover);
+  }
+}
+
+.brand-see-product {
+  background-color: var(--background-color);
+
+  &:hover {
+    background-color: var(--btn-background-hover);
+  }
+}
+
+.brand-products {
+  padding: 112px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 26px;
+  margin-top: 60px;
+  grid-auto-flow: row;
+}
+
+@media screen and (max-width: 63.938rem) {
+  .products {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 48rem) {
+  .products {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media screen and (max-width: 22.313rem) {
+  .products {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
