@@ -18,6 +18,7 @@ import { getBrands } from '~/features/brand/brandSlice'
 import { brandModal } from '~/models/brand'
 import { getProductCategories } from '~/features/product/productSlice'
 import { productCatModal } from '~/models'
+import { getMembers } from '~/features/member/memberSlice'
 
 const cx = classNames.bind(styles)
 
@@ -29,6 +30,7 @@ const Header = () => {
     dispatch<any>(getBlogs())
     dispatch<any>(getBrands())
     dispatch<any>(getProductCategories())
+    dispatch<any>(getMembers())
   }, [dispatch])
 
   const userState = useSelector((state: any) => state.auth)

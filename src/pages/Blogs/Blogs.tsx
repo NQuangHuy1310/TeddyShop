@@ -16,14 +16,13 @@ const Blogs = () => {
   const [blogId, setBlogId] = useState<string>('')
 
   useEffect(() => {
+    dispatch<any>(getCategories())
+  }, [dispatch])
+
+  useEffect(() => {
     if (blogId !== '') dispatch<any>(getBlogByCategory(blogId))
     else dispatch<any>(getBlogs())
   }, [dispatch, blogId])
-
-  useEffect(() => {
-    dispatch<any>(getCategories())
-    dispatch<any>(getBlogs())
-  }, [dispatch])
 
   const blogState = useSelector((state: any) => state.blog)
   const { blogCategories, blogs } = blogState

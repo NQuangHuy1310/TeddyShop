@@ -121,15 +121,20 @@
   align-items: center;
   justify-content: flex-start;
   gap: 12px;
-  padding: 14px 82px;
+  padding: 14px 20px;
   background-color: var(--neutral-lightest);
   border-radius: 4px;
   cursor: pointer;
   max-width: 276px;
 
+  img {
+    width: 40px;
+    height: 40px;
+  }
+
   h4 {
-    font-size: 2rem;
-    font-weight: bold;
+    font-size: 1.6rem;
+    font-weight: 700;
   }
 }
 

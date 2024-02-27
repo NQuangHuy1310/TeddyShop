@@ -6,23 +6,16 @@ import Heading from '~/components/Heading'
 import Button from '~/components/Button'
 import UserItem from '~/components/UserItem'
 import images from '~/assets'
-import { DATA } from '~/constants'
 import config from '~/config'
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
-import { getMembers } from '~/features/member/memberSlice'
+import { useSelector } from 'react-redux'
 import { memberModal } from '~/models'
+import { brandModal } from '~/models/brand'
 
 const cx = className.bind(styles)
 
 const About = () => {
-  const dispatch = useDispatch()
-
   const memberState = useSelector((state: any) => state.member?.members)
-
-  useEffect(() => {
-    dispatch<any>(getMembers())
-  }, [dispatch])
+  const brandState = useSelector((state: any) => state.brand?.brands)?.slice(0, 8)
 
   return (
     <div className={cx('about-wrapper')}>
@@ -88,10 +81,10 @@ const About = () => {
           </div>
         </div>
         <div className={cx('awards-list')}>
-          {DATA.AWARDS_LIST.map((item, index) => {
+          {brandState.map((item: brandModal, index: number) => {
             return (
               <div className={cx('awards-item')} key={index}>
-                <img src={item.image} alt="Logo" />
+                <img src={images.icon} alt="Logo" />
                 <h4>{item.name}</h4>
               </div>
             )
