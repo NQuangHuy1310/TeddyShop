@@ -8,7 +8,12 @@ const getProduct = async (productId: string) => {
   return await axios.get(`product/${productId}`)
 }
 
+const getProductCategories = async () => {
+  return await axios.get('product/category')
+}
+
 export const productService = {
   getProduct,
-  getProducts
+  getProducts,
+  getProductCategories
 }
