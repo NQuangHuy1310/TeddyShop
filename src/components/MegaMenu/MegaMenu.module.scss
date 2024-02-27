@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
+  gap: 12px;
   list-style: none;
 }
 
@@ -37,4 +37,7 @@
   font-weight: 500;
   line-height: calc(21 / 14);
   cursor: text;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

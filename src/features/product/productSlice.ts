@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk, createAction } from '@reduxjs/toolkit'
 import { productService } from './productService'
-import { ProductModel } from '~/models'
+import { ProductModel, productCatModal } from '~/models'
 
 const initialState = {
   products: [] as ProductModel[],
+  productCategories: [] as productCatModal[],
   product: {} as ProductModel,
   isError: false,
   isLoading: false,
@@ -23,6 +24,14 @@ export const getProducts = createAsyncThunk('product/getProducts', async () => {
 export const getProduct = createAsyncThunk('product/getProduct', async (productId: string) => {
   try {
     return await productService.getProduct(productId)
+  } catch (error) {
+    return error
+  }
+})
+
+export const getProductCategories = createAsyncThunk('product/getProductCat', async () => {
+  try {
+    return await productService.getProductCategories()
   } catch (error) {
     return error
   }
@@ -56,6 +65,17 @@ export const productSlice = createSlice({
         state.product = action.payload
       })
       .addCase(getProduct.rejected, (state) => {
+        state.isError = true
+      })
+      .addCase(getProductCategories.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getProductCategories.fulfilled, (state, action: any) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.productCategories = action.payload.productCategories
+      })
+      .addCase(getProductCategories.rejected, (state) => {
         state.isError = true
       })
       .addCase(resetState, () => initialState)

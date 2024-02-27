@@ -16,60 +16,10 @@ import { logoutUser, resetState } from '~/features/auth/authSlice'
 import { getBlogs } from '~/features/blog/blogSlice'
 import { getBrands } from '~/features/brand/brandSlice'
 import { brandModal } from '~/models/brand'
+import { getProductCategories } from '~/features/product/productSlice'
+import { productCatModal } from '~/models'
 
 const cx = classNames.bind(styles)
-
-const subCategoriesData = {
-  name: 'Danh mục sản phẩm',
-  items: [
-    {
-      name: 'Bàn phím',
-      desc: 'Lựa chọn bàn phím của chúng tôi',
-      link: ''
-    },
-    {
-      name: 'Chuột',
-      desc: 'Khám phá dòng chuột máy tính của chúng tôi',
-      link: ''
-    },
-    {
-      name: 'Tai nghe',
-      desc: 'Khám phá bộ sưu tập tai nghe chơi game của chúng tôi',
-      link: ''
-    },
-    {
-      name: 'Phụ kiện',
-      desc: 'Tìm phụ kiện hoàn hảo cho máy tính của bạn',
-      link: ''
-    }
-  ]
-}
-
-const subBrandData = {
-  name: 'Hãng sản xuất',
-  items: [
-    {
-      name: 'Logitech',
-      desc: 'Khám phá các sản phẩm mới nhẩt của Logitech',
-      link: ''
-    },
-    {
-      name: 'Rezer',
-      desc: 'Khám phá cac thiết bị ngoại vi chơi game của Razer',
-      link: ''
-    },
-    {
-      name: 'Corsiar',
-      desc: 'Kiểm tra thiết bị hiệu suốt cao của Corsair',
-      link: ''
-    },
-    {
-      name: 'SteelSeries',
-      desc: 'Trải nghiệm công nghệ tiên tiến của SteelSeries',
-      link: ''
-    }
-  ]
-}
 
 const Header = () => {
   const [menuMobile, setMenuMobile] = useState(false)
@@ -78,11 +28,13 @@ const Header = () => {
   useEffect(() => {
     dispatch<any>(getBlogs())
     dispatch<any>(getBrands())
+    dispatch<any>(getProductCategories())
   }, [dispatch])
 
   const userState = useSelector((state: any) => state.auth)
   const blogState = useSelector((state: any) => state.blog?.blogs)?.slice(0, 2)
   const brandState = useSelector((state: any) => state.brand?.brands).slice(0, 4)
+  const productCatState = useSelector((state: any) => state.product?.productCategories).slice(0, 4)
 
   const blogData = {
     name: 'Bài viết nổi bật',
@@ -97,6 +49,18 @@ const Header = () => {
         name: brand.name,
         link: config.routes.brandDetail.replace(':id', brand._id),
         desc: brand.slogan
+      }
+    })
+  }
+
+  const productCatData = {
+    name: 'Danh mục sản phẩm',
+    items: productCatState.map((cat: productCatModal) => {
+      return {
+        id: cat._id,
+        name: cat.name,
+        link: '',
+        desc: cat.slogan
       }
     })
   }
@@ -152,7 +116,7 @@ const Header = () => {
                 <div className={cx('mega-menu')}>
                   <div className={cx('mega-left')}>
                     <MegaMenu data={brandData} />
-                    <MegaMenu data={brandData} />
+                    <MegaMenu data={productCatData} />
                   </div>
                   <div className={cx('mega-right')}>
                     <BlogHeader data={blogData} />
