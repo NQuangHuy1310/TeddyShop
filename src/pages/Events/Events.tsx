@@ -1,108 +1,45 @@
 import classNames from 'classnames/bind'
-
 import styles from './Events.module.scss'
 import Heading from '~/components/Heading'
 import Button from '~/components/Button'
 import EventPreviewBox from '~/components/EventPreviewBox'
-import Schedule from '~/components/Schedule'
 import images from '~/assets'
 import { DATA } from '~/constants'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { getEvents } from '~/features/event/eventSlice'
+import moment from 'moment'
+import { eventModal } from '~/models/event'
 
 const cx = classNames.bind(styles)
 
-const eventList = [
-  {
-    date: 'Thứ 6',
-    day: '14',
-    month: '02',
-    year: '2024',
-    name: 'Trang web bắt đầu hoạt động',
-    tag: 'Giảm giá 20%',
-    location: 'Toàn bộ trang web',
-    desc: 'Có cơ hội trải nghiệm các mẫu bàn phím tuyệt vời, các tình năng độc đáo trên các mẫu bàn phím mới.'
-  },
-  {
-    date: 'Thứ 6',
-    day: '14',
-    month: '02',
-    year: '2024',
-    name: 'Ngày hội bàn phím',
-    tag: 'Khám phá các mẫu bàn phím mới',
-    location: 'Trung tâm triển lãm công nghệ',
-    desc: 'Tham gia ngày hội bàn phím để khám phá và trải nghiệm các mẫu bàn phím tuyệt vời. Sự kiện này sẽ giới thiệu các tính năng độc đáo và công nghệ tiên tiến trên các mẫu bàn phím mới nhất trên thị trường. Đừng bỏ lỡ cơ hội này để tìm hiểu và mua sắm các sản phẩm bàn phím chất lượng.'
-  },
-  {
-    date: 'Thứ 7',
-    day: '22',
-    month: '03',
-    year: '2024',
-    name: 'Cuộc thi gõ tốc độ',
-    tag: 'Thách thức khả năng gõ của bạn',
-    location: 'Quán cà phê Gõ Nhanh',
-    desc: 'Tham gia cuộc thi gõ tốc độ để thể hiện khả năng gõ của bạn trên bàn phím. Cuộc thi sẽ có các vòng đấu hấp dẫn và giải thưởng hấp dẫn cho những người gõ nhanh nhất. Hãy chuẩn bị sẵn sàng và tham gia để trở thành nhà vô địch gõ tốc độ!'
-  },
-  {
-    date: 'Thứ 6',
-    day: '18',
-    month: '04',
-    year: '2024',
-    name: 'Hội thảo về bàn phím thông minh',
-    tag: 'Khám phá tương lai của bàn phím',
-    location: 'Khách sạn Công nghệ',
-    desc: 'Tham gia hội thảo về bàn phím thông minh để tìm hiểu về các công nghệ và xu hướng mới nhất trong lĩnh vực này. Các chuyên gia hàng đầu sẽ chia sẻ thông tin về bàn phím thông minh, tích hợp trí tuệ nhân tạo và các tính năng đột phá. Hãy tham gia để có cái nhìn sâu hơn về tương lai của bàn phím.'
-  }
-]
-
-const scheduleData = [
-  {
-    date: '6',
-    day: '18',
-    month: '04',
-    year: '2024',
-    schedule: [
-      {
-        time: '8:00 AM',
-        name: 'Hội thảo về bàn phím thông minh',
-        tags: ['Trực tiếp', 'Online']
-      },
-      {
-        time: '9:00 AM',
-        name: 'Hội thảo về bàn phím thông minh',
-        tags: ['Trực tiếp', 'Online']
-      },
-      {
-        time: '10:00 AM',
-        name: 'Hội thảo về bàn phím thông minh',
-        tags: ['Trực tiếp', 'Online']
-      }
-    ]
-  },
-  {
-    date: '7',
-    day: '19',
-    month: '04',
-    year: '2024',
-    schedule: [
-      {
-        time: '8:00 AM',
-        name: 'Hội thảo về bàn phím thông minh',
-        tags: ['Trực tiếp', 'Online']
-      },
-      {
-        time: '9:00 AM',
-        name: 'Hội thảo về bàn phím thông minh',
-        tags: ['Trực tiếp', 'Online']
-      },
-      {
-        time: '10:00 AM',
-        name: 'Hội thảo về bàn phím thông minh',
-        tags: ['Trực tiếp', 'Online']
-      }
-    ]
-  }
-]
-
 const Events = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch<any>(getEvents())
+  }, [dispatch])
+
+  const eventState = useSelector((state: any) => state.event.events)
+  const eventData = eventState.map((event: eventModal) => {
+    const datetime = moment(event?.time).locale('vi')
+    const dayOfWeek = datetime.format('dddd')
+    const date = datetime.format('D')
+    const month = datetime.format('MMM')
+    const year = datetime.format('YYYY')
+    return {
+      date: dayOfWeek,
+      day: date,
+      month: month,
+      year: year,
+      name: event.name,
+      tag: event.tag,
+      location: event.location,
+      desc: event.title,
+      to: event._id
+    }
+  })
+
   return (
     <div className={cx('events-wrapper')}>
       <section className={cx('event-heading')}>
@@ -140,20 +77,7 @@ const Events = () => {
               Webinars
             </Button>
           </div>
-          <EventPreviewBox events={eventList} />
-        </div>
-      </section>
-
-      <section className={cx('event-schedule')}>
-        <Heading
-          className={cx('event-schedule-heading')}
-          heading="Lịch sự kiện"
-          desc="Luôn cập nhật lịch trình sự kiện chi tiết của chúng tôi và lên kế hoạch cho ngày của bạn cho phù hợp."
-        />
-        <div className={cx('event-schedule-list')}>
-          {scheduleData.map((item, index) => {
-            return <Schedule key={index} {...item} />
-          })}
+          <EventPreviewBox events={eventData} />
         </div>
       </section>
 

@@ -3,6 +3,7 @@ import classNames from 'classnames/bind'
 import styles from './EventPreview.module.scss'
 import Button from '../Button'
 import { Link } from 'react-router-dom'
+import { convertToVietnameseDay, convertToVietnameseMonth } from '~/utils/formaatedTime'
 
 const cx = classNames.bind(styles)
 
@@ -29,12 +30,12 @@ const EventPreviewBox = (props: eventProps) => {
         events.length > 0 &&
         events.map((event, index) => {
           return (
-            <Link to="" className={cx('event-item')} key={index}>
+            <Link to={`/event/${event.to}`} className={cx('event-item')} key={index}>
               <div className={cx('event-date')}>
-                <span className={cx('rank')}>{event.date}</span>
+                <span className={cx('rank')}>{convertToVietnameseDay(event.date)}</span>
                 <span className={cx('day')}>{event.day}</span>
                 <span className={cx('year')}>
-                  {event.month} - {event.year}
+                  {convertToVietnameseMonth(event.month)} - {event.year}
                 </span>
               </div>
               <div className={cx('event-detail')}>

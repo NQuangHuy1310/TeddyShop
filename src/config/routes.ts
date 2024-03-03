@@ -10,7 +10,7 @@ const routes = {
   register: '/register',
   contact: '/contact',
   events: '/events',
-  event: '/event',
+  event: '/event/:id',
   brandDetail: '/brand/:id'
 }
 
