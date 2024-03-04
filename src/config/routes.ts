@@ -11,7 +11,9 @@ const routes = {
   contact: '/contact',
   events: '/events',
   event: '/event/:id',
-  brandDetail: '/brand/:id'
+  brandDetail: '/brand/:id',
+  profile: '/user/profile',
+  address: '/user/address'
 }
 
 export default routes
