@@ -5,23 +5,23 @@ import { IoIosArrowUp } from 'react-icons/io'
 
 import styles from './Schedule.module.scss'
 import Button from '../Button'
+import { scheduleModal } from '~/models/event'
+import moment from 'moment'
+import { convertToVietnameseDay, convertToVietnameseMonth } from '~/utils/formaatedTime'
 
 const cx = classNames.bind(styles)
 
-interface scheduleProps {
-  date: string
-  day: string
-  month: string
-  year: string
-  schedule: {
-    time: string
-    name: string
-    tags: string[]
-  }[]
-}
+const Schedule = (props: scheduleModal) => {
+  const { date, name, type, time } = props
+  const dateString = moment(date)
 
-const Schedule = (props: scheduleProps) => {
-  const { date, day, month, schedule } = props
+  const dayOfWeek = convertToVietnameseDay(dateString.format('dddd'))
+  const dayOfMonth = dateString.format('D')
+  const month = convertToVietnameseMonth(dateString.format('MMM'))
+
+  const timeString = moment(time)
+  const hours = timeString.format('HH')
+  const minutes = timeString.format('mm')
 
   const [isShowTimeline, setIsShowTimeline] = useState(false)
 
@@ -29,7 +29,7 @@ const Schedule = (props: scheduleProps) => {
     <div className={cx('schedule-item')}>
       <div className={cx('schedule-heading')}>
         <h4 className={cx('schedule-date')}>
-          Thứ {date} - Ngày {day} - Tháng {month}
+          Thứ {dayOfWeek} - Ngày {dayOfMonth} - Tháng {month}
         </h4>
         <div className={cx('schedule-more')} onClick={() => setIsShowTimeline(!isShowTimeline)}>
           {isShowTimeline ? <MdExpandMore /> : <IoIosArrowUp />}
@@ -37,30 +37,26 @@ const Schedule = (props: scheduleProps) => {
       </div>
       {isShowTimeline && (
         <div className={cx('schedule-timeline')}>
-          {schedule.map((item, index) => {
-            return (
-              <div className={cx('schedule')} key={index}>
-                <p className={cx('schedule-time')}>{item.time}</p>
-                <div className={cx('schedule-details')}>
-                  <div className={cx('schedule-title')}>
-                    <h4 className={cx('schedule-name')}>{item.name}</h4>
-                    <div className={cx('schedule-tags')}>
-                      {item?.tags.map((tag, index) => {
-                        return (
-                          <div className={cx('schedule-tag')} key={index}>
-                            {tag}
-                          </div>
-                        )
-                      })}
-                    </div>
-                  </div>
+          <div className={cx('schedule')}>
+            <p className={cx('schedule-time')}>{`${hours} - ${minutes}`}</p>
+            <div className={cx('schedule-details')}>
+              <div className={cx('schedule-title')}>
+                <h4 className={cx('schedule-name')}>{name}</h4>
+                <div className={cx('schedule-tags')}>
+                  {type?.map((tag: string, index: number) => {
+                    return (
+                      <div className={cx('schedule-tag')} key={index}>
+                        {tag}
+                      </div>
+                    )
+                  })}
                 </div>
-                <Button small outline>
-                  Xem chi tiết
-                </Button>
               </div>
-            )
-          })}
+            </div>
+            <Button small outline>
+              Xem chi tiết
+            </Button>
+          </div>
         </div>
       )}
     </div>

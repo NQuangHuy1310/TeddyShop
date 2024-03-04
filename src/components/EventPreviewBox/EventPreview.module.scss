@@ -12,6 +12,7 @@
   padding: 32px 0;
   border-top: 1px solid var(--black-color);
   width: 100%;
+  cursor: text;
 }
 
 .event-date {
@@ -20,7 +21,7 @@
   padding: 12px 4px;
   justify-content: center;
   align-items: center;
-  max-width: 112px;
+  max-width: 128px;
   width: 100%;
   border: 1px solid var(--black-color);
   border-radius: 4px;
@@ -70,6 +71,7 @@
   border-radius: 4px;
   font-size: 1.4rem;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .event-location {

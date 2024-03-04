@@ -36,7 +36,7 @@ const Header = () => {
   const userState = useSelector((state: any) => state.auth)
   const blogState = useSelector((state: any) => state.blog?.blogs)?.slice(0, 2)
   const brandState = useSelector((state: any) => state.brand?.brands).slice(0, 4)
-  const productCatState = useSelector((state: any) => state.product?.productCategories).slice(0, 4)
+  const productCatState = useSelector((state: any) => state.product?.productCategories)?.slice(0, 4)
 
   const blogData = {
     name: 'Bài viết nổi bật',

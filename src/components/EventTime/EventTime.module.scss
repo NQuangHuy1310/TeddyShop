@@ -1,0 +1,58 @@
+.event-timeline {
+  display: flex;
+  align-items: center;
+  padding: 16px 24px;
+  gap: 16px;
+  border: 1px solid var(--black-color);
+  border-radius: 4px;
+}
+
+.event-time {
+  width: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: calc(48 / 40);
+  }
+
+  span {
+    font-size: 1.6rem;
+    font-weight: 400;
+  }
+}
+
+.divider {
+  width: 1px;
+  height: 72px;
+  background-color: var(--black-color);
+}
+
+.event-end {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 48rem) {
+  .event-timeline {
+    padding: 10px;
+    max-width: 375px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .event-time p {
+    font-size: 2.8rem;
+  }
+}
+
+@media screen and (max-width: 23.313rem) {
+  .event-time {
+    max-width: 42px;
+    max-height: 48px;
+  }
+}

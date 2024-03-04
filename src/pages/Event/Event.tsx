@@ -1,5 +1,4 @@
 import classNames from 'classnames/bind'
-
 import styles from './Event.module.scss'
 import Heading from '~/components/Heading'
 import Button from '~/components/Button'
@@ -8,95 +7,60 @@ import images from '~/assets'
 import Schedule from '~/components/Schedule'
 import Form from '~/components/Form'
 import Slide from '~/components/Slide'
+import { useDispatch, useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
+import { getEvent, getScheduleByEventId } from '~/features/event/eventSlice'
+import { resetState } from '~/features/auth/authSlice'
+import { memberModal } from '~/models'
+import moment from 'moment'
+import { convertToVietnameseDay, convertToVietnameseMonth } from '~/utils/formaatedTime'
+import EventTime from '~/components/EventTime'
+import { scheduleModal } from '~/models/event'
 
 const cx = classNames.bind(styles)
 
-const scheduleData = [
-  {
-    date: '6',
-    day: '18',
-    month: '04',
-    year: '2024',
-    schedule: [
-      {
-        time: '8:00 AM',
-        name: 'Hội thảo về bàn phím thông minh',
-        tags: ['Trực tiếp', 'Online']
-      },
-      {
-        time: '9:00 AM',
-        name: 'Hội thảo về bàn phím thông minh',
-        tags: ['Trực tiếp', 'Online']
-      },
-      {
-        time: '10:00 AM',
-        name: 'Hội thảo về bàn phím thông minh',
-        tags: ['Trực tiếp', 'Online']
-      }
-    ]
-  },
-  {
-    date: '7',
-    day: '19',
-    month: '04',
-    year: '2024',
-    schedule: [
-      {
-        time: '8:00 AM',
-        name: 'Hội thảo về bàn phím thông minh',
-        tags: ['Trực tiếp', 'Online']
-      },
-      {
-        time: '9:00 AM',
-        name: 'Hội thảo về bàn phím thông minh',
-        tags: ['Trực tiếp', 'Online']
-      },
-      {
-        time: '10:00 AM',
-        name: 'Hội thảo về bàn phím thông minh',
-        tags: ['Trực tiếp', 'Online']
-      }
-    ]
-  }
-]
-
 const Event = () => {
+  const dispatch = useDispatch()
+  const location = useLocation()
+
+  const eventId = location.pathname.split('/')[2]
+
+  useEffect(() => {
+    if (eventId) {
+      dispatch<any>(getEvent(eventId))
+      dispatch<any>(getScheduleByEventId(eventId))
+    } else dispatch<any>(resetState())
+  }, [eventId, dispatch])
+
+  const eventState = useSelector((state: any) => state.event?.event)
+  const scheduleState = useSelector((state: any) => state.event?.schedules)
+
+  const { members, name, tag, time, title, description } = eventState
+
+  const datetime = moment(time).locale('vi')
+
+  // ngày diễn ra
+  const day = datetime.format('D')
+  const date = convertToVietnameseDay(datetime.format('dddd'))
+  const month = convertToVietnameseMonth(datetime.format('MMM'))
+  const year = datetime.format('YYYY')
+
+  const formattedData = `${date} - Ngày ${day} - ${month} - ${year}`
+
   return (
     <div className={cx('event-wrapper')}>
       <section className={cx('event-header-container')}>
         <div className={cx('event-header')}>
           <div className={cx('event-detail')}>
-            <Heading
-              heading="Ra mắt trang web TeddyShop"
-              desc="Hãy tham gia cùng chúng tôi để có một trải nghiệm khó quên, đầy niềm vui và hứng thú."
-            />
+            <Heading heading={name} desc={title} />
           </div>
           <div className={cx('event-date')}>
             <div className={cx('event-title')}>
-              <p className={cx('event-info')}>Ngày 14 - Tháng 2 - Năm 2024</p>
-              <div className={cx('event-tag')}>Giảm giá 20%</div>
+              <p className={cx('event-info')}>{formattedData}</p>
+              <div className={cx('event-tag')}>{tag}</div>
             </div>
-            <div className={cx('event-timeline')}>
-              <div className={cx('event-time')}>
-                <p>45</p>
-                <span>Days</span>
-              </div>
-              <span className={cx('divider')}></span>
-              <div className={cx('event-time')}>
-                <p>12</p>
-                <span>House</span>
-              </div>
-              <span className={cx('divider')}></span>
-              <div className={cx('event-time')}>
-                <p>44</p>
-                <span>Min</span>
-              </div>
-              <span className={cx('divider')}></span>
-              <div className={cx('event-time')}>
-                <p>29</p>
-                <span>Secs</span>
-              </div>
-            </div>
+            <EventTime time={datetime} />
           </div>
           <div className={cx('event-action')}>
             <input type="email" placeholder="Nhập email của bạn..." />
@@ -112,15 +76,21 @@ const Event = () => {
           <div className={cx('content-member')}>
             <p>Diễn giả</p>
             <div className={cx('memeber-list')}>
-              <div className={cx('memeber-item')}>
-                <div className={cx('member-img')}>
-                  <img src={images.productDefault} alt="" />
-                </div>
-                <div className={cx('memeber-info')}>
-                  <p className={cx('member-name')}>Nguyễn Văn Quang Huy</p>
-                  <p className={cx('member-position')}>CEO</p>
-                </div>
-              </div>
+              {members &&
+                members.length > 0 &&
+                members?.map((member: memberModal, index: number) => {
+                  return (
+                    <div className={cx('memeber-item')} key={index}>
+                      <div className={cx('member-img')}>
+                        <img src={member.images ? member.images.url : images.productDefault} alt="" />
+                      </div>
+                      <div className={cx('memeber-info')}>
+                        <p className={cx('member-name')}>{member.fullName}</p>
+                        <p className={cx('member-position')}>{member.position}</p>
+                      </div>
+                    </div>
+                  )
+                })}
             </div>
           </div>
           <div className={cx('content-form')}>
@@ -137,28 +107,13 @@ const Event = () => {
             <Socials />
           </div>
         </div>
-        <div className={cx('content-right')}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil optio harum dolor perferendis quam! Impedit
-          placeat possimus commodi? Temporibus dolor consectetur laudantium earum eos non recusandae ut, iusto ex hic
-          quis nihil deleniti cumque odio corporis porro deserunt eveniet odit minima iste ullam architecto harum? Sit
-          autem officiis perspiciatis doloremque ea eos reprehenderit recusandae nobis, voluptas ad sequi quam voluptate
-          tempore deleniti? Autem amet esse unde iusto sed recusandae corporis. Et, libero? Sint voluptas vero
-          architecto modi perferendis inventore eos assumenda alias explicabo quo asperiores odit nihil, rem incidunt
-          optio suscipit commodi sed aut rerum omnis! Iure minus autem tenetur voluptas, similique nemo ut. Facere ad
-          amet cum numquam dicta eligendi blanditiis? Commodi corporis rem quam? Laboriosam culpa tempora voluptas
-          delectus nisi cum harum a reiciendis nobis earum amet iusto aspernatur labore perspiciatis deserunt ut ducimus
-          cumque facilis, dolores id! Quaerat, aut amet? Culpa, at! Illum expedita quisquam, atque dolorum eum aliquam
-          nemo nam veniam laborum quae. Laudantium vel cum error iste nulla quis doloremque ipsam voluptas voluptatibus
-          sapiente. Atque, at ipsum consectetur repudiandae minus asperiores repellat veniam tempora, illum eum et
-          doloremque necessitatibus rem facere. Adipisci veritatis, id iure asperiores, qui deleniti veniam accusantium
-          tenetur consequuntur, totam excepturi architecto.
-        </div>
+        <div className={cx('content-right')} dangerouslySetInnerHTML={{ __html: description }}></div>
       </section>
 
       <section className={cx('event-schedule')}>
         <Heading heading="Lịch sự kiện" desc="Hãy xem lịch trình chi tiết về các thủ tục của sự kiện dưới đây." />
         <div className="">
-          {scheduleData.map((item, index) => {
+          {scheduleState?.map((item: scheduleModal, index: number) => {
             return <Schedule key={index} {...item} />
           })}
         </div>
@@ -170,32 +125,23 @@ const Event = () => {
           desc="Làm quen với người tổ chức sự kiện, diễn giả và người tham gia."
         />
         <div className={cx('teams')}>
-          <div className={cx('team')}>
-            <div className={cx('team-img')}>
-              <img src={images.productDefault} alt="" />
-            </div>
-            <div className={cx('team-info')}>
-              <p className={cx('team-name')}>Nguyễn Văn Quang Huy</p>
-              <p className={cx('team-position')}>CEO</p>
-              <p className={cx('team-desc')}>
-                Nguyễn Quang Huy là người đã sáng lập ra thương hiệu và có niềm đam mê với bàn phím.
-              </p>
-            </div>
-            <Socials />
-          </div>
-          <div className={cx('team')}>
-            <div className={cx('team-img')}>
-              <img src={images.productDefault} alt="" />
-            </div>
-            <div className={cx('team-info')}>
-              <p className={cx('team-name')}>Nguyễn Văn Quang Huy</p>
-              <p className={cx('team-position')}>CEO</p>
-              <p className={cx('team-desc')}>
-                Nguyễn Quang Huy là người đã sáng lập ra thương hiệu và có niềm đam mê với bàn phím.
-              </p>
-            </div>
-            <Socials />
-          </div>
+          {members &&
+            members?.length > 0 &&
+            members?.map((member: memberModal, index: number) => {
+              return (
+                <div className={cx('team')} key={index}>
+                  <div className={cx('team-img')}>
+                    <img src={member.images ? member.images.url : images.productDefault} alt="" />
+                  </div>
+                  <div className={cx('team-info')}>
+                    <p className={cx('team-name')}>{member.fullName}</p>
+                    <p className={cx('team-position')}>{member.position}</p>
+                    <p className={cx('team-desc')} dangerouslySetInnerHTML={{ __html: member.description }}></p>
+                  </div>
+                  <Socials />
+                </div>
+              )
+            })}
         </div>
       </section>
 
