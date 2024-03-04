@@ -4,13 +4,17 @@ import styles from './Profile.module.scss'
 import Button from '~/components/Button'
 import images from '~/assets'
 import Dropzone from 'react-dropzone'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { uploadImage } from '~/features/upload/uploadSlice'
 
 const cx = classNames.bind(styles)
 const genderData = ['Nam', 'Nữ', 'Khác']
 
 const Profile = () => {
+  const dispatch = useDispatch()
+
   const authState = useSelector((state: any) => state.auth?.user)
+  const uploadState = useSelector((state: any) => state.upload?.images)
   const { userName, userEmail, userAvatar, userPhone, userGender } = authState
 
   return (
@@ -58,8 +62,8 @@ const Profile = () => {
           </Button>
         </form>
         <div className={cx('profile-avatar')}>
-          <img src={userAvatar?.url || images.noImage} alt="avatar" />
-          <Dropzone onDrop={(acceptedFiles) => console.log(acceptedFiles)}>
+          <img src={userAvatar?.url || uploadState[0]?.url || images.noImage} alt="avatar" />
+          <Dropzone onDrop={(acceptedFiles) => dispatch<any>(uploadImage(acceptedFiles))}>
             {({ getRootProps, getInputProps }) => (
               <div
                 {...getRootProps()}

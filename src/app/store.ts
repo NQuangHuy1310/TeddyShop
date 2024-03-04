@@ -5,6 +5,7 @@ import brandSelice from '~/features/brand/brandSlice'
 import eventSlice from '~/features/event/eventSlice'
 import memberSlice from '~/features/member/memberSlice'
 import productSlice from '~/features/product/productSlice'
+import uploadSlice from '~/features/upload/uploadSlice'
 
 export const store = configureStore({
   reducer: {
@@ -13,7 +14,8 @@ export const store = configureStore({
     blog: blogSlice,
     brand: brandSelice,
     member: memberSlice,
-    event: eventSlice
+    event: eventSlice,
+    upload: uploadSlice
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
