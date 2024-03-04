@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, createAction } from '@reduxjs/toolkit'
 import { authService } from './authService'
-import { User } from '~/models'
+import { User, updateUser } from '~/models'
 const getUserFormLocalStorage = localStorage.getItem('user_data')
   ? JSON.parse(localStorage.getItem('user_data') || '')
   : {}
@@ -44,6 +44,14 @@ export const logoutUser = createAsyncThunk('auth/logout', async (thunkAPI) => {
     return await authService.logoutUser()
   } catch (error) {
     return (thunkAPI as any).rejectWithValue(error)
+  }
+})
+
+export const updateUserInfo = createAsyncThunk('auth/update', async (userData: updateUser, thunkAPI) => {
+  try {
+    return await authService.updateUser(userData)
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error)
   }
 })
 
@@ -91,6 +99,19 @@ export const authSlice = createSlice({
         localStorage.removeItem('access_token')
       })
       .addCase(logoutUser.rejected, (state) => {
+        state.isError = true
+      })
+      .addCase(updateUserInfo.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(updateUserInfo.fulfilled, (state, action: any) => {
+        state.isSuccess = true
+        state.isError = false
+        state.isLoading = false
+        state.user = action.payload
+        localStorage.setItem('user_data', JSON.stringify(action.payload))
+      })
+      .addCase(updateUserInfo.rejected, (state) => {
         state.isError = true
       })
       .addCase(resetState, (state) => {
