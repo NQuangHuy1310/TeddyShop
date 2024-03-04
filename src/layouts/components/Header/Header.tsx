@@ -78,11 +78,27 @@ const Header = () => {
     dispatch<any>(dispatch(resetState()))
   }
 
+  const backToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
+
+  useEffect(() => {
+    const menuItem = document.querySelectorAll('.menu-item a')
+    menuItem.forEach((item) => {
+      item.addEventListener('click', () => {
+        backToTop()
+      })
+    })
+  }, [])
+
   return (
     <header className={cx('header')}>
       <div className={cx('header-inner')}>
         <div className={cx('header-navbar')}>
-          <Link to="/" className={cx('header-logo')}>
+          <Link to="/" className={cx('header-logo')} onClick={backToTop}>
             TeddyShop
           </Link>
           <ul className={cx('header-menu', menuMobile ? 'active' : '')}>

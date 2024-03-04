@@ -1,5 +1,4 @@
 import classNames from 'classnames/bind'
-import { Link } from 'react-router-dom'
 import { MdKeyboardArrowRight } from 'react-icons/md'
 
 import styles from './BlogItem.module.scss'
@@ -13,7 +12,7 @@ const BlogItem = (props: blogModel) => {
   const { _id: id, name, tag, blogCategory, thumbnail } = props
 
   return (
-    <Link to={`/blog-post/${id}`} className={cx('blog-item')}>
+    <div className={cx('blog-item')}>
       <div className={cx('blog-img')}>
         <img src={thumbnail.url || images.productDefault} alt="Lợi ích của việc sử dụng bàn phím" />
       </div>
@@ -25,11 +24,11 @@ const BlogItem = (props: blogModel) => {
         <div className={cx('blog-title')}>
           <h4 className={cx('blog-name')}>{name}</h4>
         </div>
-        <Button to="" small className={cx('blog-more')} rightIcon={<MdKeyboardArrowRight />}>
+        <Button to={`/blog-post/${id}`} small className={cx('blog-more')} rightIcon={<MdKeyboardArrowRight />}>
           Đọc thêm
         </Button>
       </div>
-    </Link>
+    </div>
   )
 }
 
