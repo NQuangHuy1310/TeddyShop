@@ -42,7 +42,7 @@ const Home = () => {
               <Button to={config.routes.products} outline large>
                 Mua ngay
               </Button>
-              <Button to="" background large>
+              <Button to={config.routes.blogPost.replace(':id', '65dbc89e80a8df07db153bcb')} background large>
                 Tìm hiểu thêm
               </Button>
             </div>
@@ -98,7 +98,11 @@ const Home = () => {
             <Button to={config.routes.products} outline small>
               Mua ngay
             </Button>
-            <Button to="" small rightIcon={<RiArrowRightSLine />}>
+            <Button
+              to={config.routes.blogPost.replace(':id', '65dbc89e80a8df07db153bcb')}
+              small
+              rightIcon={<RiArrowRightSLine />}
+            >
               Tìm hiểu thêm
             </Button>
           </div>
@@ -158,7 +162,7 @@ const Home = () => {
               </p>
             </div>
             <div className={cx('feature-action')}>
-              <Button outline small to="">
+              <Button outline small to={config.routes.blogPost.replace(':id', '65dbc96680a8df07db153bd7')}>
                 Tìm hiểu thêm
               </Button>
               <Button to={routes.login} small rightIcon={<RiArrowRightSLine />}>

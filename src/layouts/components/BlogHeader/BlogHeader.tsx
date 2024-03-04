@@ -6,6 +6,7 @@ import images from '~/assets'
 import { Link } from 'react-router-dom'
 import { blogModel } from '~/models'
 import routes from '~/config/routes'
+import config from '~/config'
 
 const cx = classNames.bind(styles)
 
@@ -34,7 +35,7 @@ const BlogHeader = (props: blogHeaderProps) => {
                 <div className={cx('blog-content')}>
                   <h5 className={cx('blog-name')}>{blog.name}</h5>
                   {/* <p className={cx('blog-desc')}>{blog.desc}</p> */}
-                  <Link to={blog._id} className={cx('read-more')}>
+                  <Link to={config.routes.blogPost.replace(':id', blog._id)} className={cx('read-more')}>
                     Đọc thêm
                   </Link>
                 </div>
