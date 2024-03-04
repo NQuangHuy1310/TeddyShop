@@ -14,6 +14,8 @@ import Register from '~/pages/Register'
 import Events from '~/pages/Events'
 import Event from '~/pages/Event'
 import Brand from '~/pages/Brand'
+import Profile from '~/pages/Profile'
+import ProfileLayout from '~/layouts/ProfileLayout'
 
 const publicRoutes: route[] = [
   { path: config.routes.home, element: Home, layout: MainLayout },
@@ -31,6 +33,6 @@ const publicRoutes: route[] = [
   { path: config.routes.brandDetail, element: Brand, layout: MainLayout }
 ]
 
-// const privateRoutes = []
+const privateRoutes: route[] = [{ path: config.routes.profile, element: Profile, layout: ProfileLayout }]
 
-export { publicRoutes }
+export { publicRoutes, privateRoutes }

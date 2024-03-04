@@ -1,0 +1,33 @@
+.profile-content {
+  display: flex;
+  max-width: 1440px;
+  margin: 0 auto;
+  margin-top: calc(var(--header-height) + 50px);
+  padding: 0 64px 64px 64px;
+  border-bottom: 1px solid #aaa;
+}
+
+.profile-has-children {
+  flex: 1;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 8px;
+  padding: 30px;
+}
+
+@media screen and (max-width: 1023.98px) {
+  .content {
+    padding: 0 42px;
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  .content {
+    padding: 0 32px;
+  }
+}
+
+@media screen and (max-width: 374.98px) {
+  .content {
+    padding: 0 20px;
+  }
+}

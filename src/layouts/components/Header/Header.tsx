@@ -155,7 +155,7 @@ const Header = () => {
               <div className={cx('header-auth-name')}>{user.userName}</div>
               <ul className={cx('auth-menu')}>
                 <li className={cx('auth-item')}>
-                  <Link to="" className={cx('auth-link')}>
+                  <Link to={config.routes.profile} className={cx('auth-link')}>
                     Tài khoản của tôi
                   </Link>
                 </li>
