@@ -31,7 +31,7 @@ const Slide = (props: slideProps) => {
       modules={[Autoplay, Pagination, Navigation]}
       className="mySwiper"
     >
-      {props.images.map((image, index) => {
+      {props.images?.map((image, index) => {
         return (
           <SwiperSlide key={index}>
             <img src={image} />

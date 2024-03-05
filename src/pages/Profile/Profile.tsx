@@ -100,7 +100,7 @@ const Profile = () => {
           <div className={cx('profile-item')}>
             <div className={cx('profile-item-title')}>Giới tính</div>
             <div className={cx('profile-item-data')}>
-              {genderData.map((gender) => (
+              {genderData?.map((gender) => (
                 <label key={gender} className={cx('profile-gender-label')}>
                   <input
                     type="radio"

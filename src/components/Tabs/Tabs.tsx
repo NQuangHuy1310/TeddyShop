@@ -23,7 +23,7 @@ const Tabs = (props: TabsProps) => {
   return (
     <div className={cx('tabs-container')}>
       <div className={cx('tabs-header')}>
-        {tabs.map((tab, index) => {
+        {tabs?.map((tab, index) => {
           return (
             <div
               className={cx('tab-item', { active: activeTab === index })}

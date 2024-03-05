@@ -114,7 +114,7 @@ export const CONTACT_DATA = [
     title: 'Văn phòng',
     desc: 'Hãy đến thăm văn phòng của chúng tôi để gặp gỡ và trò chuyện trực tiếp với đội ngũ chúng tôi.',
     info: 'Phường Lương Sơn,TP Sông Công, Tỉnh Thái Nguyên',
-    icon: images.map
+    icon: images?.map
   }
 ]
 

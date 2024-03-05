@@ -26,7 +26,7 @@ const MegaMenu = (props: brandProps) => {
         <h4 className={cx('mega-heading')}>{name}</h4>
         {items &&
           items.length > 0 &&
-          items.map((item, index) => {
+          items?.map((item, index) => {
             return (
               <Link to={item.link} className={cx('mega-item')} key={index}>
                 <div className={cx('mega-icon')}>

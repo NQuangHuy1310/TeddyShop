@@ -42,7 +42,7 @@ const Contact = () => {
           desc="Hãy liên hệ với chúng tôi nếu có bất kì thắc mắc hoặc cần sự trợ giúp nào qua các thông tin dưới đây."
         />
         <div className={cx('contact-us-list')}>
-          {DATA.CONTACT_DATA.map((item, index) => {
+          {DATA.CONTACT_DATA?.map((item, index) => {
             return (
               <div className={cx('contact-us-item')} key={index}>
                 <div className={cx('contact-us-icon')}>
@@ -65,7 +65,7 @@ const Contact = () => {
         </div>
         <div className={cx('location-info')}>
           <div className={cx('location-list')}>
-            {DATA.LOCATION_DATA.map((item, index) => {
+            {DATA.LOCATION_DATA?.map((item, index) => {
               return (
                 <div
                   className={cx('location-item', `${mapIndex === index ? 'active' : ''}`)}
@@ -82,7 +82,7 @@ const Contact = () => {
             })}
           </div>
           <div className={cx('location-img')}>
-            <iframe src={DATA.LOCATION_DATA[mapIndex].map} width="600" height="450"></iframe>
+            <iframe src={DATA.LOCATION_DATA[mapIndex]?.map} width="600" height="450"></iframe>
           </div>
         </div>
       </section>
@@ -90,7 +90,7 @@ const Contact = () => {
       <section className={cx('support-section')}>
         <Heading heading="Đội ngũ hỗ trợ" desc="Gặp gỡ các thành viên của nhóm hỗ trợ khách hàng chúng tôi." />
         <div className={cx('support-team')}>
-          {memberState.map((item: memberModal, index: number) => {
+          {memberState?.map((item: memberModal, index: number) => {
             return <UserItem key={index} {...item} isSupport />
           })}
         </div>

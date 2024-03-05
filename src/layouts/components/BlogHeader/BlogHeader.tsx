@@ -26,7 +26,7 @@ const BlogHeader = (props: blogHeaderProps) => {
       <div className={cx('blog-list')}>
         {blogs &&
           blogs.length > 0 &&
-          blogs.map((blog, index) => {
+          blogs?.map((blog, index) => {
             return (
               <div className={cx('blog-item')} key={index}>
                 <div className={cx('blog-img')}>

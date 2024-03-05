@@ -47,7 +47,7 @@ const Products = () => {
           {productState ? (
             <div className={cx('product-list')}>
               {productState.length > 0 &&
-                productState.map((product: ProductModel, index: number) => {
+                productState?.map((product: ProductModel, index: number) => {
                   return <Product key={index} {...product} />
                 })}
             </div>
@@ -94,7 +94,7 @@ const Products = () => {
         </div>
         <ul className={cx('faq-list')}>
           {DATA.FAQS &&
-            DATA.FAQS.map((item, index) => {
+            DATA.FAQS?.map((item, index) => {
               return (
                 <li className={cx('faq-item')} key={index}>
                   <p className={cx('question')}>{item.question}</p>

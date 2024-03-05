@@ -21,7 +21,7 @@ const Events = () => {
   }, [dispatch])
 
   const eventState = useSelector((state: any) => state.event.events)
-  const eventData = eventState.map((event: eventModal) => {
+  const eventData = eventState?.map((event: eventModal) => {
     const datetime = moment(event?.time).locale('vi')
     const dayOfWeek = datetime.format('dddd')
     const date = datetime.format('D')
@@ -94,7 +94,7 @@ const Events = () => {
           </div>
         </div>
         <div className={cx('faq-list')}>
-          {DATA.EVENT_FAQS.map((item, index) => {
+          {DATA.EVENT_FAQS?.map((item, index) => {
             return (
               <div className={cx('faq-item')} key={index}>
                 <h4 className={cx('faq-question')}>{item.question}</h4>

@@ -81,7 +81,7 @@ const About = () => {
           </div>
         </div>
         <div className={cx('awards-list')}>
-          {brandState.map((item: brandModal, index: number) => {
+          {brandState?.map((item: brandModal, index: number) => {
             return (
               <div className={cx('awards-item')} key={index}>
                 <img src={images.icon} alt="Logo" />
