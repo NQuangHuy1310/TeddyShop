@@ -19,7 +19,7 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          {publicRoutes.map((route: route, index: number) => {
+          {publicRoutes?.map((route: route, index: number) => {
             let Layout: React.ComponentType<any> = MainLayout
             if (route.layout) {
               Layout = route.layout as React.ComponentType<any>
@@ -40,7 +40,7 @@ function App() {
             )
           })}
 
-          {privateRoutes.map((route: route, index: number) => {
+          {privateRoutes?.map((route: route, index: number) => {
             let Layout: React.ComponentType<any> = MainLayout
             if (route.layout) {
               Layout = route.layout as React.ComponentType<any>

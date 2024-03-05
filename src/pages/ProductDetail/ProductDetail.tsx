@@ -140,7 +140,7 @@ const ProductDetail = () => {
           </div>
           <div className="">
             <div className={cx('performance-list')}>
-              {DATA.PERFORMANCE_DATA.map((item, index) => {
+              {DATA.PERFORMANCE_DATA?.map((item, index) => {
                 return (
                   <div className={cx('performance-item')} key={index}>
                     <div className={cx('performance-icon')}>
@@ -171,7 +171,7 @@ const ProductDetail = () => {
             desc="Tìm câu trả lời cho các câu hỏi phổ biến về sản phẩm của chúng tôi dưới đây."
           />
           <div className={cx('faq-list')}>
-            {DATA.FAQS_PRODUCTS.map((item, index) => {
+            {DATA.FAQS_PRODUCTS?.map((item, index) => {
               return (
                 <div className={cx('faq-item')} key={index}>
                   <div className={cx('faq-question')}>

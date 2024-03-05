@@ -35,7 +35,7 @@ const Header = () => {
 
   const userState = useSelector((state: any) => state.auth)
   const blogState = useSelector((state: any) => state.blog?.blogs)?.slice(0, 2)
-  const brandState = useSelector((state: any) => state.brand?.brands).slice(0, 4)
+  const brandState = useSelector((state: any) => state.brand?.brands)?.slice(0, 4)
   const productCatState = useSelector((state: any) => state.product?.productCategories)?.slice(0, 4)
 
   const blogData = {
@@ -45,7 +45,7 @@ const Header = () => {
 
   const brandData = {
     name: 'Hãng sản xuất',
-    items: brandState.map((brand: brandModal) => {
+    items: brandState?.map((brand: brandModal) => {
       return {
         id: brand._id,
         name: brand.name,
@@ -57,7 +57,7 @@ const Header = () => {
 
   const productCatData = {
     name: 'Danh mục sản phẩm',
-    items: productCatState.map((cat: productCatModal) => {
+    items: productCatState?.map((cat: productCatModal) => {
       return {
         id: cat._id,
         name: cat.name,

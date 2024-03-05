@@ -28,7 +28,7 @@ const EventPreviewBox = (props: eventProps) => {
     <div className={cx('event-list')}>
       {events &&
         events.length > 0 &&
-        events.map((event, index) => {
+        events?.map((event, index) => {
           return (
             <Link to={`/event/${event.to}`} className={cx('event-item')} key={index}>
               <div className={cx('event-date')}>

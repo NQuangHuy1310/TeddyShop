@@ -236,7 +236,7 @@ const Home = () => {
 
         {productData && productData.length > 0 ? (
           <div className={cx('products')}>
-            {productData.map((product: ProductModel, index: number) => (
+            {productData?.map((product: ProductModel, index: number) => (
               <Product key={index} {...product} />
             ))}
           </div>
