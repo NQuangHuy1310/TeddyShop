@@ -12,9 +12,10 @@ import { DATA } from '~/constants'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { getProduct } from '~/features/product/productSlice'
-import { ProductModel } from '~/models'
+import { Color, Option, ProductModel, Type } from '~/models'
 import { formatPrice } from '~/utils'
 import Tabs from '~/components/Tabs'
+import { toast } from 'react-toastify'
 
 const cx = classNames.bind(styles)
 
@@ -23,23 +24,98 @@ const ProductDetail = () => {
   const location = useLocation()
   const productId = location.pathname.split('/')[2]
 
-  const [productCount, setProductCount] = useState<number>(1)
-
   // product detail data
   useEffect(() => {
     dispatch<any>(getProduct(productId))
   }, [productId, dispatch])
 
   const product: ProductModel = useSelector((state: any) => state.product?.product)
-  const { price, name, images: productImages, description, warranty } = product
+  const {
+    price,
+    name,
+    images: productImages,
+    description,
+    warranty,
+    attributes,
+    colors,
+    options,
+    types,
+    quantity
+  } = product
 
   const [productImageMain, setProductImageMain] = useState<string | undefined>('')
   const productPrice = formatPrice(price)
 
-  // handle product count
-  const increaseProductCount = () => {}
+  const [productCount, setProductCount] = useState<number>(1)
+  const [limitProductCount, setLimitProductCount] = useState<number>(quantity)
+  const [colorId, setColorId] = useState<string>('')
+  const [optionId, setOptionId] = useState<string>('')
+  const [switchId, setSwitchId] = useState<string>('')
+  const [newPrice, setNewPrice] = useState<string>('')
+  const [switchName, setSwitchName] = useState<string>('')
+  const [optionName, setOptionName] = useState<string>('')
+  const [colorName, setColorName] = useState<string>('')
 
-  const decreaseProductCount = () => {}
+  // handle change price product when change color, option, type
+  useEffect(() => {
+    if (attributes && attributes.length > 0) {
+      const newPrice = attributes.find((item) => {
+        if (colorId && switchId && optionId) {
+          return item.color.code === colorId && item.switch.code === switchId && item.option?.code === optionId
+        } else if (colorId && switchId) {
+          return item.color.code === colorId && item.switch.code === switchId
+        } else if (colorId && optionId) {
+          return item.color.code === colorId && item.option?.code === optionId
+        } else if (switchId && optionId) {
+          return item.switch.code === switchId && item.option?.code === optionId
+        } else if (colorId) {
+          return item.color.code === colorId
+        } else if (switchId) {
+          return item.switch.code === switchId
+        } else if (optionId) {
+          return item.option?.code === optionId
+        }
+        return false
+      })
+
+      if (newPrice && newPrice.price) {
+        setNewPrice(formatPrice(newPrice.price))
+        setLimitProductCount(newPrice.quantity)
+      } else {
+        setNewPrice('')
+      }
+    } else {
+      setNewPrice('')
+    }
+  }, [colorId, optionId, switchId, attributes])
+
+  // handle product count
+  const increaseProductCount = () => {
+    if (productCount < limitProductCount) {
+      setProductCount((prev) => prev + 1)
+    } else {
+      toast.warning('Đã đạt giới giạn số lượng sản phẩm.')
+    }
+  }
+
+  const decreaseProductCount = () => {
+    if (productCount > 1) {
+      setProductCount((prev) => prev - 1)
+    } else {
+      toast.warning('Không thể giảm số lượng sản phẩm dưới 1.')
+    }
+  }
+
+  useEffect(() => {
+    if (productCount < 1) {
+      setProductCount(1)
+      toast.warning('Số lượng sản phẩm tối thiểu là 1.')
+    }
+    if (productCount > limitProductCount) {
+      setProductCount(limitProductCount)
+      toast.warning(`Số lượng sản phẩm tối đã là ${limitProductCount}`)
+    }
+  }, [productCount, limitProductCount])
 
   return (
     <div className={cx('product-detail-wrapper')}>
@@ -64,7 +140,7 @@ const ProductDetail = () => {
             <Tabs desctiption={description} warranty={warranty} />
           </div>
           <div className={cx('product-info-right')}>
-            <h4 className={cx('product-price')}>{productPrice}</h4>
+            <h4 className={cx('product-price')}>{newPrice || productPrice}</h4>
             <div className={cx('product-reviews')}>
               <div className={cx('starts')}>
                 <FaRegStar />
@@ -76,22 +152,85 @@ const ProductDetail = () => {
               <p className={cx('stars-number')}>(4.5 stars)</p>
               <p className={cx('reviews-text')}>5 Reviews</p>
             </div>
-            <div className={cx('product-type')}>
-              <Button background small>
-                Red Switch
-              </Button>
-              <Button outline small>
-                Blue Switch
-              </Button>
-              <Button outline small>
-                Brown Switch
-              </Button>
-            </div>
+            {colors && colors?.length > 0 && (
+              <div>
+                <p className={cx('product-text')}>Màu sắc: {colorName}</p>
+                <div className={cx('product-colors')}>
+                  {colors?.map((item: Color, index: number) => {
+                    return (
+                      <Button
+                        key={index}
+                        background={colorId === item.code ? true : false}
+                        outline
+                        className={cx('product-option')}
+                        onClick={() => {
+                          setColorId(item.code)
+                          setColorName(item.name)
+                        }}
+                      >
+                        {item.name}
+                      </Button>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
+            {options && options?.length > 0 && (
+              <div>
+                <p className={cx('product-text')}>Tùy chọn: {optionName}</p>
+                <div className={cx('product-optios')}>
+                  {options?.map((item: Option, index: number) => {
+                    return (
+                      <Button
+                        key={index}
+                        background={optionId === item.code ? true : false}
+                        outline
+                        className={cx('product-option')}
+                        onClick={() => {
+                          setOptionId(item.code)
+                          setOptionName(item.name)
+                        }}
+                      >
+                        {item.name}
+                      </Button>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
+            {types && types?.length > 0 && (
+              <div>
+                <p className={cx('product-text')}>Switch: {switchName}</p>
+                <div className={cx('product-switch')}>
+                  {types?.map((item: Type, index: number) => {
+                    return (
+                      <Button
+                        key={index}
+                        background={switchId === item.code ? true : false}
+                        outline
+                        className={cx('product-option')}
+                        onClick={() => {
+                          setSwitchId(item.code)
+                          setSwitchName(item.name)
+                        }}
+                      >
+                        {item.name}
+                      </Button>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
             <div className={cx('product-quantity')}>
               <Button outline className={cx('product-btn')} onClick={decreaseProductCount}>
                 -
               </Button>
-              <input type="number" className={cx('product-input')} value={productCount} />
+              <input
+                type="number"
+                className={cx('product-input')}
+                value={productCount}
+                onChange={(event) => setProductCount(Number(event.target.value))}
+              />
               <Button outline className={cx('product-btn')} onClick={increaseProductCount}>
                 +
               </Button>
