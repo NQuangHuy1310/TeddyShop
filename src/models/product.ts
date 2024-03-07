@@ -14,6 +14,38 @@ export interface Image {
   _id: string
 }
 
+export interface Color {
+  name: string
+  code: string
+  _id: string
+}
+
+export interface Option {
+  name: string
+  code: string
+  _id: string
+}
+
+export interface Type {
+  name: string
+  code: string
+  _id: string
+}
+
+export interface attributes {
+  color: {
+    code: string
+  }
+  option: {
+    code: string
+  }
+  switch: {
+    code: string
+  }
+  quantity: number
+  price: number
+}
+
 export interface ProductModel {
   _id: string
   name: string
@@ -31,6 +63,10 @@ export interface ProductModel {
   tags: string[]
   totalRating: number
   status: string
+  attributes: attributes[]
+  colors?: Color[]
+  options?: Option[]
+  types?: Type[]
 }
 
 export interface productCatModal {
