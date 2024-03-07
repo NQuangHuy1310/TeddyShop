@@ -13,9 +13,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { getProduct } from '~/features/product/productSlice'
 import { Color, Option, ProductModel, Type } from '~/models'
-import { formatPrice } from '~/utils'
+import { formatPrice, parsePrice } from '~/utils'
 import Tabs from '~/components/Tabs'
 import { toast } from 'react-toastify'
+import { addProductToCart, resetState } from '~/features/cart/cartSlice'
 
 const cx = classNames.bind(styles)
 
@@ -116,6 +117,61 @@ const ProductDetail = () => {
       toast.warning(`Số lượng sản phẩm tối đã là ${limitProductCount}`)
     }
   }, [productCount, limitProductCount])
+
+  const handleAddProductToCart = () => {
+    const newCardData = {
+      productId,
+      quantity: productCount,
+      price: parsePrice(newPrice) || parsePrice(productPrice),
+      color: { name: '', code: '' },
+      option: { name: '', code: '' },
+      switch: { name: '', code: '' }
+    }
+
+    if (attributes?.length > 0) {
+      const { color, option, switch: switchAttr } = attributes[0]
+
+      if (color) {
+        if (!colorId) {
+          toast.warning('Vui lòng chọn màu sắc.')
+          return
+        }
+        newCardData.color = { name: colorName, code: colorId }
+      }
+
+      if (option) {
+        if (!optionId) {
+          toast.warning('Vui lòng chọn tùy chọn.')
+          return
+        }
+        newCardData.option = { name: optionName, code: optionId }
+      }
+
+      if (switchAttr) {
+        if (!switchId) {
+          toast.warning('Vui lòng chọn switch.')
+          return
+        }
+        newCardData.switch = { name: switchName, code: switchId }
+      }
+    }
+
+    dispatch<any>(addProductToCart(newCardData))
+  }
+
+  // show message if add product to cart success
+  const cartState = useSelector((state: any) => state.cart)
+  const { addedCart, isSuccess, isError, isLoading } = cartState
+  useEffect(() => {
+    if (Object.keys(addedCart).length > 0) {
+      toast.success('Thêm sản phẩm vào giỏ hàng thành công')
+      // navigate to cart page
+      // reset state
+    }
+    if (isError) {
+      toast.error('Thêm sản phẩm vào giỏ hàng thất bại')
+    }
+  }, [addedCart, isSuccess, isError, isLoading])
 
   return (
     <div className={cx('product-detail-wrapper')}>
@@ -236,7 +292,7 @@ const ProductDetail = () => {
               </Button>
             </div>
             <div className={cx('product-action')}>
-              <Button background large className={cx('product-add')}>
+              <Button background large className={cx('product-add')} onClick={handleAddProductToCart}>
                 Thêm vào giỏ hàng
               </Button>
               <Button outline large className={cx('product-buy')}>
