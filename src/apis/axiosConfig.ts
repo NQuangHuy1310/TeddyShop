@@ -30,7 +30,6 @@ axiosConfig.interceptors.response.use(
   (error) => {
     if (error.response.status === 401) {
       toast.error('Bạn cần đăng nhập để thực hiện chức năng này')
-      // window.location.href = '/login'
     } else if (error.request) {
       toast.error('Lỗi kết nối đến server, vui lòng thử lại sau')
     } else {
