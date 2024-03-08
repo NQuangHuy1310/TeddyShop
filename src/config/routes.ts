@@ -13,7 +13,8 @@ const routes = {
   event: '/event/:id',
   brandDetail: '/brand/:id',
   profile: '/user/profile',
-  address: '/user/address'
+  address: '/user/address',
+  cart: '/user/cart'
 }
 
 export default routes

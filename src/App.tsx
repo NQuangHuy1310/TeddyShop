@@ -58,7 +58,7 @@ function App() {
                       <Page />
                     </Layout>
                   ) : (
-                    <Navigate to="/login" replace />
+                    <Navigate to="/login" />
                   )
                 }
               />

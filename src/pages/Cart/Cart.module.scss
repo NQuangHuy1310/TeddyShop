@@ -1,0 +1,26 @@
+.cart-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.cart-btn {
+  width: 300px;
+}
+
+.total-price {
+  font-size: 1.8rem;
+}
+
+.cart-header {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #cacaca;
+}
+
+.cart-table {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 8px;
+  border: 1px solid #e6e6e6;
+  overflow: hidden;
+}

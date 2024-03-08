@@ -18,7 +18,6 @@ const Product = (props: ProductModel) => {
 
   const handleAddFavorite = (e: React.MouseEvent, productId: string) => {
     e.preventDefault()
-    console.log(productId)
   }
 
   return (
