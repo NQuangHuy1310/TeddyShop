@@ -160,7 +160,7 @@ const Header = () => {
                   </Link>
                 </li>
                 <li className={cx('auth-item')}>
-                  <Link to="" className={cx('auth-link')}>
+                  <Link to={config.routes.cart} className={cx('auth-link')}>
                     Giỏ hàng
                   </Link>
                 </li>

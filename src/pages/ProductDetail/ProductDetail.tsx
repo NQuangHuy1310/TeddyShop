@@ -10,7 +10,7 @@ import Heading from '~/components/Heading'
 import Form from '~/components/Form'
 import { DATA } from '~/constants'
 import { useDispatch, useSelector } from 'react-redux'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { getProduct } from '~/features/product/productSlice'
 import { Color, Option, ProductModel, Type } from '~/models'
 import { formatPrice, parsePrice } from '~/utils'
@@ -23,6 +23,7 @@ const cx = classNames.bind(styles)
 const ProductDetail = () => {
   const dispatch = useDispatch()
   const location = useLocation()
+  const navigate = useNavigate()
   const productId = location.pathname.split('/')[2]
 
   // product detail data
@@ -165,13 +166,10 @@ const ProductDetail = () => {
   useEffect(() => {
     if (Object.keys(addedCart).length > 0) {
       toast.success('Thêm sản phẩm vào giỏ hàng thành công')
-      // navigate to cart page
-      // reset state
+      dispatch<any>(resetState())
+      navigate('/user/cart')
     }
-    if (isError) {
-      toast.error('Thêm sản phẩm vào giỏ hàng thất bại')
-    }
-  }, [addedCart, isSuccess, isError, isLoading])
+  }, [addedCart, isSuccess, isError, isLoading, dispatch, navigate])
 
   return (
     <div className={cx('product-detail-wrapper')}>
