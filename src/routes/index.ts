@@ -17,6 +17,7 @@ import Brand from '~/pages/Brand'
 import Profile from '~/pages/Profile'
 import ProfileLayout from '~/layouts/ProfileLayout'
 import Cart from '~/pages/Cart'
+import Address from '~/pages/Address'
 
 const publicRoutes: route[] = [
   { path: config.routes.home, element: Home, layout: MainLayout },
@@ -36,6 +37,7 @@ const publicRoutes: route[] = [
 
 const privateRoutes: route[] = [
   { path: config.routes.profile, element: Profile, layout: ProfileLayout },
+  { path: config.routes.address, element: Address, layout: ProfileLayout },
   { path: config.routes.cart, element: Cart, layout: MainLayout }
 ]
 

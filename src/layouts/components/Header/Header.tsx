@@ -144,15 +144,15 @@ const Header = () => {
             </li>
           </ul>
 
-          {Object.keys(user).length > 0 ? (
+          {Object?.keys(user)?.length > 0 ? (
             <div className={cx('header-auth')}>
               <div className={cx('header-auth-avatar')}>
                 <img
-                  src={Object.keys(user.userAvatar).length !== 0 ? user.userAvatar.url : images.noImage}
+                  src={Object?.keys(user?.userAvatar).length !== 0 ? user?.userAvatar.url : images.noImage}
                   alt="avatar"
                 />
               </div>
-              <div className={cx('header-auth-name')}>{user.userName}</div>
+              <div className={cx('header-auth-name')}>{user?.userName}</div>
               <ul className={cx('auth-menu')}>
                 <li className={cx('auth-item')}>
                   <Link to={config.routes.profile} className={cx('auth-link')}>
