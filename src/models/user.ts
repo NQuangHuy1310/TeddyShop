@@ -3,6 +3,24 @@ interface userAvatar {
   url: string
 }
 
+export interface addressData {
+  _id?: string
+  fullName: string
+  phoneNumber: string
+  location: string
+  city: string
+  state?: string
+  type?: string
+  isDefault?: boolean
+}
+
+export interface updateUser {
+  fullName: string
+  phoneNumber: string
+  gender: string
+  avatar: userAvatar
+}
+
 export interface User {
   id: string
   userName: string
@@ -11,12 +29,6 @@ export interface User {
   userAvatar: object
   userPhone: string
   userGender: string
+  userAddress?: addressData
   token: string
-}
-
-export interface updateUser {
-  fullName: string
-  phoneNumber: string
-  gender: string
-  avatar: userAvatar
 }

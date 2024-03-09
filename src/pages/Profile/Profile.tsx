@@ -31,7 +31,9 @@ const Profile = () => {
   const { userName, userEmail, userAvatar, userPhone, userGender } = authState
 
   useEffect(() => {
-    formik.setFieldValue('avatar', { public_id: imageState[0]?.public_id, url: imageState[0]?.url })
+    if (imageState?.length) {
+      formik.setFieldValue('avatar', { public_id: imageState[0]?.public_id, url: imageState[0]?.url })
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imageState])
 
@@ -43,7 +45,7 @@ const Profile = () => {
       userEmail: userEmail || '',
       userPhone: userPhone || '',
       userGender: userGender || '',
-      avatar: userAvatar || ''
+      avatar: userAvatar || {}
     },
     onSubmit: (values) => {
       dispatch<any>(

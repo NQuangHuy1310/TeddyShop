@@ -1,5 +1,5 @@
 import axios from '~/apis/axiosConfig'
-import { updateUser } from '~/models'
+import { addressData, updateUser } from '~/models'
 
 const registerUser = async (userData: { email: string; fullName: string; password: string }) => {
   return await axios.post('auth/register', userData)
@@ -17,9 +17,24 @@ const updateUser = async (userData: updateUser) => {
   return await axios.put('auth/profile', userData)
 }
 
+const addNewAddress = async (addressData: addressData) => {
+  return await axios.put('auth/address', addressData)
+}
+
+const deleteAddress = async (addressId: string) => {
+  return await axios.delete(`auth/address/${addressId}`)
+}
+
+const changeAddressDefault = async (addressId: string) => {
+  return await axios.put(`auth/address/${addressId}`)
+}
+
 export const authService = {
   registerUser,
   loginUser,
   logoutUser,
-  updateUser
+  updateUser,
+  addNewAddress,
+  deleteAddress,
+  changeAddressDefault
 }

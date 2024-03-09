@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, createAction } from '@reduxjs/toolkit'
 import { authService } from './authService'
-import { User, updateUser } from '~/models'
+import { User, addressData, updateUser } from '~/models'
 const getUserFormLocalStorage = localStorage.getItem('user_data')
   ? JSON.parse(localStorage.getItem('user_data') || '')
   : {}
@@ -54,6 +54,33 @@ export const updateUserInfo = createAsyncThunk('auth/update', async (userData: u
     return thunkAPI.rejectWithValue(error)
   }
 })
+
+export const addNewAddress = createAsyncThunk('auth/addAddress', async (addressData: addressData, thunkAPI) => {
+  try {
+    return await authService.addNewAddress(addressData)
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error)
+  }
+})
+
+export const deleteAddress = createAsyncThunk('auth/deleteAddress', async (addressId: string, thunkAPI) => {
+  try {
+    return await authService.deleteAddress(addressId)
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error)
+  }
+})
+
+export const changeAddressDefault = createAsyncThunk(
+  'auth/changeAddressDefault',
+  async (addressId: string, thunkAPI) => {
+    try {
+      return await authService.changeAddressDefault(addressId)
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error)
+    }
+  }
+)
 
 export const resetState = createAction('ReverAll')
 
@@ -112,6 +139,45 @@ export const authSlice = createSlice({
         localStorage.setItem('user_data', JSON.stringify(action.payload))
       })
       .addCase(updateUserInfo.rejected, (state) => {
+        state.isError = true
+      })
+      .addCase(addNewAddress.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(addNewAddress.fulfilled, (state, action: any) => {
+        state.isSuccess = true
+        state.isError = false
+        state.isLoading = false
+        state.user = action.payload
+        localStorage.setItem('user_data', JSON.stringify(action.payload))
+      })
+      .addCase(addNewAddress.rejected, (state) => {
+        state.isError = true
+      })
+      .addCase(deleteAddress.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(deleteAddress.fulfilled, (state, action: any) => {
+        state.isSuccess = true
+        state.isError = false
+        state.isLoading = false
+        state.user = action.payload
+        localStorage.setItem('user_data', JSON.stringify(action.payload))
+      })
+      .addCase(deleteAddress.rejected, (state) => {
+        state.isError = true
+      })
+      .addCase(changeAddressDefault.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(changeAddressDefault.fulfilled, (state, action: any) => {
+        state.isSuccess = true
+        state.isError = false
+        state.isLoading = false
+        state.user = action.payload
+        localStorage.setItem('user_data', JSON.stringify(action.payload))
+      })
+      .addCase(changeAddressDefault.rejected, (state) => {
         state.isError = true
       })
       .addCase(resetState, (state) => {
