@@ -15,7 +15,8 @@ const routes = {
   profile: '/user/profile',
   address: '/user/address',
   cart: '/user/cart',
-  productFavorite: '/user/favorite'
+  productFavorite: '/user/favorite',
+  verifyEmail: '/verify-email'
 }
 
 export default routes

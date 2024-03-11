@@ -36,4 +36,5 @@ export interface User {
   userAddress?: addressData
   token: string
   favoriteProducts?: productFavorite
+  emailVerified: boolean
 }

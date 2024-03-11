@@ -40,6 +40,7 @@ const Login = () => {
     if (isSuccess && Object.keys(user).length > 0) {
       toast.success('Đăng nhập thành công')
       dispatch<any>(resetState())
+      // location.reload()
       navigate('/')
     }
     if (isError && message) {
