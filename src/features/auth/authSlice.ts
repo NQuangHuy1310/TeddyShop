@@ -7,6 +7,9 @@ const getUserFormLocalStorage = localStorage.getItem('user_data')
 
 const initialState = {
   user: getUserFormLocalStorage as User,
+  favoriteProducts: [],
+  deletedProductFavorite: {},
+
   isError: false,
   isLoading: false,
   isSuccess: false,
@@ -70,6 +73,33 @@ export const deleteAddress = createAsyncThunk('auth/deleteAddress', async (addre
     return thunkAPI.rejectWithValue(error)
   }
 })
+
+export const addProductFavorite = createAsyncThunk('auth/addProductFavorite', async (productId: string, thunkAPI) => {
+  try {
+    return await authService.addProductFavorite(productId)
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error)
+  }
+})
+
+export const getProductFavorite = createAsyncThunk('auth/getProductFavorite', async (thunkAPI) => {
+  try {
+    return await authService.getProductFavorite()
+  } catch (error) {
+    return (thunkAPI as any).rejectWithValue(error)
+  }
+})
+
+export const deleteProductFavorite = createAsyncThunk(
+  'auth/deleteProductFavorite',
+  async (productId: string, thunkAPI) => {
+    try {
+      return await authService.deleteProductFavorite(productId)
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error)
+    }
+  }
+)
 
 export const changeAddressDefault = createAsyncThunk(
   'auth/changeAddressDefault',
@@ -178,6 +208,42 @@ export const authSlice = createSlice({
         localStorage.setItem('user_data', JSON.stringify(action.payload))
       })
       .addCase(changeAddressDefault.rejected, (state) => {
+        state.isError = true
+      })
+      .addCase(addProductFavorite.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(addProductFavorite.fulfilled, (state, action: any) => {
+        state.isSuccess = true
+        state.isError = false
+        state.isLoading = false
+        state.user.favoriteProducts = action.payload.favoriteProducts
+      })
+      .addCase(addProductFavorite.rejected, (state) => {
+        state.isError = true
+      })
+      .addCase(getProductFavorite.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getProductFavorite.fulfilled, (state, action) => {
+        state.isSuccess = true
+        state.isError = false
+        state.isLoading = false
+        state.favoriteProducts = action.payload.productsFavorite
+      })
+      .addCase(getProductFavorite.rejected, (state) => {
+        state.isError = true
+      })
+      .addCase(deleteProductFavorite.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(deleteProductFavorite.fulfilled, (state, action) => {
+        state.isSuccess = true
+        state.isError = false
+        state.isLoading = false
+        state.deletedProductFavorite = action.payload
+      })
+      .addCase(deleteProductFavorite.rejected, (state) => {
         state.isError = true
       })
       .addCase(resetState, (state) => {

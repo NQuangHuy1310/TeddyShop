@@ -29,6 +29,18 @@ const changeAddressDefault = async (addressId: string) => {
   return await axios.put(`auth/address/${addressId}`)
 }
 
+const addProductFavorite = async (productId: string) => {
+  return await axios.put(`auth/product-favorite/${productId}`)
+}
+
+const getProductFavorite = async () => {
+  return await axios.get('auth/product-favorite')
+}
+
+const deleteProductFavorite = async (productId: string) => {
+  return await axios.delete(`auth/product-favorite/${productId}`)
+}
+
 export const authService = {
   registerUser,
   loginUser,
@@ -36,5 +48,8 @@ export const authService = {
   updateUser,
   addNewAddress,
   deleteAddress,
-  changeAddressDefault
+  changeAddressDefault,
+  addProductFavorite,
+  getProductFavorite,
+  deleteProductFavorite
 }
