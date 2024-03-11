@@ -59,6 +59,13 @@
   border-radius: 4px;
 }
 
+.product-favorite-bold {
+  overflow: hidden;
+  .product-icon {
+    color: var(--background-color);
+  }
+}
+
 .product-content {
   flex: 1;
   margin-top: auto;

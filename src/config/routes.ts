@@ -14,7 +14,8 @@ const routes = {
   brandDetail: '/brand/:id',
   profile: '/user/profile',
   address: '/user/address',
-  cart: '/user/cart'
+  cart: '/user/cart',
+  productFavorite: '/user/favorite'
 }
 
 export default routes

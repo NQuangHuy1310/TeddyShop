@@ -160,6 +160,11 @@ const Header = () => {
                   </Link>
                 </li>
                 <li className={cx('auth-item')}>
+                  <Link to={config.routes.productFavorite} className={cx('auth-link')}>
+                    Yêu thích
+                  </Link>
+                </li>
+                <li className={cx('auth-item')}>
                   <Link to={config.routes.cart} className={cx('auth-link')}>
                     Giỏ hàng
                   </Link>

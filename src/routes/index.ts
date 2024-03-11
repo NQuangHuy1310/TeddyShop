@@ -18,6 +18,7 @@ import Profile from '~/pages/Profile'
 import ProfileLayout from '~/layouts/ProfileLayout'
 import Cart from '~/pages/Cart'
 import Address from '~/pages/Address'
+import ProFavorite from '~/pages/ProFavorite'
 
 const publicRoutes: route[] = [
   { path: config.routes.home, element: Home, layout: MainLayout },
@@ -38,7 +39,8 @@ const publicRoutes: route[] = [
 const privateRoutes: route[] = [
   { path: config.routes.profile, element: Profile, layout: ProfileLayout },
   { path: config.routes.address, element: Address, layout: ProfileLayout },
-  { path: config.routes.cart, element: Cart, layout: MainLayout }
+  { path: config.routes.cart, element: Cart, layout: MainLayout },
+  { path: config.routes.productFavorite, element: ProFavorite, layout: MainLayout }
 ]
 
 export { publicRoutes, privateRoutes }

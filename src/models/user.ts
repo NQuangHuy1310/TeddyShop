@@ -21,6 +21,10 @@ export interface updateUser {
   avatar: userAvatar
 }
 
+export interface productFavorite {
+  _id: string
+}
+
 export interface User {
   id: string
   userName: string
@@ -31,4 +35,5 @@ export interface User {
   userGender: string
   userAddress?: addressData
   token: string
+  favoriteProducts?: productFavorite
 }
