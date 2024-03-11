@@ -2,18 +2,22 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { privateRoutes, publicRoutes } from '~/routes'
 import { route } from './models'
 import MainLayout from '~/layouts/MainLayout'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { getAccessTokenFromLocalStorage } from './utils'
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState<string | null>(getAccessTokenFromLocalStorage())
+
+  useEffect(() => {
+    setIsLoggedIn(getAccessTokenFromLocalStorage())
+  }, [])
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     })
   }, [])
-
-  const isLoggedIn = getAccessTokenFromLocalStorage()
 
   return (
     <Router>
@@ -47,6 +51,11 @@ function App() {
             }
 
             const Page = route.element
+            isLoggedIn && (
+              <Layout>
+                <Page />
+              </Layout>
+            )
 
             return (
               <Route
@@ -58,7 +67,7 @@ function App() {
                       <Page />
                     </Layout>
                   ) : (
-                    <Navigate to="/login" />
+                    <Navigate to="/login" replace />
                   )
                 }
               />

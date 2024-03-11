@@ -24,6 +24,7 @@ const cx = classNames.bind(styles)
 
 const Header = () => {
   const [menuMobile, setMenuMobile] = useState(false)
+  // const [width, setWidth] = useState(window.innerWidth)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -94,6 +95,14 @@ const Header = () => {
     })
   }, [])
 
+  useEffect(() => {
+    window.addEventListener('click', (e) => {
+      if (e.target !== document.querySelector('.header-mobile')) {
+        setMenuMobile(false)
+      }
+    })
+  }, [])
+
   return (
     <header className={cx('header')}>
       <div className={cx('header-inner')}>
@@ -101,7 +110,7 @@ const Header = () => {
           <Link to="/" className={cx('header-logo')} onClick={backToTop}>
             TeddyShop
           </Link>
-          <ul className={cx('header-menu', menuMobile ? 'active' : '')}>
+          <ul className={cx('header-menu', 'active')}>
             <li className={cx('menu-item')}>
               <Link to={config.routes.products} className={cx('menu-link')}>
                 Mua ngay

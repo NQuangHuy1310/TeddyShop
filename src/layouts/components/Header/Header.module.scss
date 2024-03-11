@@ -235,10 +235,6 @@
     padding: 0 24px;
   }
 
-  .header-menu {
-    display: none;
-  }
-
   .header-mobile {
     display: flex;
     align-items: center;
@@ -251,7 +247,26 @@
   }
 
   .header-menu {
-    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 80%;
+    transform: translateX(-100%);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 30px;
+    gap: 24px;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: var(--white-color);
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+
+  .header-menu .active {
+    transform: translateX(0);
+    transition: 0.3s ease-in-out;
   }
 
   .header-action {
@@ -259,13 +274,17 @@
   }
 
   .mega-menu {
+    display: none;
     flex-direction: column;
-    top: 30%;
   }
 
   .mega-left {
     flex-direction: column;
     scroll-behavior: smooth;
+  }
+
+  .header-auth {
+    display: none;
   }
 }
 
