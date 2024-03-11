@@ -13,6 +13,8 @@ const initialState = {
   isError: false,
   isLoading: false,
   isSuccess: false,
+  emailSendSuccess: '',
+  emailVerifySuccess: '',
   status: '',
   message: ''
 }
@@ -85,6 +87,22 @@ export const addProductFavorite = createAsyncThunk('auth/addProductFavorite', as
 export const getProductFavorite = createAsyncThunk('auth/getProductFavorite', async (thunkAPI) => {
   try {
     return await authService.getProductFavorite()
+  } catch (error) {
+    return (thunkAPI as any).rejectWithValue(error)
+  }
+})
+
+export const sendEmailCode = createAsyncThunk('auth/sendEmailCode', async (thunkAPI) => {
+  try {
+    return await authService.sendEmailCode()
+  } catch (error) {
+    return (thunkAPI as any).rejectWithValue(error)
+  }
+})
+
+export const verifyEmail = createAsyncThunk('auth/verifyEmail', async (code: string, thunkAPI) => {
+  try {
+    return await authService.verifyEmail(code)
   } catch (error) {
     return (thunkAPI as any).rejectWithValue(error)
   }
@@ -246,10 +264,38 @@ export const authSlice = createSlice({
       .addCase(deleteProductFavorite.rejected, (state) => {
         state.isError = true
       })
+      .addCase(sendEmailCode.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(sendEmailCode.fulfilled, (state, action) => {
+        state.isSuccess = true
+        state.isError = false
+        state.isLoading = false
+        state.emailSendSuccess = action.payload.message
+      })
+      .addCase(sendEmailCode.rejected, (state) => {
+        state.isError = true
+      })
+      .addCase(verifyEmail.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(verifyEmail.fulfilled, (state, action) => {
+        state.isSuccess = true
+        state.isError = false
+        state.isLoading = false
+        state.emailVerifySuccess = action.payload.message
+      })
+      .addCase(verifyEmail.rejected, (state) => {
+        state.isError = true
+      })
       .addCase(resetState, (state) => {
         state.isError = false
         state.isLoading = false
         state.isSuccess = false
+        state.emailSendSuccess = ''
+        state.emailVerifySuccess = ''
+        state.status = ''
+        state.message = ''
       })
   }
 })

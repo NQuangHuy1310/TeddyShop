@@ -41,6 +41,14 @@ const deleteProductFavorite = async (productId: string) => {
   return await axios.delete(`auth/product-favorite/${productId}`)
 }
 
+const sendEmailCode = async () => {
+  return await axios.post('auth/send-email')
+}
+
+const verifyEmail = async (code: string) => {
+  return await axios.post('auth/verify-email', { code: code })
+}
+
 export const authService = {
   registerUser,
   loginUser,
@@ -51,5 +59,7 @@ export const authService = {
   changeAddressDefault,
   addProductFavorite,
   getProductFavorite,
-  deleteProductFavorite
+  deleteProductFavorite,
+  sendEmailCode,
+  verifyEmail
 }

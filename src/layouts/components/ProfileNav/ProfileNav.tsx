@@ -41,7 +41,7 @@ const Profile = () => {
               <Link to={config.routes.address}>Địa chỉ</Link>
             </li>
             <li className={cx('profile-item')}>
-              <Link to="">Xác thực email</Link>
+              <Link to={config.routes.verifyEmail}>Xác thực email</Link>
             </li>
             <li className={cx('profile-item')}>
               <Link to="">Đổi mật khẩu</Link>
