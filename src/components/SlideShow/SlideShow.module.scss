@@ -1,0 +1,23 @@
+.mySwiper {
+  width: 100%;
+  height: 100%; /* Chiều cao của Swiper */
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Canh giữa văn bản của slide theo chiều dọc */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+  }
+}

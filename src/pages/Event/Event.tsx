@@ -17,6 +17,8 @@ import moment from 'moment'
 import { convertToVietnameseDay, convertToVietnameseMonth } from '~/utils/formaatedTime'
 import EventTime from '~/components/EventTime'
 import { scheduleModal } from '~/models/event'
+import Breadcrumb from '~/components/Breadcrumb'
+import config from '~/config'
 
 const cx = classNames.bind(styles)
 
@@ -50,6 +52,7 @@ const Event = () => {
 
   return (
     <div className={cx('event-wrapper')}>
+      <Breadcrumb breadcrumbData={[{ pageName: 'Sự kiện', pageLink: config.routes.events }, { pageName: name }]} />
       <section className={cx('event-header-container')}>
         <div className={cx('event-header')}>
           <div className={cx('event-detail')}>

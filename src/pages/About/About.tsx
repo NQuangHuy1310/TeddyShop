@@ -10,6 +10,7 @@ import config from '~/config'
 import { useSelector } from 'react-redux'
 import { memberModal } from '~/models'
 import { brandModal } from '~/models/brand'
+import Breadcrumb from '~/components/Breadcrumb'
 
 const cx = className.bind(styles)
 
@@ -19,6 +20,7 @@ const About = () => {
 
   return (
     <div className={cx('about-wrapper')}>
+      <Breadcrumb breadcrumbData={[{ pageName: 'Giới thiệu', pageLink: config.routes.about }]} />
       <section className={cx('smooth-typing')}>
         <Heading
           heading="Nâng cao trải nghiệm khi sử dụng bàn phím của chúng tôi"

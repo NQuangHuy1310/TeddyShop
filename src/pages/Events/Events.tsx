@@ -10,6 +10,7 @@ import { useEffect } from 'react'
 import { getEvents } from '~/features/event/eventSlice'
 import moment from 'moment'
 import { eventModal } from '~/models/event'
+import Breadcrumb from '~/components/Breadcrumb'
 
 const cx = classNames.bind(styles)
 
@@ -42,6 +43,7 @@ const Events = () => {
 
   return (
     <div className={cx('events-wrapper')}>
+      <Breadcrumb breadcrumbData={[{ pageName: 'Sự kiện' }]} />
       <section className={cx('event-heading')}>
         <Heading
           heading="Tham gia cộng đồng bàn phím"

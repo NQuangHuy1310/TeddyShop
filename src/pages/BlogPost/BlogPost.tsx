@@ -13,6 +13,8 @@ import { getBlogById, getBlogs, resetState } from '~/features/blog/blogSlice'
 import { blogModel } from '~/models'
 import moment from 'moment'
 import { FaRegEye, FaRegHeart } from 'react-icons/fa'
+import Breadcrumb from '~/components/Breadcrumb'
+import config from '~/config'
 
 const cx = classNames.bind(styles)
 
@@ -39,10 +41,13 @@ const BlogPost = () => {
 
   return (
     <div className={cx('blog-post-wrapper')}>
+      <Breadcrumb
+        breadcrumbData={[{ pageName: 'Bài viết', pageLink: config.routes.blog }, { pageName: blogDetail?.name }]}
+      />
       <section className={cx('post-header')}>
         <div className={cx('header-title')}>
           <div className={cx('header-info')}>
-            <PostCategory category={blogDetail?.blogCategory?.name} subCategory={blogDetail.tag} />
+            {/* <PostCategory category={blogDetail?.blogCategory?.name} subCategory={blogDetail.tag} /> */}
             <h2 className={cx('header-name')}>{blogDetail.name}</h2>
             <div className={cx('header-created')}>
               By <strong>{blogDetail?.createdBy?.fullName}</strong>

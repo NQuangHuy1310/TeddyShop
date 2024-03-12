@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { getBlogByCategory, getBlogs, getCategories } from '~/features/blog/blogSlice'
 import { blogCategory } from '~/models'
+import Breadcrumb from '~/components/Breadcrumb'
 
 const cx = classNames.bind(styles)
 
@@ -38,6 +39,7 @@ const Blogs = () => {
 
   return (
     <div className={cx('blog-wrapper')}>
+      <Breadcrumb breadcrumbData={[{ pageName: 'Bài viết' }]} />
       <section className={cx('blog-section')}>
         <Heading
           heading="Khám phá các bài viết nổi bật của chúng tôi"
