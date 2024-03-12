@@ -11,6 +11,7 @@ import config from '~/config'
 import { getProducts } from '~/features/product/productSlice'
 import { ProductModel } from '~/models'
 import Loading from '~/components/Loading/Loading'
+import Breadcrumb from '~/components/Breadcrumb'
 
 const cx = classNames.bind(styles)
 
@@ -25,6 +26,7 @@ const Products = () => {
 
   return (
     <div className={cx('products-wrapper')}>
+      <Breadcrumb breadcrumbData={[{ pageName: 'Sản phẩm' }]} />
       <section className={cx('keyboards-section')}>
         <h1 className={cx('keyboards-section-heading', 'heading')}>Khám phá bàn phím của chúng tôi</h1>
         <p className={cx('keyboards-section-desc')}>

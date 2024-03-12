@@ -17,6 +17,8 @@ import { formatPrice, parsePrice } from '~/utils'
 import Tabs from '~/components/Tabs'
 import { toast } from 'react-toastify'
 import { addProductToCart, resetState } from '~/features/cart/cartSlice'
+import Breadcrumb from '~/components/Breadcrumb'
+import config from '~/config'
 
 const cx = classNames.bind(styles)
 
@@ -173,6 +175,12 @@ const ProductDetail = () => {
 
   return (
     <div className={cx('product-detail-wrapper')}>
+      <Breadcrumb
+        breadcrumbData={[
+          { pageName: 'Sản phẩm', pageLink: config.routes.products },
+          { pageName: name, pageLink: '' }
+        ]}
+      />
       <section className={cx('product-detail')}>
         <div className={cx('product-img')}>
           <div className={cx('product-img-main')}>

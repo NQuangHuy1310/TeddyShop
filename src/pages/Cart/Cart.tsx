@@ -8,6 +8,7 @@ import { deleteProductInCart, getCartByUser } from '~/features/cart/cartSlice'
 import Button from '~/components/Button'
 import { Link } from 'react-router-dom'
 import { formatPrice } from '~/utils'
+import Breadcrumb from '~/components/Breadcrumb'
 const cx = classNames.bind(styles)
 
 interface DataType {
@@ -88,27 +89,30 @@ const Cart: React.FC = () => {
   }
 
   return (
-    <section className={cx('cart-wrapper')}>
-      <div className={cx('cart-header')}>
-        <h2>Teddy Shop | Giỏ hàng của tôi</h2>
-      </div>
-      <Table
-        columns={columns}
-        dataSource={data}
-        className={cx('cart-table')}
-        locale={{
-          emptyText: 'Bạn chưa có sản phẩm nào trong giỏ hàng'
-        }}
-      />
-      <div className="">
-        <div className={cx('total-price')}>
-          <strong>Tổng tiền: {formatPrice(totalPrice)}</strong>
+    <div className="">
+      <Breadcrumb breadcrumbData={[{ pageName: 'Giỏ hàng' }]} />
+      <section className={cx('cart-wrapper')}>
+        <div className={cx('cart-header')}>
+          <h2>Teddy Shop | Giỏ hàng của tôi</h2>
         </div>
-        <Button large primary className={cx('cart-btn')}>
-          Thanh toán
-        </Button>
-      </div>
-    </section>
+        <Table
+          columns={columns}
+          dataSource={data}
+          className={cx('cart-table')}
+          locale={{
+            emptyText: 'Bạn chưa có sản phẩm nào trong giỏ hàng'
+          }}
+        />
+        <div className="">
+          <div className={cx('total-price')}>
+            <strong>Tổng tiền: {formatPrice(totalPrice)}</strong>
+          </div>
+          <Button large primary className={cx('cart-btn')}>
+            Thanh toán
+          </Button>
+        </div>
+      </section>
+    </div>
   )
 }
 

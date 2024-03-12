@@ -10,7 +10,7 @@ function App() {
 
   useEffect(() => {
     setIsLoggedIn(getAccessTokenFromLocalStorage())
-  }, [])
+  }, [isLoggedIn])
 
   useEffect(() => {
     window.scrollTo({

@@ -1,5 +1,8 @@
 import placeholderImageBlog from './Placeholder Image.png'
 import homeBanner from './home_banner.jpg'
+import homeBanner1 from './banner-1.jpg'
+import homeBanner2 from './banner-2.jpg'
+import homeBanner3 from './banner-3.jpg'
 import findKeyboard from './find-keyboard.jpg'
 import icon from './icon.svg'
 import keyboardUpgrade from './keyboard-upgrade.jpg'
@@ -19,6 +22,9 @@ import noImage from './no-img .png'
 const images = {
   placeholderImageBlog,
   homeBanner,
+  homeBanner1,
+  homeBanner2,
+  homeBanner3,
   findKeyboard,
   icon,
   keyboardUpgrade,

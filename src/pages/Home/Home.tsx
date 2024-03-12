@@ -12,8 +12,10 @@ import { useEffect } from 'react'
 import { getProducts } from '~/features/product/productSlice'
 import { ProductModel } from '~/models'
 import Loading from '~/components/Loading/Loading'
+import SlideShow from '~/components/SlideShow'
 
 const cx = classNames.bind(styles)
+const imagesSlide = [images.homeBanner, images.homeBanner1, images.homeBanner2, images.homeBanner3]
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -29,7 +31,7 @@ const Home = () => {
     <div className={cx('home-wrapper')}>
       <section className={cx('home-banner')}>
         <div className={cx('banner-img')}>
-          <img src={images.homeBanner} alt="Home Banner" />
+          <SlideShow imageUrls={imagesSlide} className={cx('banner-slide')} />
         </div>
         <div className={cx('banner-content')}>
           <h2 className={cx('banner-heading', 'heading')}>Khám phá bàn phím hoàn hảo dành cho bạn</h2>

@@ -7,6 +7,7 @@ import UserItem from '~/components/UserItem'
 import { DATA } from '~/constants'
 import { useSelector } from 'react-redux'
 import { memberModal } from '~/models'
+import Breadcrumb from '~/components/Breadcrumb'
 
 const cx = classNames.bind(styles)
 
@@ -21,6 +22,7 @@ const Contact = () => {
 
   return (
     <div className={cx('contact-wrapper')}>
+      <Breadcrumb breadcrumbData={[{ pageName: 'Liên hệ' }]} />
       <section className={cx('contact-section')}>
         <Heading
           heading="Liên hệ với chúng tôi"
