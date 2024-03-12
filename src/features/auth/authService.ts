@@ -9,6 +9,10 @@ const loginUser = async (userData: { email: string; password: string }) => {
   return await axios.post('auth/login', userData)
 }
 
+const loginSocial = async (userData: { email: string; fullName: string }) => {
+  return await axios.post('auth/login-social', userData)
+}
+
 const logoutUser = async () => {
   return await axios.post('auth/logout', null, { withCredentials: true })
 }
@@ -52,6 +56,7 @@ const verifyEmail = async (code: string) => {
 export const authService = {
   registerUser,
   loginUser,
+  loginSocial,
   logoutUser,
   updateUser,
   addNewAddress,

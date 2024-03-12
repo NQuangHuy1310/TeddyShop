@@ -2,14 +2,15 @@ import classNames from 'classnames/bind'
 import styles from './Login.module.scss'
 import { Link, useNavigate } from 'react-router-dom'
 import routes from '~/config/routes'
-import { FaFacebook, FaGoogle, FaGithub } from 'react-icons/fa'
+import { FaFacebook, FaGoogle } from 'react-icons/fa'
 import Button from '~/components/Button'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
-import { loginUser, resetState } from '~/features/auth/authSlice'
-import { useEffect } from 'react'
+import { loginSocial, loginUser, resetState } from '~/features/auth/authSlice'
+import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
+import { FacebookAuth, GoogleAuth } from '~/firebase/firebase'
 
 const cx = classNames.bind(styles)
 
@@ -18,9 +19,44 @@ const schema = Yup.object().shape({
   password: Yup.string().required('Vui lòng nhập mật khẩu của bạn')
 })
 
+interface AuthData {
+  displayName: string
+  email: string
+  providerId: string
+}
+
 const Login = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [userData, setUserData] = useState<{ email: string; fullName: string; providerId: string }>({
+    email: '',
+    fullName: '',
+    providerId: ''
+  })
+
+  const handleFbLogin = async () => {
+    const auth: AuthData = (await FacebookAuth()) as AuthData
+
+    if (auth) {
+      const { displayName, email, providerId } = auth || {}
+      setUserData({ email: email, fullName: displayName, providerId: providerId })
+    }
+  }
+
+  const handleGGLogin = async () => {
+    const auth = (await GoogleAuth()) as AuthData
+
+    if (auth) {
+      const { displayName, email, providerId } = auth || {}
+      setUserData({ email: email, fullName: displayName, providerId: providerId })
+    }
+  }
+
+  useEffect(() => {
+    if (Object.values(userData).some((value) => value !== '')) {
+      dispatch<any>(loginSocial(userData))
+    }
+  }, [userData, dispatch])
 
   const formik = useFormik({
     initialValues: {
@@ -40,7 +76,6 @@ const Login = () => {
     if (isSuccess && Object.keys(user).length > 0) {
       toast.success('Đăng nhập thành công')
       dispatch<any>(resetState())
-      // location.reload()
       navigate('/')
     }
     if (isError && message) {
@@ -58,14 +93,11 @@ const Login = () => {
           </p>
         </div>
         <div className={cx('form-methods')}>
-          <div className={cx('form-method')}>
+          <div className={cx('form-method')} onClick={handleFbLogin}>
             <FaFacebook className={cx('from-icon')} />
           </div>
-          <div className={cx('form-method')}>
+          <div className={cx('form-method')} onClick={handleGGLogin}>
             <FaGoogle className={cx('from-icon')} />
-          </div>
-          <div className={cx('form-method')}>
-            <FaGithub className={cx('from-icon')} />
           </div>
         </div>
         <div className={cx('form-text')}>hoặc đăng nhập với email</div>

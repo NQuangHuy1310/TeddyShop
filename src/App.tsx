@@ -6,11 +6,11 @@ import { useEffect, useState } from 'react'
 import { getAccessTokenFromLocalStorage } from './utils'
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState<string | null>(getAccessTokenFromLocalStorage())
+  const [isLoggedIn, setIsLoggedIn] = useState<string | null>('')
 
   useEffect(() => {
     setIsLoggedIn(getAccessTokenFromLocalStorage())
-  }, [isLoggedIn])
+  }, [])
 
   useEffect(() => {
     window.scrollTo({

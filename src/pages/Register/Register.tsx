@@ -2,14 +2,15 @@ import classNames from 'classnames/bind'
 import styles from './Register.module.scss'
 import { Link, useNavigate } from 'react-router-dom'
 import routes from '~/config/routes'
-import { FaFacebook, FaGoogle, FaGithub } from 'react-icons/fa'
+import { FaFacebook, FaGoogle } from 'react-icons/fa'
 import Button from '~/components/Button'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
-import { registerUser, resetState } from '~/features/auth/authSlice'
-import { useEffect } from 'react'
+import { loginSocial, registerUser, resetState } from '~/features/auth/authSlice'
+import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
+import { FacebookAuth, GoogleAuth } from '~/firebase/firebase'
 
 const schema = Yup.object().shape({
   fullName: Yup.string().required('Vui lòng nhập họ và tên của bạn'),
@@ -21,15 +22,50 @@ const schema = Yup.object().shape({
     .nullable()
 })
 
+interface AuthData {
+  displayName: string
+  email: string
+  providerId: string
+}
+
 const cx = classNames.bind(styles)
 
 const Register = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [userData, setUserData] = useState<{ email: string; fullName: string; providerId: string }>({
+    email: '',
+    fullName: '',
+    providerId: ''
+  })
 
   useEffect(() => {
     dispatch<any>(resetState())
   }, [dispatch])
+
+  const handleFbLogin = async () => {
+    const auth = (await FacebookAuth()) as AuthData
+
+    if (auth) {
+      const { displayName, email, providerId } = auth || {}
+      setUserData({ email: email, fullName: displayName, providerId: providerId })
+    }
+  }
+
+  const handleGGLogin = async () => {
+    const auth = (await GoogleAuth()) as AuthData
+
+    if (auth) {
+      const { displayName, email, providerId } = auth || {}
+      setUserData({ email: email, fullName: displayName, providerId: providerId })
+    }
+  }
+
+  useEffect(() => {
+    if (Object.values(userData).some((value) => value !== '')) {
+      dispatch<any>(loginSocial(userData))
+    }
+  }, [userData, dispatch])
 
   const userState = useSelector((state: any) => state.auth)
   const { isError, isLoading, isSuccess, message } = userState
@@ -67,14 +103,11 @@ const Register = () => {
           </p>
         </div>
         <div className={cx('form-methods')}>
-          <div className={cx('form-method')}>
+          <div className={cx('form-method')} onClick={handleFbLogin}>
             <FaFacebook className={cx('from-icon')} />
           </div>
-          <div className={cx('form-method')}>
+          <div className={cx('form-method')} onClick={handleGGLogin}>
             <FaGoogle className={cx('from-icon')} />
-          </div>
-          <div className={cx('form-method')}>
-            <FaGithub className={cx('from-icon')} />
           </div>
         </div>
         <div className={cx('form-text')}>hoặc đăng nhập với email</div>
