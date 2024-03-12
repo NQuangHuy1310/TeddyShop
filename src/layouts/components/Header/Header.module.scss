@@ -163,8 +163,9 @@
 
 .auth-menu {
   position: absolute;
-  top: 90%;
-  right: 0;
+  width: 200px;
+  top: 92%;
+  right: -30px;
   z-index: 9;
   background-color: var(--background-primary);
   box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
@@ -216,6 +217,14 @@
 @media screen and (max-width: 1023.98px) {
   .header-action {
     display: none;
+  }
+
+  .header-menu {
+    display: none;
+  }
+
+  .header-mobile {
+    display: block;
   }
 
   .mega-menu {

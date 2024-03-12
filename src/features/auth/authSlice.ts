@@ -130,6 +130,17 @@ export const changeAddressDefault = createAsyncThunk(
   }
 )
 
+export const loginSocial = createAsyncThunk(
+  'auth/loginSocial',
+  async (userData: { email: string; fullName: string }, thunkAPI) => {
+    try {
+      return await authService.loginSocial(userData)
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error)
+    }
+  }
+)
+
 export const resetState = createAction('ReverAll')
 
 export const authSlice = createSlice({
@@ -162,6 +173,21 @@ export const authSlice = createSlice({
         localStorage.setItem('access_token', action.payload.token)
       })
       .addCase(loginUser.rejected, (state, action: any) => {
+        state.isError = true
+        state.message = action.payload?.response?.data?.message || ''
+      })
+      .addCase(loginSocial.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(loginSocial.fulfilled, (state, action: any) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.isError = false
+        state.user = action.payload
+        localStorage.setItem('user_data', JSON.stringify(action.payload))
+        localStorage.setItem('access_token', action.payload.token)
+      })
+      .addCase(loginSocial.rejected, (state, action: any) => {
         state.isError = true
         state.message = action.payload?.response?.data?.message || ''
       })
