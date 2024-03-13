@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import { getAccessTokenFromLocalStorage } from './utils'
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState<string | null>('')
+  const [isLoggedIn, setIsLoggedIn] = useState<string | null>(getAccessTokenFromLocalStorage())
 
   useEffect(() => {
     setIsLoggedIn(getAccessTokenFromLocalStorage())

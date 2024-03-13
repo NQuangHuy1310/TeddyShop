@@ -45,7 +45,7 @@ const ProductDetail = () => {
     options,
     types,
     quantity
-  } = product
+  } = product ?? {}
 
   const [productImageMain, setProductImageMain] = useState<string | undefined>('')
   const productPrice = formatPrice(price)
@@ -301,7 +301,7 @@ const ProductDetail = () => {
               <Button background large className={cx('product-add')} onClick={handleAddProductToCart}>
                 Thêm vào giỏ hàng
               </Button>
-              <Button outline large className={cx('product-buy')}>
+              <Button onClick={handleAddProductToCart} outline large className={cx('product-buy')}>
                 Mua ngay
               </Button>
             </div>

@@ -6,9 +6,11 @@ import styles from './Cart.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteProductInCart, getCartByUser } from '~/features/cart/cartSlice'
 import Button from '~/components/Button'
-import { Link } from 'react-router-dom'
-import { formatPrice } from '~/utils'
+import { Link, useNavigate } from 'react-router-dom'
+import { formatPrice, parsePrice } from '~/utils'
 import Breadcrumb from '~/components/Breadcrumb'
+import { saveProductOrder } from '~/features/product/productSlice'
+import { toast } from 'react-toastify'
 const cx = classNames.bind(styles)
 
 interface DataType {
@@ -35,6 +37,7 @@ const columns: TableColumnsType<DataType> = [
     title: 'Màu sắc',
     dataIndex: 'color'
   },
+
   {
     title: 'Giá',
     dataIndex: 'price'
@@ -51,7 +54,9 @@ const columns: TableColumnsType<DataType> = [
 
 const Cart: React.FC = () => {
   const dispatch = useDispatch()
+  const nagigate = useNavigate()
   const [cartId, setCartId] = useState<string>('')
+  const [productData, setProductData] = useState<DataType[]>([])
 
   useEffect(() => {
     dispatch<any>(getCartByUser())
@@ -67,25 +72,46 @@ const Cart: React.FC = () => {
   }, [cartId, dispatch])
 
   const cartState = useSelector((state: any) => state.cart?.carts)
-  const data: DataType[] = []
 
-  let totalPrice = 0
-
-  for (let i = 0; i < cartState?.length; i++) {
-    totalPrice += cartState[i].totalPrice
-    data.push({
-      key: cartState[i]._id,
-      name: cartState[i].productId?.name,
-      quantity: cartState[i].quantity,
-      color: cartState[i]?.color?.name,
-      price: formatPrice(cartState[i]?.price),
-      total: formatPrice(cartState[i]?.totalPrice),
+  const data: DataType[] = cartState?.map((cartItem: any) => {
+    return {
+      key: cartItem.productId._id,
+      name: cartItem.productId?.name,
+      quantity: cartItem.quantity,
+      color: cartItem?.color?.name,
+      switch: cartItem?.switch?.name,
+      option: cartItem?.option?.option,
+      price: formatPrice(cartItem?.price),
+      total: formatPrice(cartItem?.totalPrice),
       action: (
-        <Button primary small onClick={() => setCartId(cartState[i]._id)}>
+        <Button primary small onClick={() => setCartId(cartItem._id)}>
           Xóa
         </Button>
       )
+    }
+  })
+
+  const rowSelection = {
+    onChange: (_selectedRowKeys: React.Key[], selectedRows: DataType[]) => {
+      setProductData(selectedRows)
+    },
+    getCheckboxProps: (record: DataType) => ({
+      name: record.name
     })
+  }
+
+  const totalPrice = productData.reduce((acc, product) => {
+    const price = typeof product.price === 'number' ? product.price.toString() : product.price
+    return acc + parsePrice(price)
+  }, 0)
+
+  const handleAddProductToOrder = () => {
+    if (productData.length === 0) {
+      toast.warning('Vui lòng chọn sản phẩm để thanh toán.')
+    } else {
+      dispatch<any>(saveProductOrder(productData))
+      nagigate('/checkout')
+    }
   }
 
   return (
@@ -96,6 +122,10 @@ const Cart: React.FC = () => {
           <h2>Teddy Shop | Giỏ hàng của tôi</h2>
         </div>
         <Table
+          rowSelection={{
+            type: 'checkbox',
+            ...rowSelection
+          }}
           columns={columns}
           dataSource={data}
           className={cx('cart-table')}
@@ -107,7 +137,7 @@ const Cart: React.FC = () => {
           <div className={cx('total-price')}>
             <strong>Tổng tiền: {formatPrice(totalPrice)}</strong>
           </div>
-          <Button large primary className={cx('cart-btn')}>
+          <Button large primary className={cx('cart-btn')} onClick={handleAddProductToOrder}>
             Thanh toán
           </Button>
         </div>

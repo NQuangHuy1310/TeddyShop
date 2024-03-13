@@ -20,6 +20,7 @@ import Cart from '~/pages/Cart'
 import Address from '~/pages/Address'
 import ProFavorite from '~/pages/ProFavorite'
 import VerifyEmail from '~/pages/VerifyEmail'
+import Checkout from '~/pages/Checkout'
 
 const publicRoutes: route[] = [
   { path: config.routes.home, element: Home, layout: MainLayout },
@@ -42,7 +43,8 @@ const privateRoutes: route[] = [
   { path: config.routes.address, element: Address, layout: ProfileLayout },
   { path: config.routes.verifyEmail, element: VerifyEmail, layout: ProfileLayout },
   { path: config.routes.cart, element: Cart, layout: MainLayout },
-  { path: config.routes.productFavorite, element: ProFavorite, layout: MainLayout }
+  { path: config.routes.productFavorite, element: ProFavorite, layout: MainLayout },
+  { path: config.routes.checkOut, element: Checkout, layout: MainLayout }
 ]
 
 export { publicRoutes, privateRoutes }

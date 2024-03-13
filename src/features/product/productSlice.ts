@@ -6,6 +6,7 @@ const initialState = {
   products: [] as ProductModel[],
   productCategories: [] as productCatModal[],
   product: {} as ProductModel,
+  orderProduct: [] as any,
   isError: false,
   isLoading: false,
   isSuccess: false,
@@ -32,6 +33,14 @@ export const getProduct = createAsyncThunk('product/getProduct', async (productI
 export const getProductCategories = createAsyncThunk('product/getProductCat', async () => {
   try {
     return await productService.getProductCategories()
+  } catch (error) {
+    return error
+  }
+})
+
+export const saveProductOrder = createAsyncThunk('product/saveProductOder', (productData: any) => {
+  try {
+    return productData
   } catch (error) {
     return error
   }
@@ -76,6 +85,17 @@ export const productSlice = createSlice({
         state.productCategories = action.payload.productCategories
       })
       .addCase(getProductCategories.rejected, (state) => {
+        state.isError = true
+      })
+      .addCase(saveProductOrder.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(saveProductOrder.fulfilled, (state, action: any) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.orderProduct = action.payload
+      })
+      .addCase(saveProductOrder.rejected, (state) => {
         state.isError = true
       })
       .addCase(resetState, () => initialState)
