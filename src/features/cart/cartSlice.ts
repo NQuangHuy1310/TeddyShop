@@ -36,6 +36,14 @@ export const deleteProductInCart = createAsyncThunk('cart/deleteCart', async (ca
   }
 })
 
+export const clearCart = createAsyncThunk('cart/clearCart', async () => {
+  try {
+    return await cartService.clearCartByUserId()
+  } catch (error) {
+    return error
+  }
+})
+
 export const resetState = createAction('ReverAll')
 
 export const cartSice = createSlice({
@@ -77,6 +85,18 @@ export const cartSice = createSlice({
         state.isError = false
       })
       .addCase(deleteProductInCart.rejected, (state) => {
+        state.isError = true
+      })
+      .addCase(clearCart.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(clearCart.fulfilled, (state) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.isError = false
+        state.carts = []
+      })
+      .addCase(clearCart.rejected, (state) => {
         state.isError = true
       })
       .addCase(resetState, () => {

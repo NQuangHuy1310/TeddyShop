@@ -5,7 +5,7 @@ export const formatPrice = (price: number) => {
   }).format(price)
 }
 
-export const parsePrice = (priceString: string) => {
+export const parsePrice = (priceString: string): number => {
   const numericString = priceString.replace(/₫|,/g, '')
   return parseFloat(numericString)
 }
