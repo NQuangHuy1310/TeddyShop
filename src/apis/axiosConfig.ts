@@ -30,6 +30,10 @@ axiosConfig.interceptors.response.use(
   (error) => {
     if (error.response.status === 401) {
       toast.error('Bạn cần đăng nhập để thực hiện chức năng này')
+    } else if (error.response.status === 403) {
+      localStorage.clear()
+      toast.warn('Phiên đăng nhập đã hết hạn vui lòng đăng nhập lại!')
+      location.reload()
     } else if (error.request) {
       toast.error('Lỗi kết nối đến server, vui lòng thử lại sau')
     } else {

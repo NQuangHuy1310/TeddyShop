@@ -87,3 +87,21 @@
     color: var(--text-error);
   }
 }
+
+.purchase-no-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 32px;
+  margin-top: 40px;
+
+  img {
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  a {
+    color: var(--background-color);
+  }
+}

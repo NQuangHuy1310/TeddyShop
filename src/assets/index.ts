@@ -18,6 +18,7 @@ import map from './map.png'
 import eventImage from './event.jpeg'
 import razer from './razer-esports.jpeg'
 import noImage from './no-img .png'
+import noProduct from './no-product.jpg'
 
 const images = {
   placeholderImageBlog,
@@ -39,7 +40,8 @@ const images = {
   phone,
   eventImage,
   razer,
-  noImage
+  noImage,
+  noProduct
 }
 
 export default images
