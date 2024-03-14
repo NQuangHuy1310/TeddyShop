@@ -16,6 +16,7 @@ const routes = {
   address: '/user/address',
   cart: '/user/cart',
   productFavorite: '/user/favorite',
+  userPurchase: '/user/purchase',
   verifyEmail: '/verify-email',
   checkOut: '/checkout'
 }

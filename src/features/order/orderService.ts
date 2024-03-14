@@ -6,7 +6,7 @@ const createOrder = async (orderData: orderData) => {
 }
 
 const getOrderByUserId = async () => {
-  return await axios.get('order')
+  return await axios.get('order/user')
 }
 
 export const orderService = {

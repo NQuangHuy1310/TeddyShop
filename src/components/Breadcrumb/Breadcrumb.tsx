@@ -15,7 +15,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ breadcrumbData }) => {
   return (
     <BreadcrumbAnt style={{ fontSize: '1.6rem', padding: '10px 0' }}>
       <BreadcrumbAnt.Item key="home">
-        <Link to={config.routes.home}>Trang chủ</Link>
+        <Link to={config.routes.home}>TeddyShop</Link>
       </BreadcrumbAnt.Item>
       {breadcrumbData.map((item, index) => {
         const isLastItem = index === breadcrumbData.length - 1

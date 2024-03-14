@@ -1,8 +1,9 @@
-export const formatPrice = (price: number) => {
+export const formatPrice = (price: number | string): string => {
+  const formattedPrice = typeof price === 'string' ? parseFloat(price) : price
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'VND'
-  }).format(price)
+  }).format(formattedPrice)
 }
 
 export const parsePrice = (priceString: string): number => {
