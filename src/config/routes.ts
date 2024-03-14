@@ -18,7 +18,10 @@ const routes = {
   productFavorite: '/user/favorite',
   userPurchase: '/user/purchase',
   verifyEmail: '/verify-email',
-  checkOut: '/checkout'
+  checkOut: '/checkout',
+  notFount: '*',
+  notAuthorized: '/notAuthorized',
+  result: '/result'
 }
 
 export default routes

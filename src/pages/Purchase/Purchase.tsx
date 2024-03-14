@@ -63,6 +63,14 @@ const Purchase = () => {
               </div>
             )
           })}
+        {orderState.length === 0 && (
+          <div className={cx('purchase-no-data')}>
+            <img src={images.noProduct} alt="Bạn chưa có đơn hàng" />
+            <h3>
+              Bạn chưa có đơn hàng nào, ấn <Link to={config.routes.products}>vào đây</Link> để tiếp tục mua sắm !
+            </h3>
+          </div>
+        )}
       </div>
     </div>
   )

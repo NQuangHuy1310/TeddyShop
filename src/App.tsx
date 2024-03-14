@@ -1,16 +1,17 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { privateRoutes, publicRoutes } from '~/routes'
 import { route } from './models'
 import MainLayout from '~/layouts/MainLayout'
 import { useEffect, useState } from 'react'
 import { getAccessTokenFromLocalStorage } from './utils'
+import NotAuthorized from './pages/NotAuthorized'
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<string | null>(getAccessTokenFromLocalStorage())
 
-  useEffect(() => {
-    setIsLoggedIn(getAccessTokenFromLocalStorage())
-  }, [])
+  // useEffect(() => {
+  //   setIsLoggedIn(getAccessTokenFromLocalStorage())
+  // }, [])
 
   useEffect(() => {
     window.scrollTo({
@@ -67,7 +68,9 @@ function App() {
                       <Page />
                     </Layout>
                   ) : (
-                    <Navigate to="/login" replace />
+                    <Layout>
+                      <NotAuthorized />
+                    </Layout>
                   )
                 }
               />

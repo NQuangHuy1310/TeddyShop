@@ -12,7 +12,7 @@ import Button from '~/components/Button'
 import { formatPrice, parsePrice } from '~/utils'
 import { orderData, shippingInfo } from '~/models/order'
 import { toast } from 'react-toastify'
-import { createOder, resetState } from '~/features/order/orderSlide'
+import { createOder } from '~/features/order/orderSlide'
 import moment from 'moment'
 
 const cx = classNames.bind(styles)
@@ -133,13 +133,9 @@ const Checkout = () => {
   useEffect(() => {
     if (Object.keys(createdOrder).length > 0 && isSuccess) {
       toast.success('Mua hàng thành công')
-      // createdOrder?.orderItems?.map((order: any) => {
-      //   dispatch<any>(deleteProductInCart(order.product))
-      // })
       setTimeout(() => {
-        navigate('/user/purchase')
-        dispatch(resetState())
-      }, 3000)
+        navigate('/result')
+      }, 1000)
     }
     if (isError) {
       toast.error('Có lỗi, vui lòng thử lại sau !')

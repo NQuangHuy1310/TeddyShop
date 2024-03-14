@@ -22,6 +22,9 @@ import ProFavorite from '~/pages/ProFavorite'
 import VerifyEmail from '~/pages/VerifyEmail'
 import Checkout from '~/pages/Checkout'
 import Purchase from '~/pages/Purchase'
+import NotFound from '~/pages/NotFound'
+import Result from '~/pages/Result'
+import NotAuthorized from '~/pages/NotAuthorized'
 
 const publicRoutes: route[] = [
   { path: config.routes.home, element: Home, layout: MainLayout },
@@ -36,7 +39,9 @@ const publicRoutes: route[] = [
   { path: config.routes.contact, element: Contact, layout: MainLayout },
   { path: config.routes.events, element: Events, layout: MainLayout },
   { path: config.routes.event, element: Event, layout: MainLayout },
-  { path: config.routes.brandDetail, element: Brand, layout: MainLayout }
+  { path: config.routes.brandDetail, element: Brand, layout: MainLayout },
+  { path: config.routes.notFount, element: NotFound, layout: MainLayout },
+  { path: config.routes.notAuthorized, element: NotAuthorized, layout: MainLayout }
 ]
 
 const privateRoutes: route[] = [
@@ -46,6 +51,7 @@ const privateRoutes: route[] = [
   { path: config.routes.userPurchase, element: Purchase, layout: MainLayout },
   { path: config.routes.cart, element: Cart, layout: MainLayout },
   { path: config.routes.productFavorite, element: ProFavorite, layout: MainLayout },
+  { path: config.routes.result, element: Result, layout: MainLayout },
   { path: config.routes.checkOut, element: Checkout, layout: MainLayout }
 ]
 

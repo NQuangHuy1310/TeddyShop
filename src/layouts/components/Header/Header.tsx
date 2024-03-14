@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { MdExpandMore } from 'react-icons/md'
 import { FaBars } from 'react-icons/fa'
 
@@ -26,6 +26,7 @@ const Header = () => {
   const [menuMobile, setMenuMobile] = useState(false)
   // const [width, setWidth] = useState(window.innerWidth)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   useEffect(() => {
     dispatch<any>(getBlogs())
@@ -77,6 +78,9 @@ const Header = () => {
   const handleLogoutUser = () => {
     dispatch<any>(logoutUser())
     dispatch<any>(dispatch(resetState()))
+    setTimeout(() => {
+      navigate('/')
+    }, 1000)
   }
 
   const backToTop = () => {
