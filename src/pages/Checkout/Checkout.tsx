@@ -1,15 +1,19 @@
 import classNames from 'classnames/bind'
 import styles from './Checkout.module.scss'
 import Breadcrumb from '~/components/Breadcrumb'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Table } from 'antd'
 import type { TableColumnsType } from 'antd'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addressData } from '~/models'
 import config from '~/config'
 import { useEffect, useState } from 'react'
 import Button from '~/components/Button'
 import { formatPrice, parsePrice } from '~/utils'
+import { orderData, shippingInfo } from '~/models/order'
+import { toast } from 'react-toastify'
+import { createOder, resetState } from '~/features/order/orderSlide'
+import moment from 'moment'
 
 const cx = classNames.bind(styles)
 
@@ -56,26 +60,91 @@ const columns: TableColumnsType<DataType> = [
 ]
 
 const Checkout = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
   const [paymentMethod, setPaymentMethod] = useState<string>('banking')
+  const [shippingInfo, setShippingInfo] = useState<shippingInfo>()
+  const [orderItems, setOrderItems] = useState<DataType[]>()
+
+  // get userId
+  const userState = useSelector((state: any) => state.auth?.user)
 
   const userAddress = useSelector((state: any) => state.auth?.user?.userAddress)
   const defaultAddress: addressData = userAddress?.find((address: addressData) => address.isDefault)
 
   const productOrder = useSelector((state: any) => state.product?.orderProduct)
+
   let totalPrice = 0
-  const data: DataType[] = productOrder?.map((product: DataType) => {
-    totalPrice += typeof product.total === 'string' ? parsePrice(product.total) : product.total
-    return {
-      key: product.key,
-      name: product.name,
-      quantity: product.quantity,
-      color: product.color ? product.color : 'No Color',
-      switch: product.switch ? product.switch : 'No switch',
-      option: product.option ? product.color : 'No Option',
-      price: product.price,
-      total: product.total
+  const data: DataType[] = []
+  for (let i = 0; i < productOrder.length; i++) {
+    totalPrice += typeof productOrder[i].total === 'string' ? parsePrice(productOrder[i].total) : productOrder[i].total
+    data.push({
+      key: productOrder[i].key,
+      name: productOrder[i].name,
+      quantity: productOrder[i].quantity,
+      color: productOrder[i].color ? productOrder[i].color : 'No Color',
+      switch: productOrder[i].switch ? productOrder[i].switch : 'No switch',
+      option: productOrder[i].option ? productOrder[i].color : 'No Option',
+      price: productOrder[i].price,
+      total: productOrder[i].total
+    })
+  }
+
+  useEffect(() => {
+    setShippingInfo(defaultAddress)
+    setOrderItems(productOrder)
+  }, [defaultAddress, productOrder])
+
+  const orderData: orderData = {
+    shippingInfo: {
+      fullName: shippingInfo?.fullName ? shippingInfo.fullName : '',
+      phoneNumber: shippingInfo?.phoneNumber ? shippingInfo.phoneNumber : '',
+      location: shippingInfo?.location ? shippingInfo.location : '',
+      city: shippingInfo?.city ? shippingInfo.city : '',
+      state: shippingInfo?.state
+    },
+    user: userState?.id,
+    orderItems: orderItems?.map((order: any) => ({
+      product: order.key,
+      quantity: order.quantity,
+      price: typeof order.price === 'number' ? order.price.toString() : parsePrice(order.price),
+      color: order.color,
+      switch: order.switch,
+      option: order.option
+    })),
+    orderDate: moment().toDate(),
+    totalPrice: totalPrice,
+    paymentMethod: paymentMethod === 'banking' ? 'Thanh toán qua ví điện tử' : 'Thanh toán khi nhận hàng'
+  }
+
+  // khi người dùng mua hàng
+  const handleOrderProduct = () => {
+    if (!orderData) {
+      toast.warning('Có lỗi vui lòng thử lại !')
+    } else {
+      dispatch<any>(createOder(orderData))
     }
-  })
+  }
+
+  // orderState
+  const orderState = useSelector((state: any) => state.order)
+  const { isSuccess, isError, isLoading, createdOrder } = orderState
+  useEffect(() => {
+    if (Object.keys(createdOrder).length > 0 && isSuccess) {
+      toast.success('Mua hàng thành công')
+      // createdOrder?.orderItems?.map((order: any) => {
+      //   dispatch<any>(deleteProductInCart(order.product))
+      // })
+      setTimeout(() => {
+        navigate('/')
+        dispatch(resetState())
+      }, 3000)
+    }
+    if (isError) {
+      toast.error('Có lỗi, vui lòng thử lại sau !')
+    }
+  }, [isSuccess, isError, isLoading, createdOrder, dispatch, navigate])
 
   // bắt sự kiện khi người dùng chuẩn bị rời đi
   useEffect(() => {
@@ -169,7 +238,7 @@ const Checkout = () => {
                     STK: <strong>NGUYEN QUANG HUY</strong> hoặc <strong>0352223905</strong>
                   </li>
                   <li>Ngân hàng MB Bank</li>
-                  <li>Chủ tài khảon: NGUYEN QUANG HUY</li>
+                  <li>Chủ tài khoản: NGUYEN QUANG HUY</li>
                   <li>Nội dung chuyển khoản: Mã đơn hàng + SĐT</li>
                 </ul>
                 <p>Xin chân thành cảm ơn!</p>
@@ -184,7 +253,7 @@ const Checkout = () => {
           </div>
         </div>
         <div className="">
-          <Button primary large>
+          <Button primary large onClick={handleOrderProduct}>
             Thanh toán
           </Button>
         </div>
