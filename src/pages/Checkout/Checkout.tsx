@@ -137,7 +137,7 @@ const Checkout = () => {
       //   dispatch<any>(deleteProductInCart(order.product))
       // })
       setTimeout(() => {
-        navigate('/')
+        navigate('/user/purchase')
         dispatch(resetState())
       }, 3000)
     }

@@ -179,7 +179,7 @@ const Header = () => {
                   </Link>
                 </li>
                 <li className={cx('auth-item')}>
-                  <Link to="" className={cx('auth-link')}>
+                  <Link to={config.routes.userPurchase} className={cx('auth-link')}>
                     Đơn hàng
                   </Link>
                 </li>
