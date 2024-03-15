@@ -6,13 +6,18 @@ export interface shippingInfo {
   state?: string
 }
 
+interface attributes {
+  name?: string
+  code?: string
+}
+
 export interface orderItem {
   product: string
   quantity: number
   price: number
-  color?: string
-  switch?: string
-  option: string
+  color?: attributes
+  switch?: attributes
+  option?: attributes
 }
 export interface orderData {
   shippingInfo: shippingInfo | undefined
@@ -38,10 +43,15 @@ export interface orderItemModal {
   product: productOrder
   quantity: number
   price: number
-  color?: string
-  switch?: string
-  option?: string
+  color?: attributes
+  switch?: attributes
+  option?: attributes
   _id?: string
+}
+
+export interface cancelOrder {
+  orderId: string
+  cancelDate: Date
 }
 
 export interface orderModal {

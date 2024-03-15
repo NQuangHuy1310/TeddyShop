@@ -9,8 +9,8 @@ import Form from '~/components/Form'
 import Slide from '~/components/Slide'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
-import { getEvent, getScheduleByEventId } from '~/features/event/eventSlice'
+import { useEffect, useState } from 'react'
+import { addUserSubscribeEvent, getEvent, getScheduleByEventId } from '~/features/event/eventSlice'
 import { resetState } from '~/features/auth/authSlice'
 import { memberModal } from '~/models'
 import moment from 'moment'
@@ -19,12 +19,15 @@ import EventTime from '~/components/EventTime'
 import { scheduleModal } from '~/models/event'
 import Breadcrumb from '~/components/Breadcrumb'
 import config from '~/config'
+import { toast } from 'react-toastify'
 
 const cx = classNames.bind(styles)
 
 const Event = () => {
   const dispatch = useDispatch()
   const location = useLocation()
+
+  const [userEmail, setUserEmail] = useState<string>('')
 
   const eventId = location.pathname.split('/')[2]
 
@@ -37,6 +40,8 @@ const Event = () => {
 
   const eventState = useSelector((state: any) => state.event?.event)
   const scheduleState = useSelector((state: any) => state.event?.schedules)
+  const subscribeState = useSelector((state: any) => state.event)
+  const { subscribe, isSuccess, isError, isLoading } = subscribeState
 
   const { members, name, tag, time, title, description } = eventState
 
@@ -49,6 +54,32 @@ const Event = () => {
   const year = datetime.format('YYYY')
 
   const formattedData = `${date} - Ngày ${day} - ${month} - ${year}`
+
+  const handleSubscribeEvent = () => {
+    if (userEmail === '') {
+      toast.warn('Bạn nên nhập email vào để đăng ký !')
+      return
+    }
+    const newData: { eventId: string; email: string } = {
+      eventId: eventId,
+      email: userEmail
+    }
+    dispatch<any>(addUserSubscribeEvent(newData))
+  }
+
+  useEffect(() => {
+    if (subscribe && Object.keys(subscribe).length > 0 && isSuccess) {
+      toast.success('Bạn đã đăng kí thành công!')
+      setUserEmail('')
+      dispatch<any>(resetState())
+      setTimeout(() => {
+        dispatch<any>(getEvent(eventId))
+      }, 500)
+    }
+    if (isError) {
+      toast.error('Đăng kí không thành công vui lòng thử lại!')
+    }
+  }, [subscribe, isSuccess, isError, isLoading, dispatch, eventId])
 
   return (
     <div className={cx('event-wrapper')}>
@@ -66,8 +97,13 @@ const Event = () => {
             <EventTime time={datetime} />
           </div>
           <div className={cx('event-action')}>
-            <input type="email" placeholder="Nhập email của bạn..." />
-            <Button background large>
+            <input
+              type="email"
+              placeholder="Nhập email của bạn..."
+              value={userEmail}
+              onChange={(event) => setUserEmail(event.target.value)}
+            />
+            <Button background large onClick={handleSubscribeEvent}>
               Đăng ký ngay
             </Button>
           </div>

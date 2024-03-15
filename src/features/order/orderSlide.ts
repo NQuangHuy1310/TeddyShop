@@ -1,10 +1,11 @@
 import { createSlice, createAsyncThunk, createAction } from '@reduxjs/toolkit'
 import { orderService } from './orderService'
-import { orderData } from '~/models/order'
+import { cancelOrder, orderData } from '~/models/order'
 
 const initialState = {
   orders: [] as orderData[],
   createdOrder: {} as orderData,
+  cancelledOrder: {},
 
   isError: false,
   isLoading: false,
@@ -24,6 +25,14 @@ export const createOder = createAsyncThunk('order/createOrder', async (orderData
 export const getOrderByUserId = createAsyncThunk('order/getOrderByUserId', async () => {
   try {
     return await orderService.getOrderByUserId()
+  } catch (error) {
+    return error
+  }
+})
+
+export const cancelOrderById = createAsyncThunk('order/cancel', async (orderData: cancelOrder) => {
+  try {
+    return await orderService.cancelOrderById({ orderId: orderData.orderId, cancelDate: orderData.cancelDate })
   } catch (error) {
     return error
   }
@@ -59,6 +68,18 @@ export const orderSlice = createSlice({
         state.orders = action.payload.orders
       })
       .addCase(getOrderByUserId.rejected, (state) => {
+        state.isError = true
+      })
+      .addCase(cancelOrderById.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(cancelOrderById.fulfilled, (state, action: any) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.isError = false
+        state.cancelledOrder = action.payload.cancelledOrder
+      })
+      .addCase(cancelOrderById.rejected, (state) => {
         state.isError = true
       })
       .addCase(resetState, () => initialState)

@@ -12,8 +12,13 @@ const getScheduleByEventId = async (eventId: string) => {
   return await axios.get(`schedule?event=${eventId}`)
 }
 
+const addUserSubscribeEvent = async (data: { eventId: string; email: string }) => {
+  return await axios.put('event/subscribe-event', data)
+}
+
 export const eventService = {
   getEvents,
   getEvent,
-  getScheduleByEventId
+  getScheduleByEventId,
+  addUserSubscribeEvent
 }

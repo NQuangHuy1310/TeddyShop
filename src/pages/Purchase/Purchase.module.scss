@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
+  margin-top: 30px;
 }
 
 .purchase-product {
@@ -17,8 +18,6 @@
   display: flex;
 
   justify-content: space-between;
-  flex-direction: column;
-
   h3 {
     font-size: 2rem;
     font-weight: 600;

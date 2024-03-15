@@ -46,9 +46,12 @@
 
 .no-address {
   font-size: 1.6rem;
+  display: flex;
+  gap: 4px;
 
   a {
-    color: var(--text-primary);
+    color: var(--text-error);
+    font-weight: 600;
   }
 }
 

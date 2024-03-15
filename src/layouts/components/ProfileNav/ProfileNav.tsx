@@ -4,7 +4,6 @@ import { FaPen } from 'react-icons/fa'
 import { FaUser } from 'react-icons/fa6'
 import { Link } from 'react-router-dom'
 import images from '~/assets'
-import { ImCreditCard } from 'react-icons/im'
 import { useState } from 'react'
 import config from '~/config'
 import { useSelector } from 'react-redux'
@@ -51,11 +50,6 @@ const Profile = () => {
             </li>
           </ul>
         )}
-
-        <div className={cx('profile-title')}>
-          <ImCreditCard />
-          Đơn mua
-        </div>
       </nav>
     </div>
   )

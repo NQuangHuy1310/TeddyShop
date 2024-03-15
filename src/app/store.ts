@@ -4,6 +4,7 @@ import blogSlice from '~/features/blog/blogSlice'
 import brandSelice from '~/features/brand/brandSlice'
 import cartSlice from '~/features/cart/cartSlice'
 import eventSlice from '~/features/event/eventSlice'
+import feedbackSlide from '~/features/feedback/feedbackSlide'
 import memberSlice from '~/features/member/memberSlice'
 import orderSlide from '~/features/order/orderSlide'
 import productSlice from '~/features/product/productSlice'
@@ -19,7 +20,8 @@ export const store = configureStore({
     event: eventSlice,
     upload: uploadSlice,
     cart: cartSlice,
-    order: orderSlide
+    order: orderSlide,
+    feedback: feedbackSlide
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
