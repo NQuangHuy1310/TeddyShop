@@ -6,6 +6,8 @@ const initialState = {
   events: [] as eventModal[],
   event: {} as eventModal,
   schedules: [] as scheduleModal[],
+
+  subscribe: {},
   isError: false,
   isLoading: false,
   isSuccess: false,
@@ -36,6 +38,17 @@ export const getScheduleByEventId = createAsyncThunk('event/getSchedules', async
     return error
   }
 })
+
+export const addUserSubscribeEvent = createAsyncThunk(
+  'event/subscribeEvent',
+  async (data: { eventId: string; email: string }) => {
+    try {
+      return await eventService.addUserSubscribeEvent(data)
+    } catch (error) {
+      return error
+    }
+  }
+)
 
 export const resetState = createAction('ReverAll')
 
@@ -79,6 +92,18 @@ export const eventSlice = createSlice({
         state.schedules = action.payload.schedules
       })
       .addCase(getScheduleByEventId.rejected, (state) => {
+        state.isError = false
+      })
+      .addCase(addUserSubscribeEvent.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(addUserSubscribeEvent.fulfilled, (state, action: any) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.isError = false
+        state.subscribe = action.payload.addUserSubscribe
+      })
+      .addCase(addUserSubscribeEvent.rejected, (state) => {
         state.isError = false
       })
       .addCase(resetState, () => initialState)

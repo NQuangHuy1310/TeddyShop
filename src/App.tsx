@@ -2,16 +2,12 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { privateRoutes, publicRoutes } from '~/routes'
 import { route } from './models'
 import MainLayout from '~/layouts/MainLayout'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { getAccessTokenFromLocalStorage } from './utils'
 import NotAuthorized from './pages/NotAuthorized'
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState<string | null>(getAccessTokenFromLocalStorage())
-
-  // useEffect(() => {
-  //   setIsLoggedIn(getAccessTokenFromLocalStorage())
-  // }, [])
+  const isLoggedIn = getAccessTokenFromLocalStorage()
 
   useEffect(() => {
     window.scrollTo({
@@ -63,7 +59,7 @@ function App() {
                 key={index}
                 path={route.path}
                 element={
-                  isLoggedIn ? (
+                  isLoggedIn !== '' ? (
                     <Layout>
                       <Page />
                     </Layout>

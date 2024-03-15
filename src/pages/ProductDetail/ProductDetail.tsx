@@ -121,6 +121,8 @@ const ProductDetail = () => {
     }
   }, [productCount, limitProductCount])
 
+  const authState = useSelector((state: any) => state.auth?.user)
+
   const handleAddProductToCart = () => {
     const newCardData = {
       productId,
@@ -158,7 +160,10 @@ const ProductDetail = () => {
         newCardData.switch = { name: switchName, code: switchId }
       }
     }
-
+    if (!authState) {
+      toast.error('Vui lòng đăng nhập để thực hiện chức năng này')
+      return
+    }
     dispatch<any>(addProductToCart(newCardData))
   }
 
@@ -166,7 +171,7 @@ const ProductDetail = () => {
   const cartState = useSelector((state: any) => state.cart)
   const { addedCart, isSuccess, isError, isLoading } = cartState
   useEffect(() => {
-    if (Object.keys(addedCart).length > 0) {
+    if (addedCart && Object?.keys(addedCart)?.length > 0) {
       toast.success('Thêm sản phẩm vào giỏ hàng thành công')
       dispatch<any>(resetState())
       navigate('/user/cart')

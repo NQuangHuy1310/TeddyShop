@@ -106,12 +106,21 @@ const Checkout = () => {
     },
     user: userState?.id,
     orderItems: orderItems?.map((order: any) => ({
-      product: order.key,
+      product: order.id,
       quantity: order.quantity,
       price: typeof order.price === 'number' ? order.price.toString() : parsePrice(order.price),
-      color: order.color,
-      switch: order.switch,
-      option: order.option
+      color: {
+        name: order?.color ? order?.color : '',
+        code: order?.colorCode ? order?.colorCode : ''
+      },
+      switch: {
+        name: order?.switch ? order?.switch : '',
+        code: order?.switchCode ? order?.switchCode : ''
+      },
+      option: {
+        name: order?.option ? order?.option : '',
+        code: order?.optionCode ? order?.optionCode : ''
+      }
     })),
     orderDate: moment().toDate(),
     totalPrice: totalPrice,
@@ -120,10 +129,23 @@ const Checkout = () => {
 
   // khi người dùng mua hàng
   const handleOrderProduct = () => {
-    if (!orderData) {
-      toast.warning('Có lỗi vui lòng thử lại !')
-    } else {
+    if (
+      orderData &&
+      orderData.shippingInfo &&
+      orderData.shippingInfo.fullName &&
+      orderData.shippingInfo.phoneNumber &&
+      orderData.shippingInfo.location &&
+      orderData.shippingInfo.city &&
+      orderData.user &&
+      orderData.orderItems &&
+      orderData.orderItems.length > 0 && // Kiểm tra có ít nhất 1 orderItem
+      totalPrice &&
+      paymentMethod
+    ) {
       dispatch<any>(createOder(orderData))
+    } else {
+      // Một hoặc nhiều giá trị thiếu
+      toast.warning('Vui lòng điền đầy đủ thông tin!')
     }
   }
 
@@ -131,7 +153,7 @@ const Checkout = () => {
   const orderState = useSelector((state: any) => state.order)
   const { isSuccess, isError, isLoading, createdOrder } = orderState
   useEffect(() => {
-    if (Object.keys(createdOrder).length > 0 && isSuccess) {
+    if (createdOrder && Object.keys(createdOrder).length > 0 && isSuccess) {
       toast.success('Mua hàng thành công')
       setTimeout(() => {
         navigate('/result')
@@ -192,7 +214,7 @@ const Checkout = () => {
               </>
             ) : (
               <div className={cx('no-address')}>
-                Bạn chưa có địa chỉ để nhận hàng, vui lòng cung cấp địa chỉ cho chúng tôi
+                <p>Bạn chưa có địa chỉ để nhận hàng, vui lòng cung cấp địa chỉ cho chúng tôi </p>
                 <Link to={config.routes.address}>tại đây!</Link>.
               </div>
             )}

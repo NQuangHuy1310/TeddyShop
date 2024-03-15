@@ -14,20 +14,26 @@ import { toast } from 'react-toastify'
 const cx = classNames.bind(styles)
 
 interface DataType {
+  id: string
   key: React.Key
   name: string
   quantity: number
   color: string
+  switch?: string
+  option?: string
   price: number | string
   total: number | string
   action: React.ReactNode
+  colorCode: number | string
+  switchCode: number | string
+  optionCode: React.ReactNode
 }
 
 const columns: TableColumnsType<DataType> = [
   {
     title: 'Tên sản phẩm',
     dataIndex: 'name',
-    render: (text: string, record: DataType) => <Link to={`/product/${record.key}`}>{text}</Link>
+    render: (text: string, record: DataType) => <Link to={`/product/${record.id}`}>{text}</Link>
   },
   {
     title: 'Số lượng',
@@ -37,7 +43,14 @@ const columns: TableColumnsType<DataType> = [
     title: 'Màu sắc',
     dataIndex: 'color'
   },
-
+  {
+    title: 'Loại switch',
+    dataIndex: 'switch'
+  },
+  {
+    title: 'Tùy chọn',
+    dataIndex: 'option'
+  },
   {
     title: 'Giá',
     dataIndex: 'price'
@@ -73,21 +86,29 @@ const Cart: React.FC = () => {
 
   const cartState = useSelector((state: any) => state.cart?.carts)
 
-  const data: DataType[] = cartState?.map((cartItem: any) => {
+  const data: DataType[] = cartState?.map((cartItem: any, index: number) => {
+    const colorCode = cartItem?.color?.code ? cartItem?.color?.code : ''
+    const switchCode = cartItem?.switch?.code ? cartItem?.switch?.code : ''
+    const optionCode = cartItem?.option?.code ? cartItem?.option?.code : ''
+
     return {
-      key: cartItem.productId._id,
+      id: cartItem.productId._id,
+      key: index + 1,
       name: cartItem.productId?.name,
       quantity: cartItem.quantity,
-      color: cartItem?.color?.name,
-      switch: cartItem?.switch?.name,
-      option: cartItem?.option?.option,
+      color: cartItem?.color?.name ? cartItem?.color?.name : 'No color',
+      switch: cartItem?.switch?.name ? cartItem?.switch.name : 'No switch',
+      option: cartItem?.option?.option ? cartItem?.option?.option : '',
       price: formatPrice(cartItem?.price),
       total: formatPrice(cartItem?.totalPrice),
       action: (
         <Button primary small onClick={() => setCartId(cartItem._id)}>
           Xóa
         </Button>
-      )
+      ),
+      colorCode,
+      switchCode,
+      optionCode
     }
   })
 
@@ -134,7 +155,7 @@ const Cart: React.FC = () => {
           }}
         />
         <div className="">
-          <div className={cx('total-price')}>
+          <div className={cx('total-price')} style={{ marginBottom: '10px' }}>
             <strong>Tổng tiền: {formatPrice(totalPrice)}</strong>
           </div>
           <Button large primary className={cx('cart-btn')} onClick={handleAddProductToOrder}>

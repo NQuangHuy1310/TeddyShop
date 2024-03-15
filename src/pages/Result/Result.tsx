@@ -19,8 +19,8 @@ const App: React.FC = () => {
         </p>
       }
       extra={[
-        <Button type="primary" key="console" onClick={() => navgate('/user/cart')}>
-          Xem giỏ hàng
+        <Button type="primary" key="console" onClick={() => navgate('/user/purchase')}>
+          Xem đơn hàng
         </Button>,
         <Button key="buy" onCanPlay={() => navgate('/')}>
           Tiếp tục mua sắm
