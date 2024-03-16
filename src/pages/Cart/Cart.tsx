@@ -27,6 +27,7 @@ interface DataType {
   colorCode: number | string
   switchCode: number | string
   optionCode: React.ReactNode
+  attributeId: number | string
 }
 
 const columns: TableColumnsType<DataType> = [
@@ -90,6 +91,7 @@ const Cart: React.FC = () => {
     const colorCode = cartItem?.color?.code ? cartItem?.color?.code : ''
     const switchCode = cartItem?.switch?.code ? cartItem?.switch?.code : ''
     const optionCode = cartItem?.option?.code ? cartItem?.option?.code : ''
+    const attributeId = cartItem?.attributeId ? cartItem?.attributeId : ''
 
     return {
       id: cartItem.productId._id,
@@ -108,7 +110,8 @@ const Cart: React.FC = () => {
       ),
       colorCode,
       switchCode,
-      optionCode
+      optionCode,
+      attributeId
     }
   })
 

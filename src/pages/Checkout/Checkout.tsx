@@ -120,7 +120,8 @@ const Checkout = () => {
       option: {
         name: order?.option ? order?.option : '',
         code: order?.optionCode ? order?.optionCode : ''
-      }
+      },
+      attributeId: order?.attributeId ? order?.attributeId : ''
     })),
     orderDate: moment().toDate(),
     totalPrice: totalPrice,

@@ -44,6 +44,7 @@ export interface attributes {
   }
   quantity: number
   price: number
+  _id: string
 }
 
 export interface ProductModel {

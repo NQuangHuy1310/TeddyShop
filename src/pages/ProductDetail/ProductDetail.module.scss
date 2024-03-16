@@ -83,6 +83,7 @@
 .product-info-right {
   flex: 1;
   max-width: 400px;
+  width: 400px;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -128,6 +129,11 @@
 .product-text {
   font-weight: 500;
   font-size: 1.6rem;
+}
+.product-number {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .product-quantity {
@@ -176,6 +182,11 @@
 
   .product-info-left {
     max-width: 832px;
+    width: 100%;
+  }
+
+  .product-info-right {
+    max-width: 400px;
     width: 100%;
   }
 }

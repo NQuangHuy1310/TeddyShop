@@ -59,10 +59,11 @@ const ProductDetail = () => {
   const [switchName, setSwitchName] = useState<string>('')
   const [optionName, setOptionName] = useState<string>('')
   const [colorName, setColorName] = useState<string>('')
+  const [attributesId, setAttributesId] = useState<string>('')
 
   // handle change price product when change color, option, type
   useEffect(() => {
-    if (attributes && attributes.length > 0) {
+    if (attributes && attributes?.length > 0) {
       const newPrice = attributes.find((item) => {
         if (colorId && switchId && optionId) {
           return item.color.code === colorId && item.switch.code === switchId && item.option?.code === optionId
@@ -85,13 +86,18 @@ const ProductDetail = () => {
       if (newPrice && newPrice.price) {
         setNewPrice(formatPrice(newPrice.price))
         setLimitProductCount(newPrice.quantity)
+        setAttributesId(newPrice._id)
       } else {
         setNewPrice('')
+        setLimitProductCount(quantity)
+        setAttributesId('')
       }
     } else {
       setNewPrice('')
+      setLimitProductCount(quantity)
+      setAttributesId('')
     }
-  }, [colorId, optionId, switchId, attributes])
+  }, [colorId, optionId, switchId, attributes, quantity])
 
   // handle product count
   const increaseProductCount = () => {
@@ -127,6 +133,7 @@ const ProductDetail = () => {
     const newCardData = {
       productId,
       quantity: productCount,
+      attributeId: attributesId,
       price: parsePrice(newPrice) || parsePrice(productPrice),
       color: { name: '', code: '' },
       option: { name: '', code: '' },
@@ -288,19 +295,22 @@ const ProductDetail = () => {
                 </div>
               </div>
             )}
-            <div className={cx('product-quantity')}>
-              <Button outline className={cx('product-btn')} onClick={decreaseProductCount}>
-                -
-              </Button>
-              <input
-                type="number"
-                className={cx('product-input')}
-                value={productCount}
-                onChange={(event) => setProductCount(Number(event.target.value))}
-              />
-              <Button outline className={cx('product-btn')} onClick={increaseProductCount}>
-                +
-              </Button>
+            <div className={cx('product-number')}>
+              <div className={cx('product-quantity')}>
+                <Button outline className={cx('product-btn')} onClick={decreaseProductCount}>
+                  -
+                </Button>
+                <input
+                  type="number"
+                  className={cx('product-input')}
+                  value={productCount}
+                  onChange={(event) => setProductCount(Number(event.target.value))}
+                />
+                <Button outline className={cx('product-btn')} onClick={increaseProductCount}>
+                  +
+                </Button>
+              </div>
+              <div className="">Số lượng sản phẩm: {limitProductCount}</div>
             </div>
             <div className={cx('product-action')}>
               <Button background large className={cx('product-add')} onClick={handleAddProductToCart}>

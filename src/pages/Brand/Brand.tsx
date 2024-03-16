@@ -23,8 +23,8 @@ const Brand = () => {
     if (getBrandId !== undefined) dispatch<any>(getBrand(getBrandId))
   }, [dispatch, getBrandId])
 
-  const brandState = useSelector((state: any) => state.brand.brand)
-  const { name, description, products: productData, logo, slogan } = brandState
+  const brandState = useSelector((state: any) => state.brand?.brand)
+  const { name, description, products: productData, logo, slogan } = brandState ?? {}
 
   return (
     <div className={cx('brand-wrapper')}>
@@ -61,7 +61,7 @@ const Brand = () => {
       <section className="brand-products">
         <Heading heading="Sản phẩm nổi bật" desc={slogan} />
 
-        {productData && productData.length > 0 ? (
+        {productData && productData?.length > 0 ? (
           <div className={cx('products')}>
             {productData?.map((product: ProductModel, index: number) => (
               <Product key={index} {...product} />
