@@ -42,7 +42,7 @@ const Header = () => {
 
   const blogData = {
     name: 'Bài viết nổi bật',
-    blogs: blogState
+    blogs: blogState ?? []
   }
 
   const brandData = {
