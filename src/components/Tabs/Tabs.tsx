@@ -37,7 +37,7 @@ const Tabs = (props: TabsProps) => {
       </div>
       <div className={cx('tab-content')}>
         <div
-          className={cx('tab-content-item', { active: activeTab === 0 })}
+          className={cx('tab-content-item', 'tab-text', { active: activeTab === 0 })}
           dangerouslySetInnerHTML={{ __html: desctiption }}
         ></div>
         <div className={cx('tab-content-item', { active: activeTab === 1 })}>

@@ -100,7 +100,7 @@ const Cart: React.FC = () => {
       quantity: cartItem.quantity,
       color: cartItem?.color?.name ? cartItem?.color?.name : 'No color',
       switch: cartItem?.switch?.name ? cartItem?.switch.name : 'No switch',
-      option: cartItem?.option?.option ? cartItem?.option?.option : '',
+      option: cartItem?.option?.name ? cartItem?.option?.name : 'No option',
       price: formatPrice(cartItem?.price),
       total: formatPrice(cartItem?.totalPrice),
       action: (

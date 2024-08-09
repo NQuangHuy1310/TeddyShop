@@ -11,6 +11,9 @@
   display: flex;
   align-items: flex-start;
   gap: 24px;
+  flex-shrink: 0;
+  min-height: 550px;
+  height: 100%;
 }
 
 .product-img-main {
@@ -57,6 +60,7 @@
   align-items: flex-start;
   gap: 80px;
   min-height: 800px;
+  flex: 1;
 }
 
 .product-info-left {

@@ -167,7 +167,7 @@ const ProductDetail = () => {
         newCardData.switch = { name: switchName, code: switchId }
       }
     }
-    if (!authState) {
+    if (Object.keys(authState).length < 0) {
       toast.error('Vui lòng đăng nhập để thực hiện chức năng này')
       return
     }
